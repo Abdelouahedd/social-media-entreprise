@@ -9,13 +9,18 @@ import './assets/lib/slick/slick.css'
 import './assets/lib/slick/slick-theme.css'
 import './assets/css/style.css'
 import './assets/css/responsive.css'
-import NavBar from "./components/NavBar/NavBar";
+import {Router, Route, Switch} from "react-router-dom";
+import history from "./history";
+import Home from "./components/home/home/Home";
 
 const App = () => {
     return (
-        <div className="wrapper">
-            <NavBar/>
-        </div>
+        <Router history={history}>
+            <Switch>
+                <Route path='/sign' component={SignIn}/>
+                <Route path='/' component={Home}/>
+            </Switch>
+        </Router>
     );
 };
 

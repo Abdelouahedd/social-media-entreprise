@@ -1,36 +1,8 @@
 import React from 'react';
 import logo from "../../assets/images/cm-logo.png"
 import cuver from "../../assets/images/cm-main-img.png"
-import $ from 'jquery'
 
 class SignIn extends React.Component {
-    /*componentDidMount() {
-        $('.sign-control li').on("click", function () {
-            var tab_id = $(this).attr('data-tab');
-            $('.sign-control li').removeClass('current');
-            $('.sign_in_sec').removeClass('current');
-            $(this).addClass('current animated fadeIn');
-            $("#" + tab_id).addClass('current animated fadeIn');
-            return false;
-        });
-        $('.signup-tab ul li').on("click", function () {
-            var tab_id = $(this).attr('data-tab');
-            $('.signup-tab ul li').removeClass('current');
-            $('.dff-tab').removeClass('current');
-            $(this).addClass('current animated fadeIn');
-            $("#" + tab_id).addClass('current animated fadeIn');
-            return false;
-        });
-        $('.tab-feed ul li').on("click", function () {
-            var tab_id = $(this).attr('data-tab');
-            $('.tab-feed ul li').removeClass('active');
-            $('.product-feed-tab').removeClass('current');
-            $(this).addClass('active animated fadeIn');
-            $("#" + tab_id).addClass('current animated fadeIn');
-            return false;
-        });
-    }
-*/
     render() {
         return (
             <div className="sign-in">
@@ -266,5 +238,4 @@ class SignIn extends React.Component {
         );
     }
 }
-
 export default SignIn;
