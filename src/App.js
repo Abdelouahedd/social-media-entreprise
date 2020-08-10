@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SignIn from "./components/sign-in/signIn";
+import './assets/css/animate.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/css/line-awesome.css'
+import './assets/css/line-awesome-font-awesome.min.css'
+import 'font-awesome/css/font-awesome.min.css'
+import './assets/lib/slick/slick.css'
+import './assets/lib/slick/slick-theme.css'
+import './assets/css/style.css'
+import './assets/css/responsive.css'
+import NavBar from "./components/NavBar/NavBar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <div className="wrapper">
+            <NavBar/>
+        </div>
+    );
+};
 
 export default App;
