@@ -1,12 +1,10 @@
 import React from 'react';
 import NavBar from "../NavBar/NavBar";
 import user_pic from '../../../assets/images/resources/user-pic.png';
-import user_post from '../../../assets/images/resources/us-pic.png';
-import location from '../../../assets/images/icon9.png';
-import like from '../../../assets/images/liked-img.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
-import TopProfiles from "../../topProfils/TopProfils";
+import TopProfiles from "../topProfils/TopProfils";
+import Post from "../Post/Post";
 
 const Home = () => {
     return (
@@ -36,219 +34,11 @@ const Home = () => {
                                         {/*start list view of posts*/}
                                         <div className="posts-section">
                                             <TopProfiles/>
-                                            <div className="post-bar">
-                                                <div className="post_topbar">
-                                                    <div className="usy-dt">
-                                                        <img src={user_post} alt=""/>
-                                                        <div className="usy-name">
-                                                            <h3>John Doe</h3>
-                                                            <span>
-                                                                 <i className="fa fa-clock-o"/> 3 min ago
-                                                             </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="ed-opts">
-                                                        <a href="#" title="" className="ed-opts-open"><i
-                                                            className="la la-ellipsis-v"></i></a>
-                                                        <ul className="ed-options">
-                                                            <li><a href="#" title="">Edit Post</a></li>
-                                                            <li><a href="#" title="">Unsaved</a></li>
-                                                            <li><a href="#" title="">Unbid</a></li>
-                                                            <li><a href="#" title="">Close</a></li>
-                                                            <li><a href="#" title="">Hide</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div className="epi-sec">
-                                                    <ul className="descp">
-                                                        <li>
-                                                            <img src={location} alt=""/>
-                                                            <span>India</span>
-                                                        </li>
-                                                    </ul>
-                                                    <ul className="bk-links">
-                                                        <li><a href="#" title=""><i className="la la-bookmark"></i></a>
-                                                        </li>
-                                                        <li><a href="#" title=""><i className="la la-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="job_descp">
-                                                    <h3>Senior Wordpress Developer</h3>
-                                                    <ul className="job-dt">
-                                                        <li><a href="#" title="">Full Time</a></li>
-                                                        <li><span>$30 / hr</span></li>
-                                                    </ul>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                                                        luctus
-                                                        hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna
-                                                        sit
-                                                        amet... <a href="#" title="">view more</a></p>
-                                                    <ul className="skill-tags">
-                                                        <li><a href="#" title="">HTML</a></li>
-                                                        <li><a href="#" title="">PHP</a></li>
-                                                        <li><a href="#" title="">CSS</a></li>
-                                                        <li><a href="#" title="">Javascript</a></li>
-                                                        <li><a href="#" title="">Wordpress</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div className="job-status-bar">
-                                                    <ul className="like-com">
-                                                        <li>
-                                                            <a href="#"><i className="fa fa-heart"/> Like</a>
-                                                            <img src={like} alt=""/>
-                                                            <span>25</span>
-                                                        </li>
-                                                        <li><a href="#" className="com"><i
-                                                            className="fas fa-comment-alt"/> Comment 15</a></li>
-                                                    </ul>
-                                                    <a href="#"><i className="fa fa-eye"></i>Views 50</a>
-                                                </div>
-                                            </div>
-                                            <div className="post-bar">
-                                                <div className="post_topbar">
-                                                    <div className="usy-dt">
-                                                        <img src={user_post} alt=""/>
-                                                        <div className="usy-name">
-                                                            <h3>John Doe</h3>
-                                                            <span>
-                                                                 <i className="fa fa-clock-o"/> 3 min ago
-                                                             </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="ed-opts">
-                                                        <a href="#" title="" className="ed-opts-open"><i
-                                                            className="la la-ellipsis-v"></i></a>
-                                                        <ul className="ed-options">
-                                                            <li><a href="#" title="">Edit Post</a></li>
-                                                            <li><a href="#" title="">Unsaved</a></li>
-                                                            <li><a href="#" title="">Unbid</a></li>
-                                                            <li><a href="#" title="">Close</a></li>
-                                                            <li><a href="#" title="">Hide</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div className="epi-sec">
-                                                    <ul className="descp">
-                                                        <li>
-                                                            <img src={location} alt=""/>
-                                                            <span>India</span>
-                                                        </li>
-                                                    </ul>
-                                                    <ul className="bk-links">
-                                                        <li><a href="#" title=""><i className="la la-bookmark"></i></a>
-                                                        </li>
-                                                        <li><a href="#" title=""><i className="la la-envelope"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div className="job_descp">
-                                                    <h3>Senior Wordpress Developer</h3>
-                                                    <ul className="job-dt">
-                                                        <li><a href="#" title="">Full Time</a></li>
-                                                        <li><span>$30 / hr</span></li>
-                                                    </ul>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                                                        luctus
-                                                        hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna
-                                                        sit
-                                                        amet... <a href="#" title="">view more</a></p>
-                                                    <ul className="skill-tags">
-                                                        <li><a href="#" title="">HTML</a></li>
-                                                        <li><a href="#" title="">PHP</a></li>
-                                                        <li><a href="#" title="">CSS</a></li>
-                                                        <li><a href="#" title="">Javascript</a></li>
-                                                        <li><a href="#" title="">Wordpress</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div className="job-status-bar">
-                                                    <ul className="like-com">
-                                                        <li>
-                                                            <a href="#"><i className="fa fa-heart"/> Like</a>
-                                                            <img src={like} alt=""/>
-                                                            <span>25</span>
-                                                        </li>
-                                                        <li><a href="#" className="com"><i
-                                                            className="fas fa-comment-alt"/> Comment 15</a></li>
-                                                    </ul>
-                                                    <a href="#"><i className="fa fa-eye"></i>Views 50</a>
-                                                </div>
-                                            </div>
-
+                                             <Post/>
+                                             <Post/>
                                             <div className="posty">
-                                                <div className="post-bar no-margin">
-                                                    <div className="post_topbar">
-                                                        <div className="usy-dt">
-                                                            <img src={user_post} alt=""/>
-                                                            <div className="usy-name">
-                                                                <h3>John Doe</h3>
-                                                                <span>
-                                                                 <i className="fa fa-clock-o"/> 3 min ago
-                                                             </span>
-                                                            </div>
-                                                        </div>
-                                                        <div className="ed-opts">
-                                                            <a href="#" title="" className="ed-opts-open"><i
-                                                                className="la la-ellipsis-v"></i></a>
-                                                            <ul className="ed-options">
-                                                                <li><a href="#" title="">Edit Post</a></li>
-                                                                <li><a href="#" title="">Unsaved</a></li>
-                                                                <li><a href="#" title="">Unbid</a></li>
-                                                                <li><a href="#" title="">Close</a></li>
-                                                                <li><a href="#" title="">Hide</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="epi-sec">
-                                                        <ul className="descp">
-                                                            <li>
-                                                                <img src={location} alt=""/>
-                                                                <span>India</span>
-                                                            </li>
-                                                        </ul>
-                                                        <ul className="bk-links">
-                                                            <li><a href="#" title=""><i className="la la-bookmark"></i></a>
-                                                            </li>
-                                                            <li><a href="#" title=""><i className="la la-envelope"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="job_descp">
-                                                        <h3>Senior Wordpress Developer</h3>
-                                                        <ul className="job-dt">
-                                                            <li><a href="#" title="">Full Time</a></li>
-                                                            <li><span>$30 / hr</span></li>
-                                                        </ul>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                            Aliquam
-                                                            luctus
-                                                            hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-                                                            magna
-                                                            sit
-                                                            amet... <a href="#" title="">view more</a></p>
-                                                        <ul className="skill-tags">
-                                                            <li><a href="#" title="">HTML</a></li>
-                                                            <li><a href="#" title="">PHP</a></li>
-                                                            <li><a href="#" title="">CSS</a></li>
-                                                            <li><a href="#" title="">Javascript</a></li>
-                                                            <li><a href="#" title="">Wordpress</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="job-status-bar">
-                                                        <ul className="like-com">
-                                                            <li>
-                                                                <a href="#"><i className="fa fa-heart"/> Like</a>
-                                                                <img src={like} alt=""/>
-                                                                <span>25</span>
-                                                            </li>
-                                                            <li><a href="#" className="com"><i
-                                                                className="fas fa-comment-alt"/> Comment 15</a></li>
-                                                        </ul>
-                                                        <a href="#"><i className="fa fa-eye"></i>Views 50</a>
-                                                    </div>
-                                                </div>
-
-                                                <div className="comment-section">
+                                             <Post/>
+                                              {/*  <div className="comment-section">
                                                     <a href="#" className="plus-ic">
                                                         <i className="la la-plus"></i>
                                                     </a>
@@ -318,16 +108,10 @@ const Home = () => {
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>*/}
+
                                             </div>
                                             {/*end list view of posts*/}
-                                            {/*   <div className="process-comm">
-                                                <div className="spinner">
-                                                    <div className="bounce1"/>
-                                                    <div className="bounce2"/>
-                                                    <div className="bounce3"/>
-                                                </div>
-                                            </div>*/}
                                         </div>
                                     </div>
                                 </div>

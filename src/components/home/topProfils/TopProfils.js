@@ -1,12 +1,12 @@
 import React from 'react';
-import envelop from "../../assets/images/envelop.png";
-import user_post from "../../assets/images/resources/us-pic.png";
+import envelop from "../../../assets/images/envelop.png";
+import user_post from "../../../assets/images/resources/us-pic.png";
 
 function TopProfiles() {
     const users = [
         {
             id: 1,
-            img: "../../assets/images/resources/us-pic.png",
+            img: "/static/media/user-pic.d9673935.png",
             name: "John Doe",
             job: "Graphic Designer",
 
@@ -41,7 +41,7 @@ function TopProfiles() {
                     users.map(
                         user =>
                             <div className="user-profy" key={user.id}>
-                                <img src={user.img} alt=""/>
+                                <img src={user_post} alt=""/>
                                 <h3>{user.name}</h3>
                                 <span>{user.job}</span>
                                 <ul>

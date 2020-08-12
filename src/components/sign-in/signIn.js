@@ -41,7 +41,7 @@ class SignIn extends React.Component {
                                             {/*SIGN IN*/}
                                             <div className="sign_in_sec" id="tab-2">
                                                 <div className="signup-tab">
-                                                    <i className="fa fa-long-arrow-left"></i>
+                                                    <i className="fa fa-long-arrow-left"/>
                                                     <h2>johndoe@example.com</h2>
                                                     <ul>
                                                         <li data-tab="tab-3" className="current"><a href="#"
@@ -56,14 +56,14 @@ class SignIn extends React.Component {
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="text" name="name" placeholder="Full Name"/>
-                                                                    <i className="la la-user"></i>
+                                                                    <i className="la la-user"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="text" name="country"
                                                                            placeholder="Country"/>
-                                                                    <i className="la la-globe"></i>
+                                                                    <i className="la la-globe"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
@@ -75,22 +75,22 @@ class SignIn extends React.Component {
                                                                         <option>Category 3</option>
                                                                         <option>Category 4</option>
                                                                     </select>
-                                                                    <i className="la la-dropbox"></i>
-                                                                    <span><i className="fa fa-ellipsis-h"></i></span>
+                                                                    <i className="la la-dropbox"/>
+                                                                    <span><i className="fa fa-ellipsis-h"/></span>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="password" name="password"
                                                                            placeholder="Password"/>
-                                                                    <i className="la la-lock"></i>
+                                                                    <i className="la la-lock"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="password" name="repeat-password"
                                                                            placeholder="Repeat Password"/>
-                                                                    <i className="la la-lock"></i>
+                                                                    <i className="la la-lock"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
@@ -98,7 +98,7 @@ class SignIn extends React.Component {
                                                                     <div className="fgt-sec">
                                                                         <input type="checkbox" name="cc" id="c2"/>
                                                                         <label htmlFor="c2">
-                                                                            <span></span>
+                                                                            <span/>
                                                                         </label>
                                                                         <small>Yes, I understand and agree to the workwise
                                                                             Terms & Conditions.</small>
@@ -118,28 +118,28 @@ class SignIn extends React.Component {
                                                                 <div className="sn-field">
                                                                     <input type="text" name="company-name"
                                                                            placeholder="Company Name"/>
-                                                                    <i className="la la-building"></i>
+                                                                    <i className="la la-building"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="text" name="country"
                                                                            placeholder="Country"/>
-                                                                    <i className="la la-globe"></i>
+                                                                    <i className="la la-globe"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="password" name="password"
                                                                            placeholder="Password"/>
-                                                                    <i className="la la-lock"></i>
+                                                                    <i className="la la-lock"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
                                                                 <div className="sn-field">
                                                                     <input type="password" name="repeat-password"
                                                                            placeholder="Repeat Password"/>
-                                                                    <i className="la la-lock"></i>
+                                                                    <i className="la la-lock"/>
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12 no-pdd">
@@ -147,7 +147,7 @@ class SignIn extends React.Component {
                                                                     <div className="fgt-sec">
                                                                         <input type="checkbox" name="cc" id="c3"/>
                                                                         <label htmlFor="c3">
-                                                                            <span></span>
+                                                                            <span/>
                                                                         </label>
                                                                         <small>Yes, I understand and agree to the workwise
                                                                             Terms & Conditions.</small>
@@ -169,14 +169,14 @@ class SignIn extends React.Component {
                                                         <div className="col-lg-12 no-pdd">
                                                             <div className="sn-field">
                                                                 <input type="text" name="username" placeholder="Username"/>
-                                                                <i className="fa fa-user"></i>
+                                                                <i className="fa fa-user"/>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-12 no-pdd">
                                                             <div className="sn-field">
                                                                 <input type="password" name="password"
                                                                        placeholder="Password"/>
-                                                                <i className="la la-lock"></i>
+                                                                <i className="la la-lock"/>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-12 no-pdd">
@@ -184,7 +184,7 @@ class SignIn extends React.Component {
                                                                 <div className="fgt-sec">
                                                                     <input type="checkbox" name="cc" id="c1"/>
                                                                     <label htmlFor="c1">
-                                                                        <span></span>
+                                                                        <span/>
                                                                     </label>
                                                                     <small>Remember me</small>
                                                                 </div>

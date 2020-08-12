@@ -1,4 +1,4 @@
-import React, {Fragment } from 'react';
+import React, {Fragment} from 'react';
 import logo from '../../../assets/images/logo.png'
 import home from '../../../assets/images/icon1.png';
 import companie from '../../../assets/images/icon2.png'
@@ -38,6 +38,7 @@ const NavBar = () => {
                                         <span><img src={companie} alt=""/></span>
                                         Companies
                                     </a>
+                                    {/*<i className="fa fa-sort-desc" style={{color: "white"}}/>*/}
                                     <ul>
                                         <li><a href="companies.html" title="">Companies</a></li>
                                         <li><a href="company-profile.html" title="">Company Profile</a></li>
@@ -70,6 +71,7 @@ const NavBar = () => {
                                         <span><img src={messages} alt=""/></span>
                                         Messages
                                     </a>
+
                                     <div className="notification-box msg" id="message">
                                         <div className="nt-title">
                                             <h4>Setting</h4>
