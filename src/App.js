@@ -11,14 +11,14 @@ import './assets/css/style.css'
 import './assets/css/responsive.css'
 import {Router, Route, Switch} from "react-router-dom";
 import history from "./history";
-import Home from "./components/home/home/Home";
+import Root from "./components/root";
 
 const App = () => {
     return (
         <Router history={history}>
             <Switch>
                 <Route path='/sign' component={SignIn}/>
-                <Route path='/' component={Home}/>
+                <Route path='/' component={Root}/>
             </Switch>
         </Router>
     );

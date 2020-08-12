@@ -13,13 +13,13 @@ function Post() {
                     <div className="usy-name">
                         <h3>John Doe</h3>
                         <span>
-                                                                 <i className="fa fa-clock-o"/> 3 min ago
-                                                             </span>
+                            <i className="fa fa-clock-o"/> 3 min ago
+                        </span>
                     </div>
                 </div>
                 <div className="ed-opts">
                     <a href="#" title="" className="ed-opts-open"><i
-                        className="la la-ellipsis-v"></i></a>
+                        className="la la-ellipsis-v"/></a>
                     <ul className="ed-options">
                         <li><a href="#" title="">Edit Post</a></li>
                         <li><a href="#" title="">Unsaved</a></li>
@@ -37,9 +37,9 @@ function Post() {
                     </li>
                 </ul>
                 <ul className="bk-links">
-                    <li><a href="#" title=""><i className="la la-bookmark"></i></a>
+                    <li><a href="#" title=""><i className="la la-bookmark"/></a>
                     </li>
-                    <li><a href="#" title=""><i className="la la-envelope"></i></a>
+                    <li><a href="#" title=""><i className="la la-envelope"/></a>
                     </li>
                 </ul>
             </div>
@@ -72,10 +72,10 @@ function Post() {
                     <li><a href="#" className="com"><i
                         className="fas fa-comment-alt"/> Comment 15</a></li>
                 </ul>
-                <a href="#"><i className="fa fa-eye"></i>Views 50</a>
+                <a href="#"><i className="fa fa-eye"/>Views 50</a>
             </div>
             <div className="comment-area mt-3">
-         {/*   <ul className="post-comments p-0 m-0">
+                {/*   <ul className="post-comments p-0 m-0">
                     <li className="mb-2">
                         <div className="d-flex flex-wrap">
                             <div className="user-img">
@@ -113,14 +113,14 @@ function Post() {
                         </div>
                     </li>
                 </ul>*/}
-                <form className="comment-text d-flex align-items-center mt-3" action="#">
+                {/*     <form className="comment-text d-flex align-items-center mt-3" action="#">
                     <input type="text" className="form-control rounded"/>
                     <div className="comment-attagement d-flex">
                         <a href="#"><i className="ri-link mr-3"/></a>
                         <a href="#"><i className="ri-user-smile-line mr-3"/></a>
                         <a href="#"><i className="ri-camera-line mr-3"/></a>
                     </div>
-                </form>
+                </form>*/}
             </div>
         </div>
     );

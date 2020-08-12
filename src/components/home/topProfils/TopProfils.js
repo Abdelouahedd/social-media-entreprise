@@ -1,7 +1,8 @@
 import React from 'react';
 import envelop from "../../../assets/images/envelop.png";
 import user_post from "../../../assets/images/resources/us-pic.png";
-
+import Slider from "react-slick";
+import './profilesSlider.css'
 function TopProfiles() {
     const users = [
         {
@@ -30,13 +31,24 @@ function TopProfiles() {
 
         },
     ]
+    var settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll:1,
+        autoplay: false,
+        className: "profiles-slider",
+        variableWidth:true,
+    };
     return (
+
         <div className="top-profiles">
             <div className="pf-hd">
                 <h3>Top Profiles</h3>
                 <i className="la la-ellipsis-v"/>
             </div>
-            <div className="profiles-slider">
+            <Slider {...settings}>
                 {
                     users.map(
                         user =>
@@ -54,7 +66,7 @@ function TopProfiles() {
                                 <a href="#" title="">View Profile</a>
                             </div>
                     )}
-            </div>
+            </Slider>
         </div>
     );
 }

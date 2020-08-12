@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from "../NavBar/NavBar";
 import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
@@ -9,7 +8,6 @@ import Post from "../Post/Post";
 const Home = () => {
     return (
         <div className="wrapper">
-            <NavBar/>
             <main>
                 <div className="main-section">
                     <div className="container">
@@ -109,7 +107,6 @@ const Home = () => {
                                                         </div>
                                                     </div>
                                                 </div>*/}
-
                                             </div>
                                             {/*end list view of posts*/}
                                         </div>
