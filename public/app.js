@@ -8,6 +8,7 @@ $(window).on("load", function() {
     $(".post_project").on("click", function(){
         $(".post-popup.pst-pj").addClass("active");
         $(".wrapper").addClass("overlay");
+        $(".iq-top-navbar").addClass("active");
         return false;
     });
     $(".post-project > a").on("click", function(){

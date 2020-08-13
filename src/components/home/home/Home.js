@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
 import TopProfiles from "../topProfils/TopProfils";
 import Post from "../Post/Post";
+import {Button, Modal} from "react-bootstrap";
+import './home.css'
 
 const Home = () => {
+    const [show, setShow] = useState(false);
+
     return (
         <>
             <main>
@@ -23,7 +27,13 @@ const Home = () => {
                                             </div>
                                             <div className="post-st">
                                                 <ul>
-                                                    <li><a className="post_project" href="#" title="">Add a post</a>
+                                                    <li>
+                                                        <a className="post_project" href="#" title=""
+                                                        >Add a post</a>
+                                                        <Button variant="primary" onClick={() => setShow(true)}>
+                                                            Custom Width Modal
+                                                        </Button>
+
                                                     </li>
                                                 </ul>
                                             </div>
@@ -32,11 +42,11 @@ const Home = () => {
                                         {/*start list view of posts*/}
                                         <div className="posts-section">
                                             <TopProfiles/>
-                                             <Post/>
-                                             <Post/>
+                                            <Post/>
+                                            <Post/>
                                             <div className="posty">
-                                             <Post/>
-                                              {/*  <div className="comment-section">
+                                                <Post/>
+                                                <div className="comment-section">
                                                     <a href="#" className="plus-ic">
                                                         <i className="la la-plus"></i>
                                                     </a>
@@ -106,9 +116,9 @@ const Home = () => {
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div>*/}
+                                                </div>
                                             </div>
-                                            {/*end list view of posts*/}
+                                            end list view of posts
                                         </div>
                                     </div>
                                 </div>
@@ -119,6 +129,32 @@ const Home = () => {
                 </div>
             </main>
             {/*pop up Add post*/}
+            {/*  <Modal
+                size="lg"
+                // centered={true}
+                contentClassName="post-popup pst-pj post-project"
+                show={show}
+                onHide={() => setShow(false)}
+                dialogClassName="modal-90w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        Custom Modal Styling
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
+                        commodi aspernatur enim, consectetur. Cumque deleniti temporibus
+                        ipsam atque a dolores quisquam quisquam adipisci possimus
+                        laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
+                        accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
+                        reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
+                        deleniti rem!
+                    </p>
+                </Modal.Body>
+            </Modal>*/}
             <div className="post-popup pst-pj">
                 <div className="post-project">
                     <h3>Post a project</h3>

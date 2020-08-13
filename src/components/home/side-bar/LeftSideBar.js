@@ -40,7 +40,7 @@ const LeftSideBar = () => {
                     </div>
                     <div className="suggestions-list">
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s1.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s1.png")} alt=""/>
                             <div className="sgt-text">
                                 <h4>Jessica William</h4>
                                 <span>Graphic Designer</span>
@@ -48,7 +48,7 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s2.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s2.png")} alt=""/>
                             <div className="sgt-text">
                                 <h4>John Doe</h4>
                                 <span>PHP Developer</span>
@@ -56,7 +56,7 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s3.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s3.png" )} alt=""/>
                             <div className="sgt-text">
                                 <h4>Poonam</h4>
                                 <span>Wordpress Developer</span>
@@ -64,7 +64,7 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s4.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s4.png")} alt=""/>
                             <div className="sgt-text">
                                 <h4>Bill Gates</h4>
                                 <span>C & C++ Developer</span>
@@ -72,7 +72,7 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s5.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s5.png")} alt=""/>
                             <div className="sgt-text">
                                 <h4>Jessica William</h4>
                                 <span>Graphic Designer</span>
@@ -80,7 +80,7 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="suggestion-usd">
-                            <img src="../../../assets/images/resources/s6.png" alt=""/>
+                            <img src={require("../../../assets/images/resources/s6.png")} alt=""/>
                             <div className="sgt-text">
                                 <h4>John Doe</h4>
                                 <span>PHP Developer</span>
@@ -104,8 +104,8 @@ const LeftSideBar = () => {
                         <li><a href="#" title="">Copyright Policy</a></li>
                     </ul>
                     <div className="cp-sec">
-                        <img src="../../../assets/images/logo2.png" alt=""/>
-                        <p><img src="../../../assets/images/cp.png" alt=""/>Copyright 2019</p>
+                        <img src={require("../../../assets/images/logo2.png")} alt=""/>
+                        <p><img src={require("../../../assets/images/cp.png")} alt=""/>Copyright 2019</p>
                     </div>
                 </div>
             </div>

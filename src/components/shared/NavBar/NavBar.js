@@ -10,10 +10,11 @@ import messages from '../../../assets/images/icon6.png'
 import notification from '../../../assets/images/icon7.png'
 import avater from "../../../assets/images/resources/ny-img3.png"
 import user from "../../../assets/images/resources/user.png"
-
+import './nav.css'
 
 const NavBar = () => {
-    return (<header>
+    return (
+        <header className="iq-top-navbar">
         <div className="container">
             <div className="header-data">
                 <div className="logo">

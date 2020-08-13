@@ -1,0 +1,37 @@
+.iq-top-navbar {
+    padding: 0 15px;
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: 0;
+    width: 100%;
+    display: inline-block;
+    z-index: 9999;
+    background-color: orange;
+    margin: 0;
+    transition: all 0.45s ease 0s;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+}
+.iq-top-navbar.active{
+    padding: 0 15px;
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: 0;
+    width: 100%;
+    display: inline-block;
+    z-index: 0;
+    background-color: orange;
+    margin: 0;
+    transition: all 0.45s ease 0s;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+}
+.header-data {
+    float: left;
+    width: 100%;
+}
+header {
+    float: left;
+    width: 100%;
+    background-color: #e44d3a;
+}

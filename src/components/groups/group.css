@@ -1,0 +1,151 @@
+
+.companies-info {
+    padding: 60px 0;
+}
+
+.company-title {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.company-title h3 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #fff;
+    padding: 10px 15px;
+}
+
+.companies-list {
+    overflow: hidden;
+    padding: 15px 15px 0;
+    min-height: 100vh;
+    transition: all 0.3s ease-out 0s;
+    float: left;
+    width: 100%;
+    margin-bottom: -30px;
+}
+
+.company_profile_info {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: none;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+}
+
+.company-up-info {
+    float: left;
+    width: 100%;
+    padding: 30px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.company-up-info img {
+    float: none;
+    margin-bottom: 10px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.company-up-info h3 {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.company-up-info h4 {
+    color: #686868;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 21px;
+}
+
+.company-up-info ul {
+    float: left;
+    width: 100%;
+}
+
+.company-up-info ul li {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.company-up-info ul li a {
+    display: inline-block;
+    padding: 0 12px;
+    color: #fff;
+    height: 35px;
+    line-height: 35px;
+}
+
+.company-up-info ul li a i {
+    font-size: 24px;
+    position: relative;
+    top: 3px;
+}
+
+.follow {
+    background-color: #53d690;
+}
+
+.message-us {
+    background-color: #e44d3a;
+}
+
+.hire-us {
+    background-color: #51a5fb;
+}
+
+.company_profile_info > a {
+    display: inline-block;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 18px 0;
+}
+
+.header-for-bg {
+    margin-top: 75px;
+    margin-bottom: -60px;
+}
+.header-for-bg .title-on-header {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: darkgray;
+}
+.header-for-bg .data-block {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 5px;
+}
+.content-page {
+    overflow: hidden;
+    padding: 90px 15px 0;
+    min-height: 100vh;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
