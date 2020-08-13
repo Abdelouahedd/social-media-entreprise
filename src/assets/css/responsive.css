@@ -53,7 +53,8 @@
 
 @media (max-width: 991px) {
 	.sgt-text span {font-size: 14px;}
-	main {padding: 20px 0 60px 0;}
+	main {padding: 40px 0 60px 0;}
+	.main-section-data{padding: 60px 0;}
 	.user-specs span {font-size: 13px;}
 	.comment_box input {width: 275px;}
 	.job-details {width: auto;}
@@ -148,12 +149,12 @@
 	.post-comment {text-align: center;}
 	.comment_box form button {padding: 0 15px;}
 	.job-details {width: 80%;}
-	.cover-sec {height: 200px;}
+	.cover-sec {height: 200px;margin-top: 90px;}
 	.cover-sec img {height: 100%;object-fit: cover;}
 	.star-descp > ul {width: 100%;margin-top: 10px;}
 	.like-com li {margin-right: 5px;}
 	.bk-links {width: 100%;margin-top: 15px;}
-	main {padding: 20px 0 40px 0}
+	main {padding: 40px 0 40px 0}
 	.bk-links {margin-bottom: 10px;}
 	.star-descp {margin-bottom: 25px;}
 	.like-com li {float: left;width: 100%;margin-bottom: 15px;}

@@ -2,12 +2,12 @@ import React from 'react';
 import cuver from '../../assets/images/resources/cover-img.jpg';
 import user_img from '../../assets/images/resources/user-pro-img.png';
 import Post from "../home/Post/Post";
-
+import "./profile.css"
 function Profile() {
     return (
         <div className="wrapper">
             <section className="cover-sec">
-                <img src={cuver} alt={"cuver img"}/>
+                <img src={cuver} alt={"cuver img"} className="img-fluid bg-img"/>
                 <div className="add-pic-box">
                     <div className="container">
                         <div className="row no-gutters">

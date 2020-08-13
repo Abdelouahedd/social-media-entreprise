@@ -14,6 +14,7 @@ $(window).on("load", function() {
     $(".post-project > a").on("click", function(){
         $(".post-popup.pst-pj").removeClass("active");
         $(".wrapper").removeClass("overlay");
+        $(".iq-top-navbar").removeClass("active");
         return false;
     });
 

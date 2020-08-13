@@ -8,11 +8,10 @@ import {Button, Modal} from "react-bootstrap";
 import './home.css'
 
 const Home = () => {
-    const [show, setShow] = useState(false);
 
     return (
         <>
-            <main>
+            <main className="home-main">
                 <div className="main-section">
                     <div className="container">
                         <div className="main-section-data">
@@ -30,10 +29,6 @@ const Home = () => {
                                                     <li>
                                                         <a className="post_project" href="#" title=""
                                                         >Add a post</a>
-                                                        <Button variant="primary" onClick={() => setShow(true)}>
-                                                            Custom Width Modal
-                                                        </Button>
-
                                                     </li>
                                                 </ul>
                                             </div>
@@ -129,32 +124,6 @@ const Home = () => {
                 </div>
             </main>
             {/*pop up Add post*/}
-            {/*  <Modal
-                size="lg"
-                // centered={true}
-                contentClassName="post-popup pst-pj post-project"
-                show={show}
-                onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        Custom Modal Styling
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>
-                        Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
-                        commodi aspernatur enim, consectetur. Cumque deleniti temporibus
-                        ipsam atque a dolores quisquam quisquam adipisci possimus
-                        laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
-                        accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
-                        reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
-                        deleniti rem!
-                    </p>
-                </Modal.Body>
-            </Modal>*/}
             <div className="post-popup pst-pj">
                 <div className="post-project">
                     <h3>Post a project</h3>
