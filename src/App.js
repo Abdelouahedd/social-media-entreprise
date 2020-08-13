@@ -9,18 +9,17 @@ import './assets/lib/slick/slick.css'
 import './assets/lib/slick/slick-theme.css'
 import './assets/css/style.css'
 import './assets/css/responsive.css'
-import {Router, Route, Switch} from "react-router-dom";
-import history from "./history";
+import { Route, Switch, BrowserRouter} from "react-router-dom";
 import Root from "./components/root";
 
 const App = () => {
     return (
-        <Router history={history}>
+        <BrowserRouter>
             <Switch>
                 <Route path='/sign' component={SignIn}/>
                 <Route path='/' component={Root}/>
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 };
 

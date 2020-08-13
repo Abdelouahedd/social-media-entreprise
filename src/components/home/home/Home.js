@@ -7,7 +7,7 @@ import Post from "../Post/Post";
 
 const Home = () => {
     return (
-        <div className="wrapper">
+        <>
             <main>
                 <div className="main-section">
                     <div className="container">
@@ -170,7 +170,7 @@ const Home = () => {
                     <a href="#" title=""><i className="la la-times-circle-o"/></a>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
