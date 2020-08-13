@@ -3,6 +3,13 @@ import envelop from "../../../assets/images/envelop.png";
 import user_post from "../../../assets/images/resources/us-pic.png";
 import Slider from "react-slick";
 import './profilesSlider.css'
+
+function Arrow(props) {
+    return (
+        <span className={props.styleArrow} onClick={props.onClick}/>
+    );
+}
+
 function TopProfiles() {
     const users = [
         {
@@ -36,13 +43,14 @@ function TopProfiles() {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll:1,
+        slidesToScroll: 1,
         autoplay: false,
         className: "profiles-slider",
-        variableWidth:true,
+        variableWidth: true,
+        nextArrow: <Arrow styleArrow={"slick-nexti"}/>,
+        prevArrow: <Arrow styleArrow="slick-previous"/>
     };
     return (
-
         <div className="top-profiles">
             <div className="pf-hd">
                 <h3>Top Profiles</h3>
