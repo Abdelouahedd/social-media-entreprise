@@ -4,7 +4,6 @@ import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
 import TopProfiles from "../topProfils/TopProfils";
 import Post from "../Post/Post";
-import {Button, Modal} from "react-bootstrap";
 import './home.css'
 
 const Home = () => {

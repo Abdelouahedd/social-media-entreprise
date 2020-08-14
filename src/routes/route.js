@@ -22,6 +22,8 @@ const AnimatedSwitch = withRouter(({location}) => (
 const Home = lazy(() => import( "../components/home/home/Home"));
 const Group = lazy(() => import( "../components/groups/group"));
 const Profile = lazy(() => import( "../components/profile/Profile"));
+const Messages = lazy(() => import( "../components/messages/Messages"));
+const AcountSettings = lazy(() => import( "../components/settings/account-setting"));
 
 const CreateRoutes = () => (
         <Switch>
@@ -30,8 +32,8 @@ const CreateRoutes = () => (
             <Route path='/projects' component={Home} exact/>
             <Route path='/profile' component={Profile} exact/>
             <Route path='/files' component={Home} exact/>
-            <Route path='/messages' component={Home} exact/>
-            <Route path='/settings' component={Home} exact/>
+            <Route path='/messages' component={Messages} exact/>
+            <Route path='/settings' component={AcountSettings} exact/>
         </Switch>
 
 );

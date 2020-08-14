@@ -5,7 +5,7 @@ function GroupCard(props) {
 
 
     return (
-        <div className="col-lg-4 col-md-6 col-sm-6">
+        <div className="col-lg-3 col-md-4 col-sm-6">
             <div className="company_profile_info">
                 <div className="company-up-info">
                     <img src={require("../../../assets/images/resources/cmp-icon1.png")} alt=""/>

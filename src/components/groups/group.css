@@ -7,6 +7,7 @@
     float: left;
     width: 100%;
     margin-bottom: 20px;
+    margin-top: 20px;
     padding: 0 15px;
 }
 
@@ -15,7 +16,8 @@
     font-size: 20px;
     font-weight: 600;
     background-color: #fff;
-    padding: 10px 15px;
+    padding: 15px 15px;
+    height: 50px;
 }
 
 .companies-list {
@@ -100,17 +102,6 @@
     top: 3px;
 }
 
-.follow {
-    background-color: #53d690;
-}
-
-.message-us {
-    background-color: #e44d3a;
-}
-
-.hire-us {
-    background-color: #51a5fb;
-}
 
 .company_profile_info > a {
     display: inline-block;
@@ -120,32 +111,4 @@
     padding: 18px 0;
 }
 
-.header-for-bg {
-    margin-top: 75px;
-    margin-bottom: -60px;
-}
-.header-for-bg .title-on-header {
-    position: absolute;
-    top: 40%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: darkgray;
-}
-.header-for-bg .data-block {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 5px;
-}
-.content-page {
-    overflow: hidden;
-    padding: 90px 15px 0;
-    min-height: 100vh;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
 
