@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
@@ -6,7 +6,25 @@ import TopProfiles from "../topProfils/TopProfils";
 import Post from "../Post/Post";
 import './home.css'
 
+
 const Home = () => {
+    const handleShow = () => {
+        const postPopUp = document.querySelector('.post-popup.pst-pj');
+        const root = document.querySelector('.wrapper');
+        const nav = document.querySelector('.iq-top-navbar');
+        postPopUp.classList.add('active');
+        root.classList.add('overlay');
+        nav.classList.add('active');
+    }
+    const handleClose = () => {
+        const root = document.querySelector('.wrapper');
+        const nav = document.querySelector('.iq-top-navbar');
+        const postPopUp = document.querySelector('.post-popup.pst-pj');
+        root.classList.remove('overlay');
+        nav.classList.remove('active');
+        postPopUp.classList.remove('active');
+    }
+
 
     return (
         <>
@@ -27,7 +45,7 @@ const Home = () => {
                                                 <ul>
                                                     <li>
                                                         <a className="post_project" href="#" title=""
-                                                        >Add a post</a>
+                                                           onClick={handleShow}>Add a post</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -38,7 +56,7 @@ const Home = () => {
                                             <TopProfiles/>
                                             <Post/>
                                             <Post/>
-                                            <div className="posty">
+                                            {/*  <div className="posty">
                                                 <Post/>
                                                 <div className="comment-section">
                                                     <a href="#" className="plus-ic">
@@ -111,8 +129,8 @@ const Home = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            end list view of posts
+                                            </div>*/}
+                                            {/*  end list view of posts*/}
                                         </div>
                                     </div>
                                 </div>
@@ -171,7 +189,7 @@ const Home = () => {
                             </div>
                         </form>
                     </div>
-                    <a href="#" title=""><i className="la la-times-circle-o"/></a>
+                    <a href="#" title="" onClick={handleClose}><i className="la la-times-circle-o"/></a>
                 </div>
             </div>
         </>

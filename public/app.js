@@ -2,8 +2,7 @@ $(window).on("load", function() {
     "use strict";
 
 
-
-    //  ============= POST PROJECT POPUP FUNCTION =========
+    //  ============= POS PROJECT POPUP FUNCTION =========
 
     $(".post_project").on("click", function(){
         $(".post-popup.pst-pj").addClass("active");
@@ -64,12 +63,6 @@ $(window).on("load", function() {
         return false;
     });
 
-    //  ============= COVER GAP FUNCTION =========
-
-  /*  var gap = $(".container").offset().left;
-    $(".cover-sec > a, .chatbox-list").css({
-        "right": gap
-    });*/
 
     //  ============= OVERVIEW EDIT FUNCTION =========
 
@@ -188,27 +181,12 @@ $(window).on("load", function() {
         return false;
     });
 
-
-    //  ============== ChatBox ==============
-
-
-    $(".chat-mg").on("click", function(){
-        $(this).next(".conversation-box").toggleClass("active");
-        return false;
-    });
-    $(".close-chat").on("click", function(){
-        $(".conversation-box").removeClass("active");
-        return false;
-    });
-
     //  ================== Edit Options Function =================
-
 
     $(".ed-opts-open").on("click", function(){
         $(this).next(".ed-options").toggleClass("active");
         return false;
     });
-
 
     // ============== Menu Script =============
 
@@ -216,39 +194,6 @@ $(window).on("load", function() {
         $("nav").toggleClass("active");
         return false;
     });
-
-
-    //  ============ Notifications Open =============
-
-    $(".not-box-open").on("click", function(){$("#message").hide();
-        $(".user-account-settingss").hide();
-        $(this).next("#notification").toggle();
-    });
-
-    //  ============ Messages Open =============
-
-    $(".not-box-openm").on("click", function(){$("#notification").hide();
-        $(".user-account-settingss").hide();
-        $(this).next("#message").toggle();
-    });
-
-
-    // ============= User Account Setting Open ===========
-    /*
-$(".user-info").on("click", function(){$("#users").hide();
-        $(".user-account-settingss").hide();
-        $(this).next("#notification").toggle();
-    });
-
-    */
-    $( ".user-info" ).click(function() {
-        $( ".user-account-settingss" ).slideToggle( "fast");
-        $("#message").not($(this).next("#message")).slideUp();
-        $("#notification").not($(this).next("#notification")).slideUp();
-        // Animation complete.
-    });
-
-
     //  ============= FORUM LINKS MOBILE MENU FUNCTION =========
 
     $(".forum-links-btn > a").on("click", function(){

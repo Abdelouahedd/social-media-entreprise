@@ -3,6 +3,7 @@ import cuver from '../../assets/images/resources/cover-img.jpg';
 import user_img from '../../assets/images/resources/user-pro-img.png';
 import Post from "../home/Post/Post";
 import "./profile.css"
+import {Link} from "react-router-dom";
 function Profile() {
     return (
         <div className="wrapper">
@@ -142,11 +143,11 @@ function Profile() {
                                             <div className="star-descp">
                                                 <span>Graphic Designer at Self Employed</span>
                                                 <ul>
-                                                    <li><i className="fa fa-star"></i></li>
-                                                    <li><i className="fa fa-star"></i></li>
-                                                    <li><i className="fa fa-star"></i></li>
-                                                    <li><i className="fa fa-star"></i></li>
-                                                    <li><i className="fa fa-star-half-o"></i></li>
+                                                    <li><i className="fa fa-star"/></li>
+                                                    <li><i className="fa fa-star"/></li>
+                                                    <li><i className="fa fa-star"/></li>
+                                                    <li><i className="fa fa-star"/></li>
+                                                    <li><i className="fa fa-star-half-o"/></li>
                                                 </ul>
                                             </div>
                                             <div className="tab-feed st2 settingjb">
@@ -229,7 +230,7 @@ function Profile() {
                                                             <div className="wordpressdevlp">
                                                                 <h2>Senior Wordpress Developer</h2>
 
-                                                                <p><i className="la la-clock-o"></i>Posted on 30 August
+                                                                <p><i className="la la-clock-o"/>Posted on 30 August
                                                                     2018</p>
                                                             </div>
                                                             <br/>
@@ -2039,8 +2040,7 @@ function Profile() {
                                 <div className="col-lg-3">
                                     <div className="right-sidebar">
                                         <div className="message-btn">
-                                            <a href="profile-account-setting.html" title=""><i
-                                                className="fa fa-cog"></i> Setting</a>
+                                            <Link to="/settings" ><i className="fa fa-cog"/> Setting</Link>
                                         </div>
                                         <div className="widget widget-portfolio">
                                             <div className="wd-heady">

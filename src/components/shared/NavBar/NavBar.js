@@ -8,7 +8,6 @@ import projects from '../../../assets/images/icon3.png'
 import profiles from '../../../assets/images/icon4.png'
 import messages from '../../../assets/images/icon6.png'
 import notification from '../../../assets/images/icon7.png'
-import avater from "../../../assets/images/resources/ny-img3.png"
 import user from "../../../assets/images/resources/user.png"
 import './nav.css'
 import NotificationBox from "./components/NotificationBox";
