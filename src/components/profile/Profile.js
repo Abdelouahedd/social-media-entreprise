@@ -1,19 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import cuver from '../../assets/images/resources/cover-img.jpg';
 import user_img from '../../assets/images/resources/user-pro-img.png';
 import Post from "../home/Post/Post";
 import "./profile.css"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
+
 function Profile() {
+   
+    var initialState = [
+        {
+            data_tab: 'feed-dd',
+            className: 'animated fadeIn active',
+            src: require('../../assets/images/ic1.png'),
+            name: 'Feed'
+        },
+        {
+            data_tab: 'info-dd',
+            className: '',
+            src: require('../../assets/images/ic2.png'),
+            name: 'Info'
+
+        },
+        {
+            data_tab: 'saved-jobs',
+            className: 'animated fadeIn',
+            src: require('../../assets/images/ic4.png'),
+            name: 'Jobs'
+        },
+        {
+            data_tab: 'my-bids',
+            className: 'animated fadeIn',
+            src: require('../../assets/images/ic5.png'),
+            name: 'Bids'
+        },
+        {
+            data_tab: 'portfolio-dd',
+            className: 'animated fadeIn',
+            src: require('../../assets/images/ic3.png'),
+            name: 'Portfolio'
+        },
+        {
+            data_tab: 'rewivewdata',
+            className: 'animated fadeIn',
+            src: require('../../assets/images/review.png'),
+            name: 'Reviews'
+        },
+        {
+            data_tab: 'payment-dd',
+            className: 'animated fadeIn',
+            src: require('../../assets/images/ic6.png'),
+            name: 'Payment'
+        }
+
+    ];
+   
+    const [tabs, setTabs] = useState(initialState)
+
+
+    const showProductFeed = (event) => {
+        let prevTab = tabs.findIndex((e) => e.className.includes('active'));
+        tabs[prevTab].className = 'animated fadeIn';
+        let newTab = tabs.findIndex((e) => e.data_tab === event.data_tab);
+        tabs[newTab].className = 'animated fadeIn active';
+
+        let selectPrevTab = document.getElementById(tabs[prevTab].data_tab);
+        selectPrevTab.classList.remove('current');
+
+        let selectNewTab = document.getElementById(tabs[newTab].data_tab);
+        selectNewTab.classList.add('current', 'animated', 'fadeIn');
+
+        setTabs([...tabs]);
+    }
+  
+
     return (
         <div className="wrapper">
             <section className="cover-sec">
-                <img src={cuver} alt={"cuver img"} className="img-fluid bg-img"/>
+                <img src={cuver} alt={"cuver img"} className="img-fluid bg-img" />
                 <div className="add-pic-box">
                     <div className="container">
                         <div className="row no-gutters">
                             <div className="col-lg-12 col-sm-12">
-                                <input type="file" id="file"/>
+                                <input type="file" id="file" />
                                 <label htmlFor="file">Change Image</label>
                             </div>
                         </div>
@@ -29,11 +98,11 @@ function Profile() {
                                     <div className="main-left-sidebar">
                                         <div className="user_profile">
                                             <div className="user-pro-img">
-                                                <img src={user_img} alt=""/>
+                                                <img src={user_img} alt="" />
                                                 <div className="add-dp" id="OpenImgUpload">
-                                                    <input type="file" id="file"/>
+                                                    <input type="file" id="file" />
                                                     <label htmlFor="file"><i
-                                                        className="fa fa-camera"/></label>
+                                                        className="fa fa-camera" /></label>
                                                 </div>
                                             </div>
                                             <div className="user_pro_status">
@@ -50,28 +119,28 @@ function Profile() {
                                             </div>
                                             <ul className="social_links">
                                                 <li><a href="#" title=""><i
-                                                    className="la la-globe"/> www.example.com</a>
+                                                    className="la la-globe" /> www.example.com</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-facebook-square"/> Http://www.facebook.com/john...</a>
+                                                    className="fa fa-facebook-square" /> Http://www.facebook.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-twitter"/> Http://www.Twitter.com/john...</a>
+                                                    className="fa fa-twitter" /> Http://www.Twitter.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-google-plus-square"/> Http://www.googleplus.com/john...</a>
+                                                    className="fa fa-google-plus-square" /> Http://www.googleplus.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-behance-square"/> Http://www.behance.com/john...</a>
+                                                    className="fa fa-behance-square" /> Http://www.behance.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-pinterest"/> Http://www.pinterest.com/john...</a>
+                                                    className="fa fa-pinterest" /> Http://www.pinterest.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-instagram"/> Http://www.instagram.com/john...</a>
+                                                    className="fa fa-instagram" /> Http://www.instagram.com/john...</a>
                                                 </li>
                                                 <li><a href="#" title=""><i
-                                                    className="fa fa-youtube"/> Http://www.youtube.com/john...</a>
+                                                    className="fa fa-youtube" /> Http://www.youtube.com/john...</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -136,6 +205,7 @@ function Profile() {
                                         </div>*/}
                                     </div>
                                 </div>
+
                                 <div className="col-lg-6">
                                     <div className="main-ws-sec">
                                         <div className="user-tab-sec rewivew">
@@ -143,59 +213,73 @@ function Profile() {
                                             <div className="star-descp">
                                                 <span>Graphic Designer at Self Employed</span>
                                                 <ul>
-                                                    <li><i className="fa fa-star"/></li>
-                                                    <li><i className="fa fa-star"/></li>
-                                                    <li><i className="fa fa-star"/></li>
-                                                    <li><i className="fa fa-star"/></li>
-                                                    <li><i className="fa fa-star-half-o"/></li>
+                                                    <li><i className="fa fa-star" /></li>
+                                                    <li><i className="fa fa-star" /></li>
+                                                    <li><i className="fa fa-star" /></li>
+                                                    <li><i className="fa fa-star" /></li>
+                                                    <li><i className="fa fa-star-half-o" /></li>
                                                 </ul>
                                             </div>
                                             <div className="tab-feed st2 settingjb">
                                                 <ul>
-                                                    <li data-tab="feed-dd" className="active">
+                                                    {
+                                                        tabs.map((el, i) =>
+                                                            <li key={i} data-tab={el.data_tab} className={el.className}
+                                                                onClick={showProductFeed.bind(null, el)}
+                                                            >
+                                                                <a href="#" title="">
+                                                                    <img src={(el.src)}
+                                                                        alt={el.src.split('/')[4]} />
+                                                                    <span>{el.name}</span>
+                                                                </a>
+                                                            </li>
+                                                        )
+                                                    }
+                                                    {/*    <li data-tab="feed-dd" className="active">
                                                         <a href="#" title="">
-                                                            <img src={require('../../assets/images/ic1.png')} alt={"icon1"}/>
+                                                            <img src={require('../../assets/images/ic1.png')}
+                                                                alt={"icon1"} />
                                                             <span>Feed</span>
                                                         </a>
                                                     </li>
                                                     <li data-tab="info-dd">
                                                         <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic2.png")}/>
+                                                            <img src={require("../../assets/images/ic2.png")} />
                                                             <span>Info</span>
                                                         </a>
                                                     </li>
                                                     <li data-tab="saved-jobs">
                                                         <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic4.png")}/>
+                                                            <img src={require("../../assets/images/ic4.png")} />
                                                             <span>Jobs</span>
                                                         </a>
                                                     </li>
                                                     <li data-tab="my-bids">
                                                         <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic5.png")}/>
+                                                            <img src={require("../../assets/images/ic5.png")} />
                                                             <span>Bids</span>
                                                         </a>
                                                     </li>
                                                     <li data-tab="portfolio-dd">
                                                         <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic3.png")}/>
+                                                            <img src={require("../../assets/images/ic3.png")} />
                                                             <span>Portfolio</span>
                                                         </a>
                                                     </li>
                                                     <li data-tab="rewivewdata">
                                                         <a href="#" title="">
-                                                            <img src={require("../../assets/images/review.png")}/>
+                                                            <img src={require("../../assets/images/review.png")} />
                                                             <span>Reviews</span>
                                                         </a>
                                                     </li>
-                                                    <li data-tab="payment-dd">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic6.png")}/>
-                                                            <span>Payment</span>
-                                                        </a>
-                                                    </li>
-
+                                                    <li data-tab="payment-dd"> 
+                                                    <a href="#" title="">
+                                                        <img src={require("../../assets/images/ic6.png")} />
+                                                        <span>Payment</span>
+                                                    </a>
+                                                    </li>*/}
                                                 </ul>
+
                                             </div>
                                         </div>
                                         {/*Jobs*/}
@@ -203,60 +287,60 @@ function Profile() {
                                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                                 <li className="nav-item">
                                                     <a className="nav-link active" id="mange-tab" data-toggle="tab"
-                                                       href="#mange" role="tab" aria-controls="home"
-                                                       aria-selected="true">Manage Jobs</a>
+                                                        href="#mange" role="tab" aria-controls="home"
+                                                        aria-selected="true">Manage Jobs</a>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" id="saved-tab" data-toggle="tab"
-                                                       href="#saved" role="tab" aria-controls="profile"
-                                                       aria-selected="false">Saved Jobs</a>
+                                                        href="#saved" role="tab" aria-controls="profile"
+                                                        aria-selected="false">Saved Jobs</a>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" id="contact-tab" data-toggle="tab"
-                                                       href="#applied" role="tab" aria-controls="applied"
-                                                       aria-selected="false">Applied Jobs</a>
+                                                        href="#applied" role="tab" aria-controls="applied"
+                                                        aria-selected="false">Applied Jobs</a>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" id="cadidates-tab" data-toggle="tab"
-                                                       href="#cadidates" role="tab" aria-controls="contact"
-                                                       aria-selected="false">Applied cadidates</a>
+                                                        href="#cadidates" role="tab" aria-controls="contact"
+                                                        aria-selected="false">Applied cadidates</a>
                                                 </li>
                                             </ul>
                                             <div className="tab-content" id="myTabContent">
                                                 <div className="tab-pane fade show active" id="mange" role="tabpanel"
-                                                     aria-labelledby="mange-tab">
+                                                    aria-labelledby="mange-tab">
                                                     <div className="posts-bar">
                                                         <div className="post-bar bgclr">
                                                             <div className="wordpressdevlp">
                                                                 <h2>Senior Wordpress Developer</h2>
 
-                                                                <p><i className="la la-clock-o"/>Posted on 30 August
+                                                                <p><i className="la la-clock-o" />Posted on 30 August
                                                                     2018</p>
                                                             </div>
-                                                            <br/>
+                                                            <br />
                                                             <div className="row no-gutters">
                                                                 <div className="col-md-6 col-sm-12">
                                                                     <div className="cadidatesbtn">
                                                                         <button type="button"
-                                                                                className="btn btn-primary">
-                                                                                <span
-                                                                                    className="badge badge-light">3</span>Candidates
+                                                                            className="btn btn-primary">
+                                                                            <span
+                                                                                className="badge badge-light">3</span>Candidates
                                                                         </button>
                                                                         <a href="#">
-                                                                            <i className="far fa-edit"/>
+                                                                            <i className="far fa-edit" />
                                                                         </a>
                                                                         <a href="#">
-                                                                            <i className="far fa-trash-alt"/>
+                                                                            <i className="far fa-trash-alt" />
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-md-6 col-sm-12">
                                                                     <ul className="bk-links bklink">
                                                                         <li><a href="#" title=""><i
-                                                                            className="la la-bookmark"/></a></li>
+                                                                            className="la la-bookmark" /></a></li>
                                                                         <li>
                                                                             <a href="#" title=""><i
-                                                                                className="la la-envelope"/>
+                                                                                className="la la-envelope" />
                                                                             </a>
                                                                         </li>
                                                                     </ul>
@@ -272,14 +356,14 @@ function Profile() {
                                                                 <p><i className="la la-clock-o"></i> Posted on 29 August
                                                                     2018</p>
                                                             </div>
-                                                            <br/>
+                                                            <br />
                                                             <div className="row no-gutters">
                                                                 <div className="col-md-6 col-sm-12">
                                                                     <div className="cadidatesbtn">
                                                                         <button type="button"
-                                                                                className="btn btn-primary">
-                                                                                <span
-                                                                                    className="badge badge-light">3</span>Candidates
+                                                                            className="btn btn-primary">
+                                                                            <span
+                                                                                className="badge badge-light">3</span>Candidates
                                                                         </button>
                                                                         <a href="#">
                                                                             <i className="far fa-edit"></i>
@@ -317,14 +401,14 @@ function Profile() {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <br/>
+                                                            <br />
                                                             <div className="row no-gutters">
                                                                 <div className="col-md-6 col-sm-12">
                                                                     <div className="cadidatesbtn">
                                                                         <button type="button"
-                                                                                className="btn btn-primary">
-                                                                                <span
-                                                                                    className="badge badge-light">3</span>Candidates
+                                                                            className="btn btn-primary">
+                                                                            <span
+                                                                                className="badge badge-light">3</span>Candidates
                                                                         </button>
                                                                         <a href="#">
                                                                             <i className="far fa-trash-alt"></i>
@@ -344,7 +428,7 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="saved" role="tabpanel"
-                                                     aria-labelledby="saved-tab">
+                                                    aria-labelledby="saved-tab">
                                                     <div className="post-bar">
                                                         <div className="p-all saved-post">
                                                             <div className="usy-dt">
@@ -482,7 +566,7 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="applied" role="tabpanel"
-                                                     aria-labelledby="applied-tab">
+                                                    aria-labelledby="applied-tab">
                                                     <div className="post-bar">
                                                         <div className="p-all saved-post">
                                                             <div className="usy-dt">
@@ -629,20 +713,20 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="cadidates" role="tabpanel"
-                                                     aria-labelledby="cadidates-tab">
+                                                    aria-labelledby="cadidates-tab">
                                                     <div className="post-bar">
                                                         <div className="post_topbar applied-post">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/us-pic.png"/>
+                                                                <img src="images/resources/us-pic.png" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
                                                                         <ul className="descp descptab bklink">
                                                                             <li><img src="images/icon8.png"
-                                                                            />><span>Epic Coder</span>
+                                                                            /><span>Epic Coder</span>
                                                                             </li>
                                                                             <li><img src="images/icon9.png"
-                                                                            />><span>India</span></li>
+                                                                            /><span>India</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -683,16 +767,16 @@ function Profile() {
                                                     <div className="post-bar">
                                                         <div className="post_topbar  applied-post">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/us-pic.png"/>
+                                                                <img src="images/resources/us-pic.png" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
                                                                         <ul className="descp descptab bklink">
                                                                             <li><img src="images/icon8.png"
-                                                                            />><span>Epic Coder</span>
+                                                                            /><span>Epic Coder</span>
                                                                             </li>
                                                                             <li><img src="images/icon9.png"
-                                                                            />><span>India</span></li>
+                                                                            /><span>India</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -733,16 +817,16 @@ function Profile() {
                                                     <div className="post-bar">
                                                         <div className="post_topbar applied-post">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/us-pic.png"/>
+                                                                <img src="images/resources/us-pic.png" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
                                                                         <ul className="descp descptab bklink">
                                                                             <li><img src="images/icon8.png"
-                                                                            />><span>Epic Coder</span>
+                                                                            /><span>Epic Coder</span>
                                                                             </li>
                                                                             <li><img src="images/icon9.png"
-                                                                            />><span>India</span></li>
+                                                                            /><span>India</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -787,32 +871,31 @@ function Profile() {
                                         {/*Post section*/}
                                         <div className="product-feed-tab current" id="feed-dd">
                                             <div className="posts-section">
-                                                <Post/>
+                                                <Post />
                                             </div>
                                         </div>
                                         {/*END Post section*/}
-
                                         <div className="product-feed-tab" id="my-bids">
                                             <ul className="nav nav-tabs bid-tab" id="myTab" role="tablist">
                                                 <li className="nav-item">
                                                     <a className="nav-link active" id="home-tab" data-toggle="tab"
-                                                       href="#home" role="tab" aria-controls="home"
-                                                       aria-selected="true">Manage Bids</a>
+                                                        href="#home" role="tab" aria-controls="home"
+                                                        aria-selected="true">Manage Bids</a>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" id="bidders-tab" data-toggle="tab"
-                                                       href="#bidders" role="tab" aria-controls="contact"
-                                                       aria-selected="false">Manage Bidders</a>
+                                                        href="#bidders" role="tab" aria-controls="contact"
+                                                        aria-selected="false">Manage Bidders</a>
                                                 </li>
                                                 <li className="nav-item">
                                                     <a className="nav-link" id="profile-tab" data-toggle="tab"
-                                                       href="#profile" role="tab" aria-controls="profile"
-                                                       aria-selected="false">My Active Bids</a>
+                                                        href="#profile" role="tab" aria-controls="profile"
+                                                        aria-selected="false">My Active Bids</a>
                                                 </li>
                                             </ul>
                                             <div className="tab-content" id="myTabContent">
                                                 <div className="tab-pane fade show active" id="home" role="tabpanel"
-                                                     aria-labelledby="home-tab">
+                                                    aria-labelledby="home-tab">
                                                     <div className="post-bar">
                                                         <div className="post_topbar">
                                                             <div className="wordpressdevlp">
@@ -840,7 +923,7 @@ function Profile() {
                                                                         className="la la-envelope"></i></a></li>
                                                                 </ul>
                                                             </ul>
-                                                            <br/>
+                                                            <br />
                                                             <div className="cadidatesbtn bidsbtn">
                                                                 <button type="button" className="btn btn-primary">
                                                                     <span className="badge badge-light">3</span>Candidates
@@ -881,7 +964,7 @@ function Profile() {
                                                                         className="la la-envelope"></i></a></li>
                                                                 </ul>
                                                             </ul>
-                                                            <br/>
+                                                            <br />
                                                             <div className="cadidatesbtn bidsbtn">
                                                                 <button type="button" className="btn btn-primary">
                                                                     <span className="badge badge-light">3</span>Candidates
@@ -922,7 +1005,7 @@ function Profile() {
                                                                         className="la la-envelope"></i></a></li>
                                                                 </ul>
                                                             </ul>
-                                                            <br/>
+                                                            <br />
                                                             <div className="cadidatesbtn bidsbtn">
                                                                 <button type="button" className="btn btn-primary">
                                                                     <span className="badge badge-light">3</span>Candidates
@@ -938,7 +1021,7 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="profile" role="tabpanel"
-                                                     aria-labelledby="profile-tab">
+                                                    aria-labelledby="profile-tab">
                                                     <div className="post-bar">
                                                         <div className="post_topbar active-bids">
                                                             <div className="usy-dt">
@@ -1022,13 +1105,13 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="contact" role="tabpanel"
-                                                     aria-labelledby="contact-tab">
+                                                    aria-labelledby="contact-tab">
                                                     <div className="post-bar">
                                                         <div className="post_topbar">
                                                             <div className="usy-dt">
                                                                 <div className="wordpressdevlp">
                                                                     <h2>Senior Wordpress Developer</h2>
-                                                                    <br/>
+                                                                    <br />
                                                                     <p><i className="la la-clock-o"></i>Posted on 30
                                                                         August 2018</p>
                                                                 </div>
@@ -1076,7 +1159,7 @@ function Profile() {
                                                             <div className="usy-dt">
                                                                 <div className="wordpressdevlp">
                                                                     <h2>Senior PHP Developer</h2>
-                                                                    <br/>
+                                                                    <br />
                                                                     <p><i className="la la-clock-o"></i>Posted on 30
                                                                         August 2018</p>
                                                                 </div>
@@ -1124,7 +1207,7 @@ function Profile() {
                                                             <div className="usy-dt">
                                                                 <div className="wordpressdevlp">
                                                                     <h2>UI UX Designer</h2>
-                                                                    <br/>
+                                                                    <br />
                                                                     <p><i className="la la-clock-o"></i>Posted on 30
                                                                         August 2018</p>
                                                                 </div>
@@ -1169,20 +1252,20 @@ function Profile() {
                                                     </div>
                                                 </div>
                                                 <div className="tab-pane fade" id="bidders" role="tabpanel"
-                                                     aria-labelledby="bidders-tab">
+                                                    aria-labelledby="bidders-tab">
                                                     <div className="post-bar">
                                                         <div className="post_topbar post-bid">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/us-pic.png"/>
+                                                                <img src="images/resources/us-pic.png" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
                                                                         <ul className="descp descptab bklink">
                                                                             <li><img src="images/icon8.png"
-                                                                            />><span>Epic Coder</span>
+                                                                            /><span>Epic Coder</span>
                                                                             </li>
                                                                             <li><img src="images/icon9.png"
-                                                                            />><span>India</span></li>
+                                                                            /><span>India</span></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -1295,7 +1378,7 @@ function Profile() {
                                                     <div className="post-bar">
                                                         <div className="post_topbar post-bid">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/rock.jpg"/>
+                                                                <img src="images/resources/rock.jpg" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
@@ -1355,33 +1438,32 @@ function Profile() {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="product-feed-tab" id="info-dd">
                                             <div className="user-profile-ov">
                                                 <h3><a href="#" title="" className="overview-open">Overview</a> <a
                                                     href="#" title="" className="overview-open"><i
-                                                    className="fa fa-pencil"></i></a></h3>
+                                                        className="fa fa-pencil"></i></a></h3>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                    tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
-                                                    amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
-                                                    lectus commodo viverra. Nunc eu augue nec arcu efficitur faucibus.
-                                                    Aliquam accumsan ac magna convallis bibendum. Quisque laoreet augue
-                                                    eget augue fermentum scelerisque. Vivamus dignissim mollis est
-                                                    dictum blandit. Nam porta auctor neque sed congue. Nullam rutrum
-                                                    eget ex at maximus. Lorem ipsum dolor sit amet, consectetur
+                                                tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
+                                                amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
+                                                lectus commodo viverra. Nunc eu augue nec arcu efficitur faucibus.
+                                                Aliquam accumsan ac magna convallis bibendum. Quisque laoreet augue
+                                                eget augue fermentum scelerisque. Vivamus dignissim mollis est
+                                                dictum blandit. Nam porta auctor neque sed congue. Nullam rutrum
+                                                eget ex at maximus. Lorem ipsum dolor sit amet, consectetur
                                                     adipiscing elit. Donec eget vestibulum lorem.</p>
                                             </div>
                                             <div className="user-profile-ov st2">
                                                 <h3><a href="#" title="" className="exp-bx-open">Experience </a><a
                                                     href="#" title="" className="exp-bx-open"><i
-                                                    className="fa fa-pencil"></i></a> <a href="#" title=""
-                                                                                         className="exp-bx-open"><i
-                                                    className="fa fa-plus-square"></i></a></h3>
+                                                        className="fa fa-pencil"></i></a> <a href="#" title=""
+                                                            className="exp-bx-open"><i
+                                                                className="fa fa-plus-square"></i></a></h3>
                                                 <h4>Web designer <a href="#" title=""><i
                                                     className="fa fa-pencil"></i></a></h4>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                    tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
-                                                    amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
+                                                tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
+                                                amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
                                                     lectus commodo viverra. </p>
                                                 <h4>UI / UX Designer <a href="#" title=""><i
                                                     className="fa fa-pencil"></i></a></h4>
@@ -1390,36 +1472,36 @@ function Profile() {
                                                 <h4>PHP developer <a href="#" title=""><i className="fa fa-pencil"></i></a>
                                                 </h4>
                                                 <p className="no-margin">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum
-                                                    commodo id. Vivamus sit amet augue nec urna efficitur tincidunt.
+                                                adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum
+                                                commodo id. Vivamus sit amet augue nec urna efficitur tincidunt.
                                                     Vivamus consectetur aliquam lectus commodo viverra. </p>
                                             </div>
                                             <div className="user-profile-ov">
                                                 <h3><a href="#" title="" className="ed-box-open">Education</a> <a
                                                     href="#" title="" className="ed-box-open"><i
-                                                    className="fa fa-pencil"></i></a> <a href="#" title=""><i
-                                                    className="fa fa-plus-square"></i></a></h3>
+                                                        className="fa fa-pencil"></i></a> <a href="#" title=""><i
+                                                            className="fa fa-plus-square"></i></a></h3>
                                                 <h4>Master of Computer Science</h4>
                                                 <span>2015 - 2018</span>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                                                    tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
-                                                    amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
+                                                tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit
+                                                amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam
                                                     lectus commodo viverra. </p>
                                             </div>
                                             <div className="user-profile-ov">
                                                 <h3><a href="#" title="" className="lct-box-open">Location</a> <a
                                                     href="#" title="" className="lct-box-open"><i
-                                                    className="fa fa-pencil"></i></a> <a href="#" title=""><i
-                                                    className="fa fa-plus-square"></i></a></h3>
+                                                        className="fa fa-pencil"></i></a> <a href="#" title=""><i
+                                                            className="fa fa-plus-square"></i></a></h3>
                                                 <h4>India</h4>
                                                 <p>151/4 BT Chownk, Delhi </p>
                                             </div>
                                             <div className="user-profile-ov">
                                                 <h3><a href="#" title="" className="skills-open">Skills</a> <a href="#"
-                                                                                                               title=""
-                                                                                                               className="skills-open"><i
-                                                    className="fa fa-pencil"></i></a> <a href="#"><i
-                                                    className="fa fa-plus-square"></i></a></h3>
+                                                    title=""
+                                                    className="skills-open"><i
+                                                        className="fa fa-pencil"></i></a> <a href="#"><i
+                                                            className="fa fa-plus-square"></i></a></h3>
                                                 <ul>
                                                     <li><a href="#" title="">HTML</a></li>
                                                     <li><a href="#" title="">PHP</a></li>
@@ -1443,7 +1525,7 @@ function Profile() {
                                                 <div className="post-bar ">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/bg-img3.png"/>
+                                                            <img src="images/resources/bg-img3.png" />
                                                             <div className="usy-name">
                                                                 <h3>Rock William</h3>
                                                                 <div className="epi-sec epi2">
@@ -1472,12 +1554,12 @@ function Profile() {
                                                         <div className="reviewtext">
                                                             <p>Lorem ipsum dolor sit amet, adipiscing elit. Nulla luctus
                                                                 mi et porttitor ultrices</p>
-                                                            <hr/>
+                                                            <hr />
                                                         </div>
 
                                                         <div className="post_topbar post-reply">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/bg-img4.png"/>
+                                                                <img src="images/resources/bg-img4.png" />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
@@ -1489,11 +1571,11 @@ function Profile() {
                                                             </div>
                                                         </div>
                                                         <div className="post_topbar rep-post rep-thanks">
-                                                            <hr/>
+                                                            <hr />
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/bg-img4.png"/>
+                                                                <img src="images/resources/bg-img4.png" />
                                                                 <input className="reply" type="text"
-                                                                       placeholder="Reply"/>
+                                                                    placeholder="Reply" />
                                                                 <a className="replybtn" href="#">Send</a>
 
                                                             </div>
@@ -1504,7 +1586,7 @@ function Profile() {
                                                 <div className="post-bar post-thanks">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/bg-img1.png"/>
+                                                            <img src="images/resources/bg-img1.png" />
                                                             <div className="usy-name">
                                                                 <h3>Jassica William</h3>
                                                                 <div className="epi-sec epi2">
@@ -1539,16 +1621,16 @@ function Profile() {
                                                                 <li><i className="fa fa-star"></i></li>
                                                                 <li><i className="fa fa-star-half-o"></i></li>
                                                             </ul>
-                                                            <a href="#" title="">5.0 of 5 Reviews</a><br/><br/>
+                                                            <a href="#" title="">5.0 of 5 Reviews</a><br /><br />
                                                             <p>Awesome Work, Thanks John!</p>
-                                                            <hr/>
+                                                            <hr />
                                                         </div>
                                                         <div className="post_topbar rep-post">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/bg-img4.png"/>
+                                                                <img src="images/resources/bg-img4.png" />
 
                                                                 <input className="reply" type="text"
-                                                                       placeholder="Reply"/>
+                                                                    placeholder="Reply" />
                                                                 <a className="replybtn" href="#">Send</a>
 
                                                             </div>
@@ -1562,7 +1644,7 @@ function Profile() {
                                                 <div className="post-bar">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/us-pic.png"/>
+                                                            <img src="images/resources/us-pic.png" />
                                                             <div className="usy-name">
                                                                 <h3>John Doe</h3>
                                                                 <span><img src="images/clock.png"
@@ -1584,9 +1666,9 @@ function Profile() {
                                                     <div className="epi-sec">
                                                         <ul className="descp">
                                                             <li><img
-                                                                src="images/icon8.png"/>><span>Frontend Developer</span>
+                                                                src="images/icon8.png" />><span>Frontend Developer</span>
                                                             </li>
-                                                            <li><img src="images/icon9.png"/>><span>India</span>
+                                                            <li><img src="images/icon9.png" />><span>India</span>
                                                             </li>
                                                         </ul>
                                                         <ul className="bk-links">
@@ -1604,7 +1686,7 @@ function Profile() {
                                                             <li><span>$300 - $350</span></li>
                                                         </ul>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                            Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
+                                                        Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
                                                             at. Etiam id magna sit amet... <a href="#" title="">view
                                                                 more</a></p>
                                                         <ul className="skill-tags">
@@ -1622,11 +1704,11 @@ function Profile() {
                                                         <ul className="like-com">
                                                             <li>
                                                                 <a href="#"><i className="la la-heart"></i> Like</a>
-                                                                <img src="images/liked-img.png"/>
+                                                                <img src="images/liked-img.png" />
                                                                 <span>25</span>
                                                             </li>
                                                             <li><a href="#" title="" className="com"><img
-                                                                src="images/com.png"/> Comment 15</a></li>
+                                                                src="images/com.png" /> Comment 15</a></li>
                                                         </ul>
                                                         <a><i className="la la-eye"></i>Views 50</a>
                                                     </div>
@@ -1634,7 +1716,7 @@ function Profile() {
                                                 <div className="post-bar">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/us-pic.png"/>
+                                                            <img src="images/resources/us-pic.png" />
                                                             <div className="usy-name">
                                                                 <h3>John Doe</h3>
                                                                 <span><img src="images/clock.png"
@@ -1656,9 +1738,9 @@ function Profile() {
                                                     <div className="epi-sec">
                                                         <ul className="descp">
                                                             <li><img
-                                                                src="images/icon8.png"/>><span>Frontend Developer</span>
+                                                                src="images/icon8.png" />><span>Frontend Developer</span>
                                                             </li>
-                                                            <li><img src="images/icon9.png"/>><span>India</span>
+                                                            <li><img src="images/icon9.png" />><span>India</span>
                                                             </li>
                                                         </ul>
                                                         <ul className="bk-links">
@@ -1676,7 +1758,7 @@ function Profile() {
                                                             <li><span>$300 - $350</span></li>
                                                         </ul>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                            Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
+                                                        Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
                                                             at. Etiam id magna sit amet... <a href="#" title="">view
                                                                 more</a></p>
                                                         <ul className="skill-tags">
@@ -1694,11 +1776,11 @@ function Profile() {
                                                         <ul className="like-com">
                                                             <li>
                                                                 <a href="#"><i className="la la-heart"></i> Like</a>
-                                                                <img src="images/liked-img.png"/>
+                                                                <img src="images/liked-img.png" />
                                                                 <span>25</span>
                                                             </li>
                                                             <li><a href="#" title="" className="com"><img
-                                                                src="images/com.png"/> Comment 15</a></li>
+                                                                src="images/com.png" /> Comment 15</a></li>
                                                         </ul>
                                                         <a><i className="la la-eye"></i>Views 50</a>
                                                     </div>
@@ -1706,7 +1788,7 @@ function Profile() {
                                                 <div className="post-bar">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/us-pic.png"/>
+                                                            <img src="images/resources/us-pic.png" />
                                                             <div className="usy-name">
                                                                 <h3>John Doe</h3>
                                                                 <span><img src="images/clock.png"
@@ -1728,9 +1810,9 @@ function Profile() {
                                                     <div className="epi-sec">
                                                         <ul className="descp">
                                                             <li><img
-                                                                src="images/icon8.png"/>><span>Frontend Developer</span>
+                                                                src="images/icon8.png" />><span>Frontend Developer</span>
                                                             </li>
-                                                            <li><img src="images/icon9.png"/>><span>India</span>
+                                                            <li><img src="images/icon9.png" />><span>India</span>
                                                             </li>
                                                         </ul>
                                                         <ul className="bk-links">
@@ -1748,7 +1830,7 @@ function Profile() {
                                                             <li><span>$300 - $350</span></li>
                                                         </ul>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                            Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
+                                                        Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
                                                             at. Etiam id magna sit amet... <a href="#" title="">view
                                                                 more</a></p>
                                                         <ul className="skill-tags">
@@ -1766,11 +1848,11 @@ function Profile() {
                                                         <ul className="like-com">
                                                             <li>
                                                                 <a href="#"><i className="la la-heart"></i> Like</a>
-                                                                <img src="images/liked-img.png"/>
+                                                                <img src="images/liked-img.png" />
                                                                 <span>25</span>
                                                             </li>
                                                             <li><a href="#" title="" className="com"><img
-                                                                src="images/com.png"/> Comment 15</a></li>
+                                                                src="images/com.png" /> Comment 15</a></li>
                                                         </ul>
                                                         <a><i className="la la-eye"></i>Views 50</a>
                                                     </div>
@@ -1778,7 +1860,7 @@ function Profile() {
                                                 <div className="post-bar">
                                                     <div className="post_topbar">
                                                         <div className="usy-dt">
-                                                            <img src="images/resources/us-pic.png"/>
+                                                            <img src="images/resources/us-pic.png" />
                                                             <div className="usy-name">
                                                                 <h3>John Doe</h3>
                                                                 <span><img src="images/clock.png"
@@ -1800,9 +1882,9 @@ function Profile() {
                                                     <div className="epi-sec">
                                                         <ul className="descp">
                                                             <li><img
-                                                                src="images/icon8.png"/>><span>Frontend Developer</span>
+                                                                src="images/icon8.png" />><span>Frontend Developer</span>
                                                             </li>
-                                                            <li><img src="images/icon9.png"/>><span>India</span>
+                                                            <li><img src="images/icon9.png" />><span>India</span>
                                                             </li>
                                                         </ul>
                                                         <ul className="bk-links">
@@ -1820,7 +1902,7 @@ function Profile() {
                                                             <li><span>$300 - $350</span></li>
                                                         </ul>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                            Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
+                                                        Aliquam luctus hendrerit metus, ut ullamcorper quam finibus
                                                             at. Etiam id magna sit amet... <a href="#" title="">view
                                                                 more</a></p>
                                                         <ul className="skill-tags">
@@ -1838,17 +1920,17 @@ function Profile() {
                                                         <ul className="like-com">
                                                             <li>
                                                                 <a href="#"><i className="la la-heart"></i> Like</a>
-                                                                <img src="images/liked-img.png"/>
+                                                                <img src="images/liked-img.png" />
                                                                 <span>25</span>
                                                             </li>
                                                             <li><a href="#" title="" className="com"><img
-                                                                src="images/com.png"/> Comment 15</a></li>
+                                                                src="images/com.png" /> Comment 15</a></li>
                                                         </ul>
                                                         <a><i className="la la-eye"></i>Views 50</a>
                                                     </div>
                                                 </div>
                                                 <div className="process-comm">
-                                                    <a href="#" title=""><img src="images/process-icon.png"/>></a>
+                                                    <a href="#" title=""><img src="images/process-icon.png" />></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1863,72 +1945,72 @@ function Profile() {
                                                     <div className="row">
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img1.jpg"/>
+                                                                <img src="images/resources/pf-img1.jpg" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
                                                                 />></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img2.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img2.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img3.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img3.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img4.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img4.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img5.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img5.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img6.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img6.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img7.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img7.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img8.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img8.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img9.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img9.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-4 col-md-4 col-sm-6 col-6">
                                                             <div className="gallery_pt">
-                                                                <img src="images/resources/pf-img10.jpg" alt=""/>
+                                                                <img src="images/resources/pf-img10.jpg" alt="" />
                                                                 <a href="#" title=""><img src="images/all-out.png"
-                                                                                          alt=""/></a>
+                                                                    alt="" /></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1940,7 +2022,7 @@ function Profile() {
                                                 <ul>
                                                     <li>
                                                         <h3>Add Billing Method</h3>
-                                                        <a href="#" title=""><i className="fa fa-plus-circle"/></a>
+                                                        <a href="#" title=""><i className="fa fa-plus-circle" /></a>
                                                     </li>
                                                     <li>
                                                         <h3>See Activity</h3>
@@ -1952,14 +2034,14 @@ function Profile() {
                                                     </li>
                                                 </ul>
                                                 <div className="lt-sec">
-                                                    <img src="images/lt-icon.png" alt=""/>
+                                                    <img src="images/lt-icon.png" alt="" />
                                                     <h4>All your transactions are saved here</h4>
                                                     <a href="#" title="">Click Here</a>
                                                 </div>
                                             </div>
                                             <div className="add-billing-method">
                                                 <h3>Add Billing Method</h3>
-                                                <h4><img src="images/dlr-icon.png" alt=""/><span>With workwise payment protection , only pay for work delivered.</span>
+                                                <h4><img src="images/dlr-icon.png" alt="" /><span>With workwise payment protection , only pay for work delivered.</span>
                                                 </h4>
                                                 <div className="payment_methods">
                                                     <h4>Credit or Debit Cards</h4>
@@ -1969,15 +2051,15 @@ function Profile() {
                                                                 <div className="cc-head">
                                                                     <h5>Card Number</h5>
                                                                     <ul>
-                                                                        <li><img src="images/cc-icon1.png" alt=""/></li>
-                                                                        <li><img src="images/cc-icon2.png" alt=""/></li>
-                                                                        <li><img src="images/cc-icon3.png" alt=""/></li>
-                                                                        <li><img src="images/cc-icon4.png" alt=""/></li>
+                                                                        <li><img src="images/cc-icon1.png" alt="" /></li>
+                                                                        <li><img src="images/cc-icon2.png" alt="" /></li>
+                                                                        <li><img src="images/cc-icon3.png" alt="" /></li>
+                                                                        <li><img src="images/cc-icon4.png" alt="" /></li>
                                                                     </ul>
                                                                 </div>
                                                                 <div className="inpt-field pd-moree">
-                                                                    <input type="text" name="cc-number" placeholder=""/>
-                                                                    <i className="fa fa-credit-card"/>
+                                                                    <input type="text" name="cc-number" placeholder="" />
+                                                                    <i className="fa fa-credit-card" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-6">
@@ -1985,7 +2067,7 @@ function Profile() {
                                                                     <h5>First Name</h5>
                                                                 </div>
                                                                 <div className="inpt-field">
-                                                                    <input type="text" name="f-name" placeholder=""/>
+                                                                    <input type="text" name="f-name" placeholder="" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-6">
@@ -1993,7 +2075,7 @@ function Profile() {
                                                                     <h5>Last Name</h5>
                                                                 </div>
                                                                 <div className="inpt-field">
-                                                                    <input type="text" name="l-name" placeholder=""/>
+                                                                    <input type="text" name="l-name" placeholder="" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-6">
@@ -2005,13 +2087,13 @@ function Profile() {
                                                                         <div className="col-lg-6 pd-left-none no-pd">
                                                                             <div className="inpt-field">
                                                                                 <input type="text" name="f-name"
-                                                                                       placeholder=""/>
+                                                                                    placeholder="" />
                                                                             </div>
                                                                         </div>
                                                                         <div className="col-lg-6 pd-right-none no-pd">
                                                                             <div className="inpt-field">
                                                                                 <input type="text" name="f-name"
-                                                                                       placeholder=""/>
+                                                                                    placeholder="" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -2020,10 +2102,10 @@ function Profile() {
                                                             <div className="col-lg-6">
                                                                 <div className="cc-head">
                                                                     <h5>Cvv (Security Code)<i
-                                                                        className="fa fa-question-circle"/></h5>
+                                                                        className="fa fa-question-circle" /></h5>
                                                                 </div>
                                                                 <div className="inpt-field">
-                                                                    <input type="text" name="l-name" placeholder=""/>
+                                                                    <input type="text" name="l-name" placeholder="" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-lg-12">
@@ -2040,39 +2122,39 @@ function Profile() {
                                 <div className="col-lg-3">
                                     <div className="right-sidebar">
                                         <div className="message-btn">
-                                            <Link to="/settings" ><i className="fa fa-cog"/> Setting</Link>
+                                            <Link to="/settings"><i className="fa fa-cog" /> Setting</Link>
                                         </div>
                                         <div className="widget widget-portfolio">
                                             <div className="wd-heady">
                                                 <h3>Portfolio</h3>
-                                                <img src="images/photo-icon.png"/>
+                                                <img src={require("../../assets/images/photo-icon.png")} />
                                             </div>
                                             <div className="pf-gallery">
                                                 <ul>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery1.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery2.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery3.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery4.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery5.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery6.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery7.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery8.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img src="images/resources/pf-gallery9.png"
-                                                                                  alt=""/></a></li>
+                                                        alt="" /></a></li>
                                                     <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery10.png" alt=""/></a></li>
+                                                        src="images/resources/pf-gallery10.png" alt="" /></a></li>
                                                     <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery11.png" alt=""/></a></li>
+                                                        src="images/resources/pf-gallery11.png" alt="" /></a></li>
                                                     <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery12.png" alt=""/></a></li>
+                                                        src="images/resources/pf-gallery12.png" alt="" /></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -2083,7 +2165,7 @@ function Profile() {
                     </div>
                 </div>
             </main>
-        </div>
+        </div >
     );
 }
 
