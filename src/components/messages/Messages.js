@@ -11,8 +11,8 @@ function Messages(props) {
                                 <div className="msg-title">
                                     <h3>Messages</h3>
                                     <ul>
-                                        <li><a href="#" title=""><i className="fa fa-cog"></i></a></li>
-                                        <li><a href="#" title=""><i className="fa fa-ellipsis-v"></i></a></li>
+                                        <li><a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-cog"></i></a></li>
+                                        <li><a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-ellipsis-v"></i></a></li>
                                     </ul>
                                 </div>
                                 <div className="messages-list">
@@ -109,7 +109,7 @@ function Messages(props) {
                                             <p>Online</p>
                                         </div>
                                     </div>
-                                    <a href="#" title=""><i className="fa fa-ellipsis-v"/></a>
+                                    <a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-ellipsis-v"/></a>
                                 </div>
                                 <div className="messages-line">
                                     <div className="main-message-box">
@@ -206,9 +206,9 @@ function Messages(props) {
                                                 <button type="submit">Send</button>
                                         </div>
                                         <ul>
-                                            <li><a href="#" title=""><i className="fa fa-smile-o"></i></a></li>
-                                            <li><a href="#" title=""><i className="fa fa-camera"></i></a></li>
-                                            <li><a href="#" title=""><i className="fa fa-paperclip"></i></a></li>
+                                            <li><a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-smile-o"></i></a></li>
+                                            <li><a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-camera"></i></a></li>
+                                            <li><a href="https://abdelouahedd.github.io/profile/" title=""><i className="fa fa-paperclip"></i></a></li>
                                         </ul>
                                     </form>
                                 </div>

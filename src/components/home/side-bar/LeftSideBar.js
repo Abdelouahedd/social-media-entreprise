@@ -88,20 +88,20 @@ const LeftSideBar = () => {
                             <span><i className="la la-plus"/></span>
                         </div>
                         <div className="view-more">
-                            <a href="#" title="">View More</a>
+                            <a href="https://abdelouahedd.github.io/profile/" title="">View More</a>
                         </div>
                     </div>
                 </div>
                 <div className="tags-sec full-width">
                     <ul>
-                        <li><a href="#" title="">Help Center</a></li>
-                        <li><a href="#" title="">About</a></li>
-                        <li><a href="#" title="">Privacy Policy</a></li>
-                        <li><a href="#" title="">Community Guidelines</a></li>
-                        <li><a href="#" title="">Cookies Policy</a></li>
-                        <li><a href="#" title="">Career</a></li>
-                        <li><a href="#" title="">Language</a></li>
-                        <li><a href="#" title="">Copyright Policy</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Help Center</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">About</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Privacy Policy</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Community Guidelines</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Cookies Policy</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Career</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Language</a></li>
+                        <li><a href="https://abdelouahedd.github.io/profile/" title="">Copyright Policy</a></li>
                     </ul>
                     <div className="cp-sec">
                         <img src={require("../../../assets/images/logo2.png")} alt=""/>

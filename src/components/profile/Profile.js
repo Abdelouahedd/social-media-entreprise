@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import cuver from '../../assets/images/resources/cover-img.jpg';
-import user_img from '../../assets/images/resources/user-pro-img.png';
 import Post from "../home/Post/Post";
-import "./profile.css"
-import { Link } from "react-router-dom";
+import "./profile.css";
+import LeftSideBar from './components/left-sideBar';
+import RightSideBar from './components/right-sideBar';
 
 
 function Profile() {
-   
+
     var initialState = [
         {
             data_tab: 'feed-dd',
@@ -54,11 +54,12 @@ function Profile() {
         }
 
     ];
-   
+
     const [tabs, setTabs] = useState(initialState)
 
 
     const showProductFeed = (event) => {
+       
         let prevTab = tabs.findIndex((e) => e.className.includes('active'));
         tabs[prevTab].className = 'animated fadeIn';
         let newTab = tabs.findIndex((e) => e.data_tab === event.data_tab);
@@ -72,7 +73,7 @@ function Profile() {
 
         setTabs([...tabs]);
     }
-  
+
 
     return (
         <div className="wrapper">
@@ -95,115 +96,7 @@ function Profile() {
                         <div className="main-section-data">
                             <div className="row">
                                 <div className="col-lg-3">
-                                    <div className="main-left-sidebar">
-                                        <div className="user_profile">
-                                            <div className="user-pro-img">
-                                                <img src={user_img} alt="" />
-                                                <div className="add-dp" id="OpenImgUpload">
-                                                    <input type="file" id="file" />
-                                                    <label htmlFor="file"><i
-                                                        className="fa fa-camera" /></label>
-                                                </div>
-                                            </div>
-                                            <div className="user_pro_status">
-                                                <ul className="flw-status">
-                                                    <li>
-                                                        <span>Following</span>
-                                                        <b>34</b>
-                                                    </li>
-                                                    <li>
-                                                        <span>Followers</span>
-                                                        <b>155</b>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <ul className="social_links">
-                                                <li><a href="#" title=""><i
-                                                    className="la la-globe" /> www.example.com</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-facebook-square" /> Http://www.facebook.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-twitter" /> Http://www.Twitter.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-google-plus-square" /> Http://www.googleplus.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-behance-square" /> Http://www.behance.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-pinterest" /> Http://www.pinterest.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-instagram" /> Http://www.instagram.com/john...</a>
-                                                </li>
-                                                <li><a href="#" title=""><i
-                                                    className="fa fa-youtube" /> Http://www.youtube.com/john...</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        {/*  <div className="suggestions full-width">
-                                            <div className="sd-title">
-                                                <h3>People Viewed Profile</h3>
-                                                <i className="la la-ellipsis-v"></i>
-                                            </div>
-                                            <div className="suggestions-list">
-                                                <div className="suggestion-usd">
-                                                    <img src="../../assets/images/resources/s1.png" alt=""/>
-                                                        <div className="sgt-text">
-                                                            <h4>Jessica William</h4>
-                                                            <span>Graphic Designer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"/></span>
-                                                </div>
-                                                <div className="suggestion-usd">
-                                                    <img src="images/resources/s2.png" alt=""/>
-                                                        <div className="sgt-text">
-                                                            <h4>John Doe</h4>
-                                                            <span>PHP Developer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"></i></span>
-                                                </div>
-                                                <div className="suggestion-usd">
-                                                    <img src="images/resources/s3.png" alt=""/>
-                                                        <div className="sgt-text">
-                                                            <h4>Poonam</h4>
-                                                            <span>Wordpress Developer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"/></span>
-                                                </div>
-                                                <div className="suggestion-usd">
-                                                    <img src="images/resources/s4.png" alt=""/>
-                                                        <div className="sgt-text">
-                                                            <h4>Bill Gates</h4>
-                                                            <span>C & C++ Developer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"/></span>
-                                                </div>
-                                                <div className="suggestion-usd">
-                                                    <img src="images/resources/s5.png" alt=""/>
-                                                        <div className="sgt-text">
-                                                            <h4>Jessica William</h4>
-                                                            <span>Graphic Designer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"/></span>
-                                                </div>
-                                                <div className="suggestion-usd">
-                                                    <img src="images/resources/s6.png" />
-                                                        <div className="sgt-text">
-                                                            <h4>John Doe</h4>
-                                                            <span>PHP Developer</span>
-                                                        </div>
-                                                        <span><i className="la la-plus"></i></span>
-                                                </div>
-                                                <div className="view-more">
-                                                    <a href="#" title="">View More</a>
-                                                </div>
-                                            </div>
-                                        </div>*/}
-                                    </div>
+                                    <LeftSideBar />
                                 </div>
 
                                 <div className="col-lg-6">
@@ -227,57 +120,14 @@ function Profile() {
                                                             <li key={i} data-tab={el.data_tab} className={el.className}
                                                                 onClick={showProductFeed.bind(null, el)}
                                                             >
-                                                                <a href="#" title="">
+                                                                <p style={{ cursor: 'pointer' }}>
                                                                     <img src={(el.src)}
                                                                         alt={el.src.split('/')[4]} />
                                                                     <span>{el.name}</span>
-                                                                </a>
+                                                                </p>
                                                             </li>
                                                         )
                                                     }
-                                                    {/*    <li data-tab="feed-dd" className="active">
-                                                        <a href="#" title="">
-                                                            <img src={require('../../assets/images/ic1.png')}
-                                                                alt={"icon1"} />
-                                                            <span>Feed</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="info-dd">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic2.png")} />
-                                                            <span>Info</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="saved-jobs">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic4.png")} />
-                                                            <span>Jobs</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="my-bids">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic5.png")} />
-                                                            <span>Bids</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="portfolio-dd">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/ic3.png")} />
-                                                            <span>Portfolio</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="rewivewdata">
-                                                        <a href="#" title="">
-                                                            <img src={require("../../assets/images/review.png")} />
-                                                            <span>Reviews</span>
-                                                        </a>
-                                                    </li>
-                                                    <li data-tab="payment-dd"> 
-                                                    <a href="#" title="">
-                                                        <img src={require("../../assets/images/ic6.png")} />
-                                                        <span>Payment</span>
-                                                    </a>
-                                                    </li>*/}
                                                 </ul>
 
                                             </div>
@@ -717,15 +567,15 @@ function Profile() {
                                                     <div className="post-bar">
                                                         <div className="post_topbar applied-post">
                                                             <div className="usy-dt">
-                                                                <img src="images/resources/us-pic.png" />
+                                                                <img src={require("../../assets/images/resources/us-pic.png")} />
                                                                 <div className="usy-name">
                                                                     <h3>John Doe</h3>
                                                                     <div className="epi-sec epi2">
                                                                         <ul className="descp descptab bklink">
-                                                                            <li><img src="images/icon8.png"
+                                                                            <li><img src={require("../../assets/images/icon8.png")}
                                                                             /><span>Epic Coder</span>
                                                                             </li>
-                                                                            <li><img src="images/icon9.png"
+                                                                            <li><img src={require("../../assets/images/icon9.png")}
                                                                             /><span>India</span></li>
                                                                         </ul>
                                                                     </div>
@@ -2120,45 +1970,7 @@ function Profile() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3">
-                                    <div className="right-sidebar">
-                                        <div className="message-btn">
-                                            <Link to="/settings"><i className="fa fa-cog" /> Setting</Link>
-                                        </div>
-                                        <div className="widget widget-portfolio">
-                                            <div className="wd-heady">
-                                                <h3>Portfolio</h3>
-                                                <img src={require("../../assets/images/photo-icon.png")} />
-                                            </div>
-                                            <div className="pf-gallery">
-                                                <ul>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery1.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery2.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery3.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery4.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery5.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery6.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery7.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery8.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img src="images/resources/pf-gallery9.png"
-                                                        alt="" /></a></li>
-                                                    <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery10.png" alt="" /></a></li>
-                                                    <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery11.png" alt="" /></a></li>
-                                                    <li><a href="#" title=""><img
-                                                        src="images/resources/pf-gallery12.png" alt="" /></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <RightSideBar />
                                 </div>
                             </div>
                         </div>

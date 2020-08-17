@@ -156,7 +156,7 @@ const RightSideBar = () => {
                             <span><i className="la la-plus"></i></span>
                         </div>
                         <div className="view-more">
-                            <a href="#" title="">View More</a>
+                            <a href="/" title="">View More</a>
                         </div>
                     </div>
                 </div>
