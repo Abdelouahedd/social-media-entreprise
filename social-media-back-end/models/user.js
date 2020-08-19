@@ -42,7 +42,7 @@ var User = new Schema({
     }
 });
 
-function validationRegister(user) {
+validationRegister = (user) => {
     const schema = {
         nom: Joi.string().required(),
         prenom: Joi.string().required(),
@@ -52,5 +52,14 @@ function validationRegister(user) {
     return Joi.validate(user, schema);
 }
 
+validationConnecter = (user) => {
+    const schema = {
+        email: Joi.string().required().email(),
+        mot_pass: Joi.string().required()
+    };
+    return Joi.validate(user, schema);
+}
+
+exports.validationConnecter = validationConnecter;
 exports.validationRegister = validationRegister;
 exports.User = mongoose.model('User', User);
