@@ -1,6 +1,5 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
+const bcrypt = require("bcrypt-nodejs");
+var jwt = require('jsonwebtoken');
 //hash password
 exports.generateHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
