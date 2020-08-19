@@ -1,5 +1,6 @@
-var { user, validationRegister } = require('../models/user');
-var { generateHash } = require('../helper/helper');
+var { user, validationRegister, validationConnecter } = require('../models/user');
+var { generateHash, comparePassword } = require('../helper/helper');
+var jwt = require('jsonwebtoken');
 
 exports.signIn = async (req, res) => {
     try {
@@ -28,7 +29,35 @@ exports.signIn = async (req, res) => {
             res.status(200).send({ success: true, msg: `User ${Newuser.nom} is created by succesfully` });
         });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ success: false, error: error.message });
     }
 
+}
+exports.signUp = async (req, res) => {
+    try {
+        const { error } = validationConnecter(req.body);
+        if (error) {
+            return res.status(400).send({ success: false, msg: error.details[0].message });
+        }
+        await user.findOne({
+            email: req.body.email
+        }, (err, user) => {
+            if (err) throw err;
+            if (!user) {
+                res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+            } else {
+                comparePassword(req.body.mot_pass, user.mot_pass, function (err, isMatch) {
+                    if (isMatch && !err) {
+                        const token = jwt.sign({ _id: user }, process.env.SECRET_KEY, { expiresIn: '1h' });
+                        res.status(200).send({ success: true, token: token });
+                    }
+                    else {
+                        res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+                    }
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 }

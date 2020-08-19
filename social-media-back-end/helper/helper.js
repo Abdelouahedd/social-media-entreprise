@@ -21,7 +21,7 @@ exports.verifyToken = (req, res, next) => {
     var beareHeader = req.headers['x-access-token'] || req.headers['authorization'];
     if (beareHeader) {
         beareHeader = beareHeader.slice(7, beareHeader.length);
-        jwt.verify(beareHeader, config.secretKey, function (err, decoded) {
+        jwt.verify(beareHeader, process.env.SECRET_KEY, function (err, decoded) {
             if (err) return res.json({
                 success: false,
                 message: 'Token is not valid'
