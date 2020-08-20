@@ -61,3 +61,22 @@ exports.signUp = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+exports.updateInfo = async (req, res) => {
+    try {
+        User.findOneAndUpdate({ _id: req.params.id }, {
+            $set: {
+                email: req.body.email,
+                nom: req.body.nom,
+                prenom: req.body.prenom,
+                password: generateHash(req.body.password),
+            },
+        }, { new: true }, (err, result) => {
+            if (err) return res.send(err)
+            res.send({ msg: "User Updated", res: result });
+        })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+
+}
