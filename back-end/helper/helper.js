@@ -22,11 +22,12 @@ exports.verifyToken = (req, res, next) => {
     if (beareHeader) {
         beareHeader = beareHeader.slice(7, beareHeader.length);
         jwt.verify(beareHeader, process.env.SECRET_KEY, function (err, decoded) {
-            if (err) return res.json({
-                success: false,
-                message: 'Token is not valid'
-            });
-            req.decoded = decoded;
+            if (err)
+                return res.json({
+                    success: false,
+                    message: 'Token is not valid'
+                });
+            req.user = decoded;
             next();
         });
     } else {

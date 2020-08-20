@@ -11,10 +11,10 @@ var Post = new Schema({
         type: Date,
         default: Date.now,
     },
-    photo: {
+    photo_post: {
         type: String,
     },
-    vedio: {
+    vedio_post: {
         type: String
     },
     user: {
