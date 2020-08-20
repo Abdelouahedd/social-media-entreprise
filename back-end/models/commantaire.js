@@ -14,7 +14,6 @@ var Commantaire = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         require: true,
-        unique: true
     },
 }, {
     timestamps: true

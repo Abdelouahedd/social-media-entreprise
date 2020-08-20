@@ -23,7 +23,6 @@ var Evenment = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-        unique: true
     },
     commantaires: [{
         type: Schema.Types.ObjectId,
