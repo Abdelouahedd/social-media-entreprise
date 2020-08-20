@@ -48,7 +48,7 @@ exports.signUp = async (req, res) => {
             } else {
                 comparePassword(req.body.mot_pass, user.mot_pass, function (err, isMatch) {
                     if (isMatch && !err) {
-                        const token = jwt.sign({ _id: user }, process.env.SECRET_KEY, { expiresIn: '1h' });
+                        const token = jwt.sign({ user: user }, process.env.SECRET_KEY, { expiresIn: '1h' });
                         res.status(200).send({ success: true, token: token });
                     }
                     else {

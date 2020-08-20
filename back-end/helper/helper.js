@@ -27,7 +27,7 @@ exports.verifyToken = (req, res, next) => {
                     success: false,
                     message: 'Token is not valid'
                 });
-            req.user = decoded;
+            req.user = decoded.user;
             next();
         });
     } else {
