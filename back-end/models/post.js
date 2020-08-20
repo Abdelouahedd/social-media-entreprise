@@ -5,7 +5,6 @@ var Post = new Schema({
     sujet: {
         type: String,
         required: true,
-
     },
     data_creation: {
         type: Date,
@@ -20,8 +19,7 @@ var Post = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        require: true,
-        unique: true
+        required: true,
     },
     commantaires: [{
         type: Schema.Types.ObjectId,
@@ -33,4 +31,5 @@ var Post = new Schema({
 })
 
 
-exports.post = model('Post', Post);
+var post = model('Post', Post);
+module.exports = post;

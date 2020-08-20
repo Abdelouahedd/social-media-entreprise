@@ -6,7 +6,6 @@ var User = new Schema({
     nom: {
         type: String,
         required: true,
-        unique: true
     },
     prenom: {
         type: String,
@@ -16,7 +15,6 @@ var User = new Schema({
         type: String,
         required: true,
         unique: true
-
     },
     mot_pass: {
         type: String,
