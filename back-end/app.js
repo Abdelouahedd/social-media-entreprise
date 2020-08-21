@@ -47,7 +47,8 @@ mongo.connect(process.env.MONGO_LOCAL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        useFindAndModify: false
     }, (err) => {
         if (err) throw err;
         console.log("Mongo db connection established");

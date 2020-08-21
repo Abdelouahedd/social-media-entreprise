@@ -34,3 +34,12 @@ exports.verifyToken = (req, res, next) => {
         res.status(403).send({ success: false, msg: "Auth token is not supplied" });
     }
 }
+
+//verifier if the schema is owen to user
+
+exports.isMyOwenShema = (req, res, next) => {
+    if (req.user._id != req.body.user) {
+        next(new Error("Don't have a right to update or delete this post"));
+    }
+    next();
+}

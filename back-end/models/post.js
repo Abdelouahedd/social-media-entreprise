@@ -28,7 +28,18 @@ var Post = new Schema({
 
 }, {
     timestamps: true
-})
+});
+
+/* Post.pre('findOneAndUpdate', function (next, req, callback) {
+    console.log("Befor update");
+    console.log(req);
+     if (error.name === 'MongoError' && error.code === 11000) {
+        next(new Error('There was a duplicate key error'));
+    } 
+    next(callback);
+}); */
+
+
 
 
 var post = model('Post', Post);
