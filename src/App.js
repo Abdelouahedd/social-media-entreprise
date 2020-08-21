@@ -12,17 +12,22 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Root from "./components/root";
 import SpinnerLoad from "./components/shared/spinner/SpinnerLoad";
 import Authentification from './components/authentification/authentification';
+import store from './redux/store/store';
+import { Provider } from 'react-redux'
 
 const App = () => {
     return (
-        <Suspense fallback={<SpinnerLoad />}>
-            <BrowserRouter>
-                <Switch>
-                    <Route path='/sign' component={Authentification} />
-                    <Route path='/' component={Root} />
-                </Switch>
-            </BrowserRouter>
-        </Suspense>
+        <Provider store={store}>
+            <Suspense fallback={<SpinnerLoad />}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path='/sign' component={Authentification} />
+                        <Route path='/' component={Root} />
+                    </Switch>
+                </BrowserRouter>
+            </Suspense>
+        </Provider>
+
     );
 };
 
