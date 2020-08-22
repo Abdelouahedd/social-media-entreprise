@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongo = require('mongoose');
 var morgan = require('morgan');
+var cors = require('cors');
 require("dotenv").config();
 
 //Routes
@@ -15,6 +16,7 @@ var app = express();
 
 app.use(logger('dev'));
 app.use(morgan('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));

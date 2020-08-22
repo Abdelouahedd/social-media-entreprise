@@ -13,12 +13,11 @@ export default function AuthReducer(state = initState, action) {
     switch (action.type) {
         case "AUTH_START":
             return updateObject(state, { error: null, loading: true });
-        case "AUTH_SECCUS":
+        case "AUTH_SUCCESS":
             return updateObject(state, {
-                idToken: action.idToken,
+                token: action.token,
                 message: action.message,
-                error: action.error,
-                loading: false
+                loading: false,
             });
         case "AUTH_FAIL":
             return updateObject(state, {

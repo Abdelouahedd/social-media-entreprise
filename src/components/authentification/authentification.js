@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import logo from "../../assets/images/cm-logo.png"
 import cuver from "../../assets/images/cm-main-img.png"
-import SignIn from './compnents/signIn';
-import SignUp from './compnents/signUp';
+import SignIn from './compnents/signIN';
+import SignUp from './compnents/signUP';
 
 export default function Authentification() {
 

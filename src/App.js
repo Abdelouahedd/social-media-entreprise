@@ -14,18 +14,22 @@ import SpinnerLoad from "./components/shared/spinner/SpinnerLoad";
 import Authentification from './components/authentification/authentification';
 import store from './redux/store/store';
 import { Provider } from 'react-redux'
+import { ToastProvider } from 'react-toast-notifications'
 
 const App = () => {
     return (
         <Provider store={store}>
-            <Suspense fallback={<SpinnerLoad />}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path='/sign' component={Authentification} />
-                        <Route path='/' component={Root} />
-                    </Switch>
-                </BrowserRouter>
-            </Suspense>
+            <ToastProvider
+                placement="bottom-left"
+            >
+                <Suspense fallback={<SpinnerLoad />}>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route path='/sign' component={Authentification} />
+                            <Route path='/' component={Root} />
+                        </Switch>
+                    </BrowserRouter>
+                </Suspense></ToastProvider>
         </Provider>
 
     );

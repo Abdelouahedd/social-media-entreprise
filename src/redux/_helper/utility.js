@@ -4,3 +4,5 @@ export const updateObject = (oldObject, updatedProperties) => {
         ...updatedProperties
     };
 };
+
+export const URL = "http://localhost:4000";

@@ -2,7 +2,7 @@ var { user, validationRegister, validationConnecter } = require('../models/user'
 var { generateHash, comparePassword } = require('../helper/helper');
 var jwt = require('jsonwebtoken');
 
-exports.signIn = async (req, res) => {
+exports.signUp = async (req, res) => {
     try {
         const { nom, prenom, email, mot_pass } = req.body;
         //validate de request body
@@ -33,23 +33,26 @@ exports.signIn = async (req, res) => {
     }
 
 }
-exports.signUp = async (req, res) => {
+exports.signIn = async (req, res) => {
     try {
+        console.log(req.body);
         const { error } = validationConnecter(req.body);
         if (error) {
             return res.status(400).send({ success: false, msg: error.details[0].message });
         }
-        await user.findOne({
+        user.findOne({
             email: req.body.email
         }, (err, user) => {
+            console.log("user" + user);
             if (err) throw err;
+            console.log(user);
             if (!user) {
                 res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
                 comparePassword(req.body.mot_pass, user.mot_pass, function (err, isMatch) {
                     if (isMatch && !err) {
                         const token = jwt.sign({ user: user }, process.env.SECRET_KEY, { expiresIn: '1h' });
-                        res.status(200).send({ success: true, token: token });
+                        res.status(200).send({ success: true, msg: 'Authentication succes', token: token });
                     }
                     else {
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });

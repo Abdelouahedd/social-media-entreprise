@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-
-const SignIn = () => {
+const SignUp = () => {
     return (
         <div className="sign_in_sec" id="tab-2">
             <div className="signup-tab">
@@ -126,6 +125,5 @@ const SignIn = () => {
             </div>
         </div>
     );
-
 }
-export default SignIn;
+export default SignUp;
