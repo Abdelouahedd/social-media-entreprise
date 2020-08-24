@@ -1,9 +1,50 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import Spinner from 'react-spinkit';
+
+
+
 
 const SignUp = () => {
+    var SignupSchema = Yup.object().shape({
+        nom: Yup.string()
+            .min(2, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Required'),
+        prenom: Yup.string()
+            .min(2, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Required'),
+        email: Yup.string()
+            .email('Invalid email')
+            .required('Required'),
+        password: Yup.string()
+            .min(6, 'Password must at less 6 characters')
+            .required('Required'),
+        repeatPassword: Yup.string().when('password', {
+            is: (val) => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf(
+                [Yup.ref('password')],
+                'Passwords do not match'
+            ),
+        }),
+        acceptTerms: Yup.bool().oneOf([true], 'Accept Terms & Conditions is required')
+    });
+    const onSubmit = async (values, actions) => {
+        try {
+            console.log(values);
+            actions.resetForm({})
+            actions.setStatus({ success: true })
+        } catch (error) {
+            actions.setStatus({ success: false })
+            actions.setSubmitting(false)
+            actions.setErrors({ submit: error.message })
+        }
+    }
     return (
         <div className="sign_in_sec" id="tab-2">
-            <div className="signup-tab">
+            {/*   <div className="signup-tab">
                 <i className="fa fa-long-arrow-left" />
                 <h2>johndoe@example.com</h2>
                 <ul>
@@ -12,118 +53,111 @@ const SignUp = () => {
                     </li>
                     <li data-tab="tab-4"><a href="#" title="">Company</a></li>
                 </ul>
-            </div>
+            </div> */}
             <div className="dff-tab current" id="tab-3">
-                <form>
-                    <div className="row">
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="text" name="name" placeholder="Full Name" />
-                                <i className="la la-user" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="text" name="country"
-                                    placeholder="Country" />
-                                <i className="la la-globe" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <select>
-                                    <option>Category</option>
-                                    <option>Category 1</option>
-                                    <option>Category 2</option>
-                                    <option>Category 3</option>
-                                    <option>Category 4</option>
-                                </select>
-                                <i className="la la-dropbox" />
-                                <span><i className="fa fa-ellipsis-h" /></span>
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="password" name="password"
-                                    placeholder="Password" />
-                                <i className="la la-lock" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="password" name="repeat-password"
-                                    placeholder="Repeat Password" />
-                                <i className="la la-lock" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="checky-sec st2">
-                                <div className="fgt-sec">
-                                    <input type="checkbox" name="cc" id="c2" />
-                                    <label htmlFor="c2">
-                                        <span />
-                                    </label>
-                                    <small>Yes, I understand and agree to the workwise
-                                        Terms & Conditions.</small>
+                <Formik
+                    initialValues={{
+                        nom: '',
+                        prenom: '',
+                        email: '',
+                        password: '',
+                        repeatPassword: '',
+                        acceptTerms: false
+                    }}
+                    validationSchema={SignupSchema}
+                    onSubmit={onSubmit}
+                >
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleSubmit,
+                        isSubmitting,
+                    }) => (
+                            <form onSubmit={handleSubmit}>
+                                <div className="row">
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="sn-field">
+                                            <input onChange={handleChange} type="email" name="email" placeholder="Email" value={values.email} /> <i className="la la-envelope" />
+                                        </div>
+                                        {errors.email && touched.email ? (
+                                            <div className="sn-field alert alert-danger">{errors.email}</div>
+                                        ) : null}
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="sn-field">
+                                            <input onChange={handleChange} type="text" name="nom" placeholder="Nom" value={values.nom} />
+                                            <i className="fa fa-user-circle" />
+                                        </div>
+                                        {errors.nom && touched.nom ? (
+                                            <div className="sn-field alert alert-danger">{errors.nom}</div>
+                                        ) : null}
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="sn-field">
+                                            <input onChange={handleChange} type="text" name="prenom" placeholder="Prenom" value={values.prenom} />
+                                            <i className="fa fa-user-circle" />
+                                        </div>
+                                        {errors.prenom && touched.prenom ? (
+                                            <div className="sn-field alert alert-danger">{errors.prenom}</div>
+                                        ) : null}
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="sn-field">
+                                            <input onChange={handleChange} type="password" name="password"
+                                                placeholder="Password" value={values.password} />
+                                            <i className="la la-lock" />
+                                        </div>
+                                        {errors.password && touched.password ? (
+                                            <div className="sn-field alert alert-danger">{errors.password}</div>
+                                        ) : null}
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="sn-field">
+                                            <input onChange={handleChange} type="password" name="repeatPassword"
+                                                placeholder="Repeat Password" value={values.repeatPassword} />
+                                            <i className="la la-lock" />
+                                        </div>
+                                        {errors.repeatPassword && touched.repeatPassword ? (
+                                            <div className="sn-field alert alert-danger">{errors.repeatPassword}</div>
+                                        ) : null}
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <div className="checky-sec st2">
+                                            <div className="fgt-sec">
+                                                <input onChange={handleChange} type="checkbox" id="c2" name="acceptTerms" value={values.acceptTerms} />
+                                                <label htmlFor="c2">
+                                                    <span />
+                                                </label>
+                                                <small>
+                                                    Yes, I understand and agree to the workwise Terms & Conditions.
+                                        </small>
+                                            </div>
+                                            {errors.acceptTerms && touched.repeatPassword ? (
+                                                <div className="sn-field alert alert-danger">{errors.acceptTerms}</div>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-12 no-pdd">
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                        >
+                                            {
+                                                isSubmitting ?
+                                                    (<Spinner name="circle" color="white" />) :
+                                                    (<span>Get Started</span>)
+                                            }
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <button type="submit" value="submit">Get Started</button>
-                        </div>
-                    </div>
-                </form>
+                            </form>
+
+                        )}
+                </Formik>
             </div>
-            <div className="dff-tab" id="tab-4">
-                <form>
-                    <div className="row">
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="text" name="company-name"
-                                    placeholder="Company Name" />
-                                <i className="la la-building" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="text" name="country"
-                                    placeholder="Country" />
-                                <i className="la la-globe" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="password" name="password"
-                                    placeholder="Password" />
-                                <i className="la la-lock" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="sn-field">
-                                <input type="password" name="repeat-password"
-                                    placeholder="Repeat Password" />
-                                <i className="la la-lock" />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <div className="checky-sec st2">
-                                <div className="fgt-sec">
-                                    <input type="checkbox" name="cc" id="c3" />
-                                    <label htmlFor="c3">
-                                        <span />
-                                    </label>
-                                    <small>Yes, I understand and agree to the workwise
-                                        Terms & Conditions.</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-12 no-pdd">
-                            <button type="submit" value="submit">Get Started</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </div >
     );
 }
 export default SignUp;

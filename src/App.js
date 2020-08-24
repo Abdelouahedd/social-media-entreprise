@@ -15,21 +15,24 @@ import Authentification from './components/authentification/authentification';
 import store from './redux/store/store';
 import { Provider } from 'react-redux'
 import { ToastProvider } from 'react-toast-notifications'
+import PrivateRoute from './routes/privateRoute';
 
 const App = () => {
     return (
+
         <Provider store={store}>
             <ToastProvider
-                placement="bottom-left"
+            // placement="bottom-left"
             >
-                <Suspense fallback={<SpinnerLoad />}>
-                    <BrowserRouter>
-                        <Switch>
-                            <Route path='/sign' component={Authentification} />
-                            <Route path='/' component={Root} />
-                        </Switch>
-                    </BrowserRouter>
-                </Suspense></ToastProvider>
+                    <Suspense fallback={<SpinnerLoad />}>
+                        <BrowserRouter>
+                            <Switch>
+                                <Route path='/sign' component={Authentification} />
+                                <PrivateRoute path='/' component={Root} />
+                            </Switch>
+                        </BrowserRouter>
+                    </Suspense>
+            </ToastProvider>
         </Provider>
 
     );
