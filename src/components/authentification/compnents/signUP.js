@@ -2,11 +2,20 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Spinner from 'react-spinkit';
+import { useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+import { URL } from '../../../redux/_helper/utility';
 
 
 
 
 const SignUp = () => {
+
+    const history = useHistory();
+    const { addToast } = useToasts()
+
+
+
     var SignupSchema = Yup.object().shape({
         nom: Yup.string()
             .min(2, 'Too Short!')
@@ -31,9 +40,42 @@ const SignUp = () => {
         }),
         acceptTerms: Yup.bool().oneOf([true], 'Accept Terms & Conditions is required')
     });
+
+    const sign = (user) => {
+        fetch(`${URL}/users/signUP`, {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(async (res) => {
+            let response = await res.json();
+            console.log(response);
+            if (res.status === 200) {
+                setTimeout(() => {
+                    addToast(response.msg, { appearance: 'success', autoDismiss: true },);
+                    history.push('/');
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    addToast(response.msg, { appearance: 'error', autoDismiss: true },)
+                }, 2000);
+            }
+        }).catch(err => {
+            console.error(err);
+            addToast('Error logging in please try again', { appearance: 'error', autoDismiss: true },)
+        });
+    }
+
     const onSubmit = async (values, actions) => {
         try {
-            console.log(values);
+            const user = {
+                nom: values.nom,
+                prenom: values.prenom,
+                email: values.email,
+                mot_pass: values.password
+            }
+            sign(user);
             actions.resetForm({})
             actions.setStatus({ success: true })
         } catch (error) {
