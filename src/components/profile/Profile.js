@@ -5,7 +5,6 @@ import "./profile.css";
 import LeftSideBar from './components/left-sideBar';
 import RightSideBar from './components/right-sideBar';
 import {currentUser} from '../../_helper/services'
-import {Form} from "react-bootstrap";
 
 function Profile() {
     var initialState = [

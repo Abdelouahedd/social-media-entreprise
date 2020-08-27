@@ -175,8 +175,7 @@ label {
     float: none;
     border: 5px solid #fff;
     margin-top: -60px;
-    width: 60%;
-
+    /*width: 60%;*/
 }
 
 .cover-sec img {

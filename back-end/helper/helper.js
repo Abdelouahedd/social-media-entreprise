@@ -20,7 +20,8 @@ exports.comparePassword = function (pw, pw1, cb) {
 exports.verifyToken = (req, res, next) => {
     var beareHeader = req.headers['x-access-token'] || req.headers['authorization'];
     if (beareHeader) {
-        beareHeader = beareHeader.slice(7, beareHeader.length);
+        // beareHeader = beareHeader.slice(7, beareHeader.length);
+        beareHeader = beareHeader.split(' ')[1];
         jwt.verify(beareHeader, process.env.SECRET_KEY, function (err, decoded) {
             if (err)
                 return res.json({
@@ -31,7 +32,7 @@ exports.verifyToken = (req, res, next) => {
             next();
         });
     } else {
-        res.status(403).send({ success: false, msg: "Auth token is not supplied" });
+        res.status(403).send({success: false, msg: "Auth token is not supplied"});
     }
 }
 
