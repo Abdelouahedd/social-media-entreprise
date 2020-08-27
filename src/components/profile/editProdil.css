@@ -1,0 +1,235 @@
+.content-page {
+    overflow: hidden; /*padding: 90px 15px 0;*/
+    min-height: 100vh;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.iq-card .list-star li {
+    margin-right: 0;
+}
+
+.iq-card-body.relative-background {
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-pic {
+    max-width: 100%;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.profile-img-edit {
+    position: relative;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+}
+
+.file-upload {
+    display: none;
+}
+
+.p-image {
+    position: absolute;
+    top: auto;
+    right: 8px;
+    bottom: 10px;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    background: var(--iq-primary);
+    color: var(--iq-white);
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.upload-button {
+    font-size: 1.5em;
+}
+
+.iq-edit-profile .nav-link {
+    padding: 20px 15px;
+    border-radius: 0;
+    color: #777D74;
+    text-align: center;
+    font-size: 16px;
+    border-left: 1px solid var(--iq-light-primary);
+}
+
+.iq-edit-profile.nav-pills .nav-link.active, .iq-edit-profile.nav-pills .show > .nav-link {
+    color: #ffffff;
+    background: var(--iq-primary);
+}
+
+ul.iq-edit-profile li:first-child a {
+    border-radius: 5px 0 0 5px;
+    border-left: none;
+}
+
+ul.iq-edit-profile li:last-child a {
+    border-radius: 0 5px 5px 0;
+}
+
+.form-control {
+    height: 45px;
+    line-height: 45px;
+    background: transparent;
+    border: 1px solid #f1f1f1;;
+    font-size: 14px;
+    color: #a09e9e;
+    border-radius: 10px;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #3f414d;
+    font-weight: normal;
+}
+
+.acc-setting {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    border-left: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    -ms-box-shadow: 1px 0 4px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 1px 0 4px rgba(0, 0, 0, 0.24);
+    box-shadow: 1px 0 4px rgba(0, 0, 0, 0.24);
+}
+
+#content-page {
+    padding: 20px;
+}
+
+.iq-bg-danger {
+    background: #fff5f4 !important;
+    color: #ff9b8a !important;
+}
+
+.btn-primary {
+    background: #50b5ff;
+    border-color: #50b5ff;
+}
+
+.user-pro-img {
+    float: left;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.user-pro-img .add-dp {
+    position: absolute;
+    top: 10px;
+    left: 60%;
+}
+
+.add-dp i {
+    bottom: 0;
+    font-size: 14px;
+    box-shadow: none;
+    position: relative;
+    border-radius: 50px;
+    text-align: center;
+    background: #e44d3a;
+    padding: 5px;
+    color: #ffff;
+    left: 60%;
+    top: -60px;
+}
+
+.add-dp i:hover {
+    font-size: 14px;
+    border: 2px solid #fff;
+    background: #e44d3a;
+    padding: 10px;
+}
+
+.add-dp {
+    margin: -16px;
+    padding: 0;
+}
+
+.add-dp input[type=file] {
+    opacity: 0;
+    padding: 10px 0px 9px;
+    display: none;
+}
+
+.user-pro-img img {
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    float: none;
+    border: 5px solid #fff;
+    margin-top: -60px;
+    width: 60%;
+
+}
+
+.cover-sec img {
+    width: 100%;
+}
+
+.cover-sec > a {
+    display: inline-block;
+    color: #e44d3a;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #e44d3a;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    padding: 10px 15px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.cover-sec > a i {
+    padding-right: 5px;
+}
+
+.add-pic-box [type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+    float: left;
+}
+
+.add-pic-box [type="file"] + label {
+    top: 100%;
+    right: 10px;
+    background: #fff;
+    border: 2px solid #e44d3a;
+    border-radius: 3px;
+    color: #e44d3a;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+    padding: 2px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+    margin: 0;
+    float: right;
+    text-transform: uppercase;
+}
+
+.add-pic-box [type="file"] + label:hover {
+    background: #e44d3a;
+    color: #fff;
+}

@@ -25,7 +25,7 @@ export const LeftSideBar = () => {
                         </li>
                     </ul>
                 </div>
-                <ul className="social_links">
+                {/*   <ul className="social_links">
                     <li><a href=" www.example.com" title=""><i
                         className="la la-globe" /> www.example.com</a>
                     </li>
@@ -50,7 +50,7 @@ export const LeftSideBar = () => {
                     <li><a href=" www.example.com" title=""><i
                         className="fa fa-youtube" /> Http://www.youtube.com/john...</a>
                     </li>
-                </ul>
+                </ul>*/}
             </div>
 
         </div>

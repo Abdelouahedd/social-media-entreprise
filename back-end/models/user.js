@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 const Joi = require('joi');
 var Schema = mongoose.Schema;
-var { role } = require('../helper/enums/enum');
+var {role} = require('../helper/enums/enum');
 var User = new Schema({
     nom: {
         type: String,
@@ -23,21 +23,35 @@ var User = new Schema({
     },
     telephone: {
         type: String,
+        default: ""
+    },
+    fonction: {
+        type: String,
+        default: ""
+    },
+    Descriptif: {
+        type: String,
+        default: "",
+        maxlength: 500
     },
     date_naissance: {
-        type: Date
+        type: Date,
     },
     photo_profil: {
-        type: String
+        type: String,
+        default: ""
     },
     photo_couverture: {
-        type: String
+        type: String,
+        default: ""
     },
     role: {
         type: String,
         enum: Object.values(role),
         default: role.USER
     }
+}, {
+    timestamps: true
 });
 
 exports.validationRegister = (user) => {
@@ -51,7 +65,7 @@ exports.validationRegister = (user) => {
 }
 
 exports.validationConnecter = (user) => {
-    const schema =  Joi.object({
+    const schema = Joi.object({
         email: Joi.string().required().email(),
         mot_pass: Joi.string().required().min(6)
     });

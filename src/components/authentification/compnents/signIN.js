@@ -35,6 +35,7 @@ export default function SignIn() {
             console.log(response);
             if (res.status === 200) {
                 dispatch(authSuccess(response.token, response.msg));
+                sessionStorage.setItem('jwtToken', response.token);
                 addToast(response.msg, { appearance: 'success', autoDismiss: true },);
                 setTimeout(() => {
                     history.push('/');
