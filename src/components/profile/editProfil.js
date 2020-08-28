@@ -207,7 +207,6 @@ function EditProfil() {
                                                    handleChange,
                                                    handleSubmit,
                                                    isSubmitting,
-                                                   isValide
                                                }) => (
                                                 <form onSubmit={handleSubmit}>
                                                     <div className="form-group col-sm-12">
@@ -293,8 +292,9 @@ function EditProfil() {
                                                             <label htmlFor="naissance">Date de naissance:</label>
                                                             <input type="date" className="form-control" id="naissance"
                                                                    name="date_naissance"
+                                                                   data-date-format="DD MMMM YYYY"
                                                                    onChange={handleChange}
-                                                                   value={values.date_naissance}
+                                                                   value={values.date_naissance.substr(0,10)}
                                                             />
                                                             {errors.date_naissance && touched.date_naissance ? (
                                                                 <div
