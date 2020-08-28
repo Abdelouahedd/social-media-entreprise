@@ -20,12 +20,10 @@ export const authFail = (error) => {
         error: error
     };
 };
-export const logOut = (state, action) => {
+export const logOut = () => {
     return {
         type: "LOGOUT",
-        token: "",
         message: "log out",
-        error: false
     };
 }
 

@@ -21,6 +21,10 @@ var User = new Schema({
         required: true,
         minlength: 6
     },
+    gender: {
+        type: String,
+        default: "Homme"
+    },
     telephone: {
         type: String,
         default: ""
@@ -29,19 +33,28 @@ var User = new Schema({
         type: String,
         default: ""
     },
-    Descriptif: {
+    descriptif: {
         type: String,
         default: "",
         maxlength: 500
     },
     date_naissance: {
         type: Date,
+        max: new Date(Date.now())
     },
     photo_profil: {
         type: String,
         default: ""
     },
     photo_couverture: {
+        type: String,
+        default: ""
+    },
+    ville: {
+        type: String,
+        default: ""
+    },
+    address: {
         type: String,
         default: ""
     },
@@ -68,6 +81,36 @@ exports.validationConnecter = (user) => {
     const schema = Joi.object({
         email: Joi.string().required().email(),
         mot_pass: Joi.string().required().min(6)
+    });
+    return schema.validate(user);
+}
+
+exports.validationUpdate = (user) => {
+    const schema = Joi.object({
+        email: Joi.string()
+            .email()
+            .required(),
+        nom: Joi.string()
+            .min(2 )
+            .max(50)
+            .required(),
+        telephone: Joi.string()
+            .required(),
+        prenom: Joi.string()
+            .min(2)
+            .max(50)
+            .required(),
+        date_naissance: Joi.date()
+            .max(new Date(Date.now()))
+            .required(),
+        descriptif: Joi.string()
+            .max(500)
+            .min(20),
+        ville: Joi.string(),
+        address: Joi.string(),
+        fonction: Joi.string()
+            .required(),
+        gender: Joi.string(),
     });
     return schema.validate(user);
 }

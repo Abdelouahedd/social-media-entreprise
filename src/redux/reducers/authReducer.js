@@ -1,4 +1,4 @@
-import { updateObject } from "../_helper/utility";
+import {updateObject} from "../_helper/utility";
 
 
 const initState = {
@@ -12,7 +12,7 @@ const initState = {
 export default function AuthReducer(state = initState, action) {
     switch (action.type) {
         case "AUTH_START":
-            return updateObject(state, { error: null, loading: true });
+            return updateObject(state, {error: null, loading: true});
         case "AUTH_SUCCESS":
             return updateObject(state, {
                 token: action.token,
@@ -25,9 +25,10 @@ export default function AuthReducer(state = initState, action) {
                 loading: false
             });
         case "LOGOUT":
+            sessionStorage.clear();
             return updateObject(state, initState);
         default:
-            return { ...state };
+            return {...state};
     }
 
 }

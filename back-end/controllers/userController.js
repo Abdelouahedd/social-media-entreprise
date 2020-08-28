@@ -1,4 +1,4 @@
-var {user, validationRegister, validationConnecter} = require('../models/user');
+var {user, validationRegister, validationConnecter, validationUpdate} = require('../models/user');
 var {generateHash, comparePassword} = require('../helper/helper');
 var jwt = require('jsonwebtoken');
 
@@ -33,9 +33,9 @@ exports.signUp = async (req, res) => {
     }
 
 }
+
 exports.signIn = async (req, res) => {
     try {
-        console.log(req.body);
         const {error} = validationConnecter(req.body);
         if (error) {
             return res.status(400).send({success: false, msg: error.details[0].message});
@@ -66,21 +66,30 @@ exports.signIn = async (req, res) => {
 
 exports.updateInfo = async (req, res) => {
     try {
+        const {error} = validationUpdate(req.body);
+        if (error) {
+            return res.status(400).send({success: false, msg: error.details[0].message});
+        }
         user.findOneAndUpdate({_id: req.params.id}, {
             $set: {
                 email: req.body.email,
                 nom: req.body.nom,
                 prenom: req.body.prenom,
-                password: generateHash(req.body.password),
+                telephone: req.body.telephone,
+                date_naissance: req.body.date_naissance,
+                descriptif: req.body.descriptif,
+                ville: req.body.ville,
+                address: req.body.address,
+                fonction: req.body.fonction,
+                gender: req.body.gender
             },
         }, {new: true}, (err, result) => {
             if (err) return res.send(err)
-            res.send({msg: "User Updated", res: result});
-        })
+            res.status(200).send({success: true, msg: "User Updated by succes", res: result});
+        });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
-
 }
 
 exports.changeProfilImg = async (req, res) => {
