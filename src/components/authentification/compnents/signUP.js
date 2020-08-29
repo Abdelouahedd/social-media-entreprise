@@ -195,7 +195,6 @@ const SignUp = () => {
                                     </div>
                                 </div>
                             </form>
-
                         )}
                 </Formik>
             </div>

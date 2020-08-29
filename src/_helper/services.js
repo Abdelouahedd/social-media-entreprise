@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
 
 
-export const currentUser = decode(sessionStorage.getItem('jwtToken')).user;
+let token = sessionStorage.getItem('jwtToken')
+
+export const currentUser = token ? decode(token).user : {};

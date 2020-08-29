@@ -1,6 +1,6 @@
 import React from 'react';
-import {Tabs, Tab, Row, Col, Nav} from 'react-bootstrap';
 import EditProfil from "../profile/editProfil";
+import UpdatePassword from "./components/UpdatePassword";
 
 function AccountSetting(props) {
     return (
@@ -11,16 +11,15 @@ function AccountSetting(props) {
                         <div className="col-lg-3">
                             <div className=" acc-leftbar ">
                                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                                    {/*Edit Profile of current user*/}
                                     <a className="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab"
                                        href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i
-                                        className="la la-cogs"></i>Account Setting</a>
-                                    <a className="nav-item nav-link" id="nav-status-tab" data-toggle="tab"
-                                       href="#nav-status" role="tab" aria-controls="nav-status"
-                                       aria-selected="false"><i
-                                        className="fa fa-line-chart"></i>Status</a>
+                                        className="la la-cogs"/>Account Setting</a>
+                                    {/*update password of current User*/}
                                     <a className="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
                                        href="#nav-password" role="tab" aria-controls="nav-password"
-                                       aria-selected="false"><i className="fa fa-lock"></i>Change Password</a>
+                                       aria-selected="false"><i className="fa fa-lock"/>Change Password</a>
+
                                     <a className="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
                                        href="#nav-notification" role="tab" aria-controls="nav-notification"
                                        aria-selected="false"><i className="fa fa-flash"></i>Notifications</a>
@@ -48,112 +47,9 @@ function AccountSetting(props) {
                                      aria-labelledby="nav-acc-tab">
                                     <EditProfil/>
                                 </div>
-                                <div className="tab-pane fade" id="nav-status" role="tabpanel"
-                                     aria-labelledby="nav-status-tab">
-                                    <div className="acc-setting">
-                                        <h3>Profile Status</h3>
-                                        <div className="profile-bx-details">
-                                            <div className="row">
-                                                <div className="col-lg-3 col-md-6 col-sm-12">
-                                                    <div className="profile-bx-info">
-                                                        <div className="pro-bx">
-                                                            <img src={require("../../assets/images/pro-icon1.png")}
-                                                                 alt=""/>
-                                                            <div className="bx-info">
-                                                                <h3>$5,145</h3>
-                                                                <h5>Total Income</h5>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3 col-md-6 col-sm-12">
-                                                    <div className="profile-bx-info">
-                                                        <div className="pro-bx">
-                                                            <img src={require("../../assets/images/pro-icon2.png")}
-                                                                 alt=""/>
-                                                            <div className="bx-info">
-                                                                <h3>$4,745</h3>
-                                                                <h5>Widthraw</h5>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3 col-md-6 col-sm-12">
-                                                    <div className="profile-bx-info">
-                                                        <div className="pro-bx">
-                                                            <img src={require("../../assets/images/pro-icon3.png")}
-                                                                 alt=""/>
-                                                            <div className="bx-info">
-                                                                <h3>$1,145</h3>
-                                                                <h5>Sent</h5>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3 col-md-6 col-sm-12">
-                                                    <div className="profile-bx-info">
-                                                        <div className="pro-bx">
-                                                            <img src={require("../../assets/images/pro-icon4.png")}
-                                                                 alt=""/>
-                                                            <div className="bx-info">
-                                                                <h3>130</h3>
-                                                                <h5>Total Projects</h5>
-                                                            </div>
-                                                        </div>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="pro-work-status">
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className="tab-pane fade" id="nav-password" role="tabpanel"
                                      aria-labelledby="nav-password-tab">
-                                    <div className="acc-setting">
-                                        <h3>Account Setting</h3>
-                                        <form>
-                                            <div className="cp-field">
-                                                <h5>Old Password</h5>
-                                                <div className="cpp-fiel">
-                                                    <input type="text" name="old-password" placeholder="Old Password"/>
-                                                    <i className="fa fa-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="cp-field">
-                                                <h5>New Password</h5>
-                                                <div className="cpp-fiel">
-                                                    <input type="text" name="new-password" placeholder="New Password"/>
-                                                    <i className="fa fa-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="cp-field">
-                                                <h5>Repeat Password</h5>
-                                                <div className="cpp-fiel">
-                                                    <input type="text" name="repeat-password"
-                                                           placeholder="Repeat Password"/>
-                                                    <i className="fa fa-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="cp-field">
-                                                <h5><a href="#" title="">Forgot Password?</a></h5>
-                                            </div>
-                                            <div className="save-stngs pd2">
-                                                <ul>
-                                                    <li>
-                                                        <button type="submit">Save Setting</button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="submit">Restore Setting</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <UpdatePassword />
                                 </div>
                                 <div className="tab-pane fade" id="nav-notification" role="tabpanel"
                                      aria-labelledby="nav-notification-tab">

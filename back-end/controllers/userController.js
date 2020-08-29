@@ -128,10 +128,26 @@ exports.changeCuverImg = async (req, res) => {
 
 exports.getUserByID = async (req, res) => {
     try {
-        user.findOne({_id: req.params.id}, (err, result) => {
+        await user.findOne({_id: req.params.id}, (err, result) => {
             if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err})
             res.send({success: true, msg: "GET USER BY SUCCES", user: result});
         });
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+}
+
+exports.updatePassword = async (req, res) => {
+    try {
+        user.findOneAndUpdate({_id: req.params.id}, {
+                $set: {
+                    mot_pass: generateHash(req.body.password)
+                },
+            }, {new: true},
+            (err) => {
+                if (err) return res.status(500).send({success: false, error: err});
+                res.status(200).send({success: true, msg: "Password updated by succes"});
+            });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
