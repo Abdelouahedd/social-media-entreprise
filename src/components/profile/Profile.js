@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import cuver from '../../assets/images/resources/cover-img.jpg';
 import Post from "../home/Post/Post";
 import "./profile.css";
 import LeftSideBar from './components/left-sideBar';
 import RightSideBar from './components/right-sideBar';
-import {currentUser} from '../../_helper/services'
+import {URL} from "../../redux/_helper/utility";
+import {useToasts} from "react-toast-notifications";
+import {useParams} from "react-router-dom";
 
 function Profile() {
     var initialState = [
@@ -28,12 +30,28 @@ function Profile() {
             name: 'Bids'
         },
     ];
-
-    const [tabs, setTabs] = useState(initialState)
+    const [tabs, setTabs] = useState(initialState);
+    const [user, setUser] = useState({});
+    const {addToast} = useToasts();
+    const param = useParams();
 
     useEffect(() => {
-        console.log(currentUser);
-    }, [])
+        fetch(`${URL}/users/${param.id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }
+        ).then(res => res.json())
+            .then((res) => setUser(res.user))
+            .catch(err => {
+                console.error(err);
+                addToast(err.toString(), {appearance: 'error', autoDismiss: true},)
+            });
+    }, []);
+
 
     const showProductFeed = (event) => {
 
@@ -62,17 +80,8 @@ function Profile() {
     return (
         <div className="wrapper">
             <section className="cover-sec">
-                <img src={cuver} alt={"cuver img"} className="img-fluid bg-img"/>
-                <div className="add-pic-box">
-                    <div className="container">
-                        <div className="row no-gutters">
-                            <div className="col-lg-12 col-sm-12">
-                                <input type="file" id="file"/>
-                                <label htmlFor="file">Change Image</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img src={user.photo_couverture === "" ? cuver : user.photo_couverture} alt={"cuver img"}
+                     className="img-fluid bg-img"/>
             </section>
             <main>
                 <div className="main-section">
@@ -80,15 +89,14 @@ function Profile() {
                         <div className="main-section-data">
                             <div className="row">
                                 <div className="col-lg-3 justify-content-center">
-                                    <LeftSideBar/>
+                                    <LeftSideBar user={user}/>
                                 </div>
-
                                 <div className="col-lg-6">
                                     <div className="main-ws-sec">
                                         <div className="user-tab-sec rewivew">
-                                            <h3>{currentUser.nom + " " + currentUser.prenom}</h3>
+                                            <h3>{user.nom + " " + user.prenom}</h3>
                                             <div className="star-descp">
-                                                <span>Join at : {new Date(currentUser.createdAt).toLocaleDateString("en-us")}</span>
+                                                <span>Join at : {new Date(user.createdAt).toLocaleDateString("en-us")}</span>
                                             </div>
                                             <div className="tab-feed st2 settingjb">
                                                 <ul style={{

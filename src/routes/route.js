@@ -31,7 +31,7 @@ const CreateRoutes = () => (
         <Route path='/' component={Home} exact/>
         <Route path='/companies/company' component={Group} exact/>
         <Route path='/projects' component={Home} exact/>
-        <Route path='/profile' component={Profile} exact/>
+        <Route path='/profile/:id' component={Profile} exact/>
         <Route path='/profile/edit' component={EditProfill} exact/>
         <Route path='/files' component={Home} exact/>
         <Route path='/messages' component={Messages} exact/>

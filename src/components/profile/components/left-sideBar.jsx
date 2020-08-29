@@ -1,17 +1,13 @@
-import React  from 'react'
+import React from 'react'
 import user_img from '../../../assets/images/resources/user-pro-img.png';
 
-export const LeftSideBar = () => {
+export const LeftSideBar = (props) => {
+
     return (
         <div className="main-left-sidebar">
             <div className="user_profile">
                 <div className="user-pro-img">
-                    <img src={user_img} alt="" />
-                    <div className="add-dp" id="OpenImgUpload">
-                        <input type="file" id="file" />
-                        <label htmlFor="file"><i
-                            className="fa fa-camera" /></label>
-                    </div>
+                    <img src={props.user.photo_profil === "" ? user_img : props.user.photo_profil} alt=""/>
                 </div>
                 <div className="user_pro_status">
                     <ul className="flw-status">
@@ -56,7 +52,6 @@ export const LeftSideBar = () => {
         </div>
     )
 }
-
 
 
 export default LeftSideBar;

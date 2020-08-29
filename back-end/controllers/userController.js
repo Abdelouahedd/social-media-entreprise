@@ -118,9 +118,20 @@ exports.changeCuverImg = async (req, res) => {
                 },
             }, {new: true},
             (err, result) => {
-                if (err) return res.send(err)
+                if (err) return res.status(500).send({success: false, error: err})
                 res.send({success: true, msg: "img cuver Updated", imgUrl: result.photo_couverture});
             })
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+}
+
+exports.getUserByID = async (req, res) => {
+    try {
+        user.findOne({_id: req.params.id}, (err, result) => {
+            if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err})
+            res.send({success: true, msg: "GET USER BY SUCCES", user: result});
+        });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
