@@ -1,6 +1,9 @@
 import React from 'react';
 import EditProfil from "../profile/editProfil";
 import UpdatePassword from "./components/UpdatePassword";
+import Notification from "./components/notification";
+import Blocking from "./components/blocking";
+import DeactivateAccount from "./components/deactivateAccount";
 
 function AccountSetting(props) {
     return (
@@ -19,25 +22,27 @@ function AccountSetting(props) {
                                     <a className="nav-item nav-link" id="nav-password-tab" data-toggle="tab"
                                        href="#nav-password" role="tab" aria-controls="nav-password"
                                        aria-selected="false"><i className="fa fa-lock"/>Change Password</a>
-
+                                    {/*show All notification*/}
                                     <a className="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
                                        href="#nav-notification" role="tab" aria-controls="nav-notification"
-                                       aria-selected="false"><i className="fa fa-flash"></i>Notifications</a>
+                                       aria-selected="false"><i className="fa fa-flash"/>Notifications</a>
+
                                     <a className="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab"
                                        href="#privcy" role="tab" aria-controls="privacy" aria-selected="false"><i
-                                        className="fa fa-group"></i>Requests</a>
+                                        className="fa fa-group"/>Requests</a>
+
                                     <a className="nav-item nav-link" id="security" data-toggle="tab"
                                        href="#security-login" role="tab" aria-controls="security-login"
-                                       aria-selected="false"><i className="fa fa-user-secret"></i>Security and Login</a>
+                                       aria-selected="false"><i className="fa fa-user-secret"/>Security and Login</a>
                                     <a className="nav-item nav-link" id="nav-privacy-tab" data-toggle="tab"
                                        href="#privacy" role="tab" aria-controls="privacy" aria-selected="false"><i
-                                        className="fa fa-paw"></i>Privacy</a>
+                                        className="fa fa-paw"/>Privacy</a>
                                     <a className="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab"
                                        href="#blockking" role="tab" aria-controls="blockking" aria-selected="false"><i
-                                        className="fa fa-cc-diners-club"></i>Blocking</a>
+                                        className="fa fa-cc-diners-club"/>Blocking</a>
                                     <a className="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
                                        href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
-                                       aria-selected="false"><i className="fa fa-random"></i>Deactivate Account</a>
+                                       aria-selected="false"><i className="fa fa-random"/>Deactivate Account</a>
                                 </div>
                             </div>
                         </div>
@@ -49,96 +54,11 @@ function AccountSetting(props) {
                                 </div>
                                 <div className="tab-pane fade" id="nav-password" role="tabpanel"
                                      aria-labelledby="nav-password-tab">
-                                    <UpdatePassword />
+                                    <UpdatePassword/>
                                 </div>
                                 <div className="tab-pane fade" id="nav-notification" role="tabpanel"
                                      aria-labelledby="nav-notification-tab">
-                                    <div className="acc-setting">
-                                        <h3>Notifications</h3>
-                                        <div className="notifications-list">
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src={require("../../assets/images/resources/ny-img1.png")}
-                                                         alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Jassica William</a> Comment on your
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img2.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Poonam Verma</a> Bid on your Latest
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img3.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Tonney Dhman</a> Comment on your project.
-                                                    </h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img1.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Jassica William</a> Comment on your
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img1.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Jassica William</a> Comment on your
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img2.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Poonam Verma </a> Bid on your Latest
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img3.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Tonney Dhman</a> Comment on your project
-                                                    </h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div className="notfication-details">
-                                                <div className="noty-user-img">
-                                                    <img src="images/resources/ny-img1.png" alt=""/>
-                                                </div>
-                                                <div className="notification-info">
-                                                    <h3><a href="#" title="">Jassica William</a> Comment on your
-                                                        project.</h3>
-                                                    <span>2 min ago</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Notification/>
                                 </div>
                                 <div className="tab-pane fade" id="privcy" role="tabpanel"
                                      aria-labelledby="nav-privcy-tab">
@@ -358,29 +278,7 @@ function AccountSetting(props) {
                                 </div>
                                 <div className="tab-pane fade" id="blockking" role="tabpanel"
                                      aria-labelledby="nav-blockking-tab">
-                                    <div className="helpforum">
-                                        <div className="row">
-                                            <div className="col-12 security">
-                                                <h3>Blocking</h3>
-                                                <hr/>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <h4>Blocking</h4>
-                                                    <p>See your list,and make changes if you'd like</p>
-                                                    <div className="bloktext">
-                                                        <p>You are not bloking anyone</p>
-                                                        <p>Need to blok or report someone? Go to the profile of the
-                                                            person you want to blok and select "Blok or Report" from the
-                                                            drowp-down menu at the top of the profile summery</p>
-                                                        <p>Note: After you have blocked the person, Any previous profile
-                                                            views of yours and of the other person will disappear from
-                                                            each of your "Who's viewed your profile" sections. </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Blocking/>
                                 </div>
                                 <div className="tab-pane fade" id="privciy" role="tabpanel"
                                      aria-labelledby="nav-privcy-tab">
@@ -752,51 +650,7 @@ function AccountSetting(props) {
                                 </div>
                                 <div className="tab-pane fade" id="nav-deactivate" role="tabpanel"
                                      aria-labelledby="nav-deactivate-tab">
-                                    <div className="acc-setting">
-                                        <h3>Deactivate Account</h3>
-                                        <form>
-                                            <div className="cp-field">
-                                                <h5>Email</h5>
-                                                <div className="cpp-fiel">
-                                                    <input type="text" name="email" placeholder="Email"/>
-                                                    <i className="fa fa-envelope"></i>
-                                                </div>
-                                            </div>
-                                            <div className="cp-field">
-                                                <h5>Password</h5>
-                                                <div className="cpp-fiel">
-                                                    <input type="password" name="password" placeholder="Password"/>
-                                                    <i className="fa fa-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div className="cp-field">
-                                                <h5>Please Explain Further</h5>
-                                                <textarea></textarea>
-                                            </div>
-                                            <div className="cp-field">
-                                                <div className="fgt-sec">
-                                                    <input type="checkbox" name="cc" id="c4"/>
-                                                    <label htmlFor="c4">
-                                                        <span></span>
-                                                    </label>
-                                                    <small>Email option out</small>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                                                    pretium nulla quis erat dapibus, varius hendrerit neque suscipit.
-                                                    Integer in ex euismod, posuere lectus id,</p>
-                                            </div>
-                                            <div className="save-stngs pd3">
-                                                <ul>
-                                                    <li>
-                                                        <button type="submit">Save Setting</button>
-                                                    </li>
-                                                    <li>
-                                                        <button type="submit">Restore Setting</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <DeactivateAccount/>
                                 </div>
                             </div>
                         </div>
@@ -804,7 +658,6 @@ function AccountSetting(props) {
                 </div>
             </div>
         </section>
-
     );
 }
 
