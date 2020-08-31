@@ -93,8 +93,8 @@ const NavBar = () => {
                     </div>
                     <div className="user-account">
                         <div className="user-info" onClick={() => setShowAccount(!show)}>
-                            <img src={user} alt=""/>
-                            <a href="#" title="">John</a>
+                            <img src={currentUser.photo_profil == "" ? user : currentUser.photo_profil}
+                                 alt={currentUser.nom}/>
                             <i className="la la-sort-down"/>
                         </div>
                         <AccountBox show={show ? showBox : hideBox}/>

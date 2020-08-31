@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import {URL} from "../../redux/_helper/utility";
 import {useToasts} from "react-toast-notifications";
 import {Formik} from "formik";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {logOut} from "../../redux/actions/authActions";
 import {useHistory} from "react-router-dom";
 
@@ -294,7 +294,7 @@ function EditProfil() {
                                                                    name="date_naissance"
                                                                    data-date-format="DD MMMM YYYY"
                                                                    onChange={handleChange}
-                                                                   value={values.date_naissance.substr(0,10)}
+                                                                   value={values.date_naissance.substr(0, 10)}
                                                             />
                                                             {errors.date_naissance && touched.date_naissance ? (
                                                                 <div
