@@ -1,0 +1,92 @@
+.section_comment {
+    display: none;
+}
+
+.section_comment.active {
+    display: block;
+    -webkit-animation: fadein 2s;
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.comment {
+    padding: 12px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.komen {
+    font-size: 14px;
+    background-color: ghostwhite;
+    border-radius: 20px;
+    border: #f4f4f4 1px solid;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.komen + a {
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.geser {
+    margin-left: 55px;
+    margin-top: 5px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/*FORM FOR ADDING A COMMENT*/
+.box-footer {
+    border-radius: 0 0 3px 3px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.img-circle {
+    vertical-align: middle;
+    border-radius: 20px;
+    width: 35px !important;
+    height: 35px !important;
+    float: left;
+}
+
+.img-sm + .img-push {
+    margin-left: 40px;
+}
+
+.box .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+}
+
+.input-sm {
+    border-radius: 20px;
+}

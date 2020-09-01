@@ -1,129 +1,114 @@
-import React from 'react';
-import user_post from "../../../assets/images/resources/us-pic.png";
-import location from "../../../assets/images/icon9.png";
-import like from "../../../assets/images/liked-img.png";
+import React, {useState} from 'react';
 import './post.css'
+import Comment from "./comments/comment";
 
 function Post() {
+
+    const [editOption, setEditOption] = useState(false);
+    const [showComments, setShowComments] = useState(false);
+
     return (
-        <div className="post-bar">
-            <div className="post_topbar">
-                <div className="usy-dt">
-                    <img src={user_post} alt=""/>
-                    <div className="usy-name">
-                        <h3>John Doe</h3>
-                        <span>
-                            <i className="fa fa-clock-o"/> 3 min ago
-                        </span>
-                    </div>
-                </div>
-                <div className="ed-opts">
-                    <a href="#" title="" className="ed-opts-open"><i
-                        className="la la-ellipsis-v"/></a>
-                    <ul className="ed-options">
-                        <li><a href="#" title="">Edit Post</a></li>
-                        <li><a href="#" title="">Unsaved</a></li>
-                        <li><a href="#" title="">Unbid</a></li>
-                        <li><a href="#" title="">Close</a></li>
-                        <li><a href="#" title="">Hide</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div className="epi-sec">
-                <ul className="descp">
-                    <li>
-                        <img src={location} alt=""/>
-                        <span>India</span>
-                    </li>
-                </ul>
-                <ul className="bk-links">
-                    <li><a href="#" title=""><i className="la la-bookmark"/></a>
-                    </li>
-                    <li><a href="#" title=""><i className="la la-envelope"/></a>
-                    </li>
-                </ul>
-            </div>
-            <div className="job_descp">
-                <h3>Senior Wordpress Developer</h3>
-                <ul className="job-dt">
-                    <li><a href="#" title="">Full Time</a></li>
-                    <li><span>$30 / hr</span></li>
-                </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                    luctus
-                    hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna
-                    sit
-                    amet... <a href="#" title="">view more</a></p>
-                <ul className="skill-tags">
-                    <li><a href="#" title="">HTML</a></li>
-                    <li><a href="#" title="">PHP</a></li>
-                    <li><a href="#" title="">CSS</a></li>
-                    <li><a href="#" title="">Javascript</a></li>
-                    <li><a href="#" title="">Wordpress</a></li>
-                </ul>
-            </div>
-            <div className="job-status-bar">
-                <ul className="like-com">
-                    <li>
-                        <a href="#"><i className="fa fa-heart"/> Like</a>
-                        <img src={like} alt=""/>
-                        <span>25</span>
-                    </li>
-                    <li><a href="#" className="com"><i
-                        className="fas fa-comment-alt"/> Comment 15</a></li>
-                </ul>
-                <a href="#"><i className="fa fa-eye"/>Views 50</a>
-            </div>
-            <div className="comment-area mt-3">
-                {/*   <ul className="post-comments p-0 m-0">
-                    <li className="mb-2">
-                        <div className="d-flex flex-wrap">
-                            <div className="user-img">
-                                <img src={user_post} alt="userimg"
-                                     className="avatar-35 rounded-circle img-fluid"/>
+        <>
+            <div className="card gedf-card">
+                <div className="card-header">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className="mr-2">
+                                <img className="avatar rounded-circle" width="45" src="https://picsum.photos/50/50"
+                                     alt=""/>
                             </div>
-                            <div className="comment-data-block ml-3">
-                                <h6>Monty Carlo</h6>
-                                <p className="mb-0">Lorem ipsum dolor sit amet</p>
-                                <div className="d-flex flex-wrap align-items-center comment-activity">
-                                    <a href="#">like</a>
-                                    <a href="#">reply</a>
-                                    <a href="#">translate</a>
-                                    <span> 5 min </span>
-                                </div>
+                            <div className="ml-2">
+                                <div className="h5 m-0">@LeeCross</div>
+                                <div className="h7 text-muted">Miracles Lee Cross</div>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div className="d-flex flex-wrap">
-                            <div className="user-img">
-                                <img src={user_post} alt="userimg"
-                                     className="avatar-35 rounded-circle img-fluid"/>
-                            </div>
-                            <div className="comment-data-block ml-3">
-                                <h6>Paul Molive</h6>
-                                <p className="mb-0">Lorem ipsum dolor sit amet</p>
-                                <div className="d-flex flex-wrap align-items-center comment-activity">
-                                    <a href="#">like</a>
-                                    <a href="#">reply</a>
-                                    <a href="#">translate</a>
-                                    <span> 5 min </span>
-                                </div>
+                        <div>
+                            <div className="ed-opts">
+                                <p className="ed-opts-open" style={{cursor: "pointer"}}
+                                   onClick={() => setEditOption(!editOption)}
+                                >
+                                    <i className="la la-ellipsis-v"/>
+                                </p>
+                                <ul className={editOption ? "ed-options active" : "ed-options"}>
+                                    <li><a href="#" title="">Edit Post</a></li>
+                                    <li><a href="#" title="">Unsaved</a></li>
+                                    <li><a href="#" title="">Unbid</a></li>
+                                    <li><a href="#" title="">Close</a></li>
+                                    <li><a href="#" title="">Hide</a></li>
+                                </ul>
                             </div>
                         </div>
-                    </li>
-                </ul>*/}
-                {/*     <form className="comment-text d-flex align-items-center mt-3" action="#">
-                    <input type="text" className="form-control rounded"/>
-                    <div className="comment-attagement d-flex">
-                        <a href="#"><i className="ri-link mr-3"/></a>
-                        <a href="#"><i className="ri-user-smile-line mr-3"/></a>
-                        <a href="#"><i className="ri-camera-line mr-3"/></a>
                     </div>
-                </form>*/}
+
+                </div>
+                <div className="card-body">
+                    <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"></i> Hace 40 min</div>
+
+                    <a className="card-link" href="#">
+                        <h5 className="card-title">Totam non adipisci hic! Possimus ducimus amet, dolores illo ipsum
+                            quos
+                            cum.</h5>
+                    </a>
+                    <p className="card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt fugit reprehenderit
+                        consectetur exercitationem odio,
+                        quam nobis? Officiis, similique, harum voluptate, facilis voluptas pariatur dolorum tempora
+                        sapiente
+                        eius maxime quaerat.
+                        <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU"
+                           target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
+                    </p>
+                    <div className="photo">
+                        <div className="children">
+                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
+                                 alt="Card image cap"/>
+                        </div>
+                        <div className="children">
+                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
+                                 alt="Card image cap"/>
+                        </div>
+
+                        <div className="children">
+                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
+                                 alt="Card image cap"/>
+                            <div className="children_float">
+                                +8
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="card-footer bg-white border-1 p-0">
+                    <div className="d-flex justify-content-between align-items-center my-1">
+                        <div className="col">
+                            <button type="button" className="btn btn-fbook btn-block btn-sm"><i
+                                className="fa fa-thumbs-up"
+                                aria-hidden="true"></i> Like
+                            </button>
+                        </div>
+                        <div className="col">
+                            <button type="button" className="btn btn-fbook btn-block btn-sm"
+                                    onClick={() => setShowComments(!showComments)}><i
+                                className="fa fa-comment"
+                                aria-hidden="true"></i> Commente
+                            </button>
+                        </div>
+                        <div className="col">
+                            <button type="button" className="btn btn-fbook btn-block btn-sm"><i
+                                className="fa fa-share"
+                                aria-hidden="true"></i> Share
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+                {/*Comment*/}
+                <Comment showComments={showComments}/>
             </div>
-        </div>
-    );
+        </>
+    )
+        ;
 }
 
 export default Post;
