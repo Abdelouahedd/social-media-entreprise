@@ -34,7 +34,7 @@ function EditProfil() {
             .max(50, 'Too Long!')
             .required('Required'),
         date_naissance: Yup.date()
-            .max(new Date(Date.now()))
+            .max(new Date(Date.now()), "Date max is " + new Date(Date.now()).toLocaleDateString())
             .required('Required'),
         descriptif: Yup.string()
             .max(500)
@@ -190,7 +190,7 @@ function EditProfil() {
                                                     email: currentUser.email,
                                                     nom: currentUser.nom,
                                                     prenom: currentUser.prenom,
-                                                    date_naissance: currentUser.date_naissance,
+                                                    date_naissance: currentUser.date_naissance == undefined ? "" : currentUser.date_naissance,
                                                     ville: currentUser.ville,
                                                     address: currentUser.address,
                                                     fonction: currentUser.fonction,
