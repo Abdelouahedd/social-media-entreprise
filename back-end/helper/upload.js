@@ -1,17 +1,21 @@
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 
 
-const DIR = 'public/images/';
+const DIR_IMAGE = 'public/images/';
+const DIR_VIDEO = 'public/videos/';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, DIR);
+        if (file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+            cb(null, DIR_IMAGE);
+        } else if (file.originalname.match(/\.(mkv|mp4)$/)) {
+            cb(null, DIR_VIDEO);
+        }
     },
     filename: (req, file, cb) => {
         if (!file) cb(null, true);
         const fileName = file.originalname.toLowerCase().split(' ').join('-');
-        console.log(fileName)
         cb(null, uuidv4() + '-' + fileName)
     }
 });
@@ -19,11 +23,13 @@ const storage = multer.diskStorage({
 exports.upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        if (file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|mkv|mp4)$/)) {
             cb(null, true);
         } else {
             cb(null, false);
-            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+            return cb(new Error('Only jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|mkv|mp4 format allowed!'));
         }
     }
 });
+
+

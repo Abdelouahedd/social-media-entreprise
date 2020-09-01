@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import './post.css'
 import Comment from "./comments/comment";
 
-function Post() {
-
+function Post(props) {
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
+    const [like, setLike] = useState(false);
+
 
     return (
         <>
@@ -22,24 +23,21 @@ function Post() {
                                 <div className="h7 text-muted">Miracles Lee Cross</div>
                             </div>
                         </div>
-                        <div>
-                            <div className="ed-opts">
-                                <p className="ed-opts-open" style={{cursor: "pointer"}}
-                                   onClick={() => setEditOption(!editOption)}
-                                >
-                                    <i className="la la-ellipsis-v"/>
-                                </p>
-                                <ul className={editOption ? "ed-options active" : "ed-options"}>
-                                    <li><a href="#" title="">Edit Post</a></li>
-                                    <li><a href="#" title="">Unsaved</a></li>
-                                    <li><a href="#" title="">Unbid</a></li>
-                                    <li><a href="#" title="">Close</a></li>
-                                    <li><a href="#" title="">Hide</a></li>
-                                </ul>
-                            </div>
+                        <div className="ed-opts">
+                            <p className="ed-opts-open" style={{cursor: "pointer"}}
+                               onClick={() => setEditOption(!editOption)}
+                            >
+                                <i className="la la-ellipsis-v"/>
+                            </p>
+                            <ul className={editOption ? "ed-options active" : "ed-options"}>
+                                <li><a href="#" title="">Edit Post</a></li>
+                                <li><a href="#" title="">Unsaved</a></li>
+                                <li><a href="#" title="">Unbid</a></li>
+                                <li><a href="#" title="">Close</a></li>
+                                <li><a href="#" title="">Hide</a></li>
+                            </ul>
                         </div>
                     </div>
-
                 </div>
                 <div className="card-body">
                     <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"></i> Hace 40 min</div>
@@ -67,7 +65,6 @@ function Post() {
                             <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
                                  alt="Card image cap"/>
                         </div>
-
                         <div className="children">
                             <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
                                  alt="Card image cap"/>
@@ -77,19 +74,19 @@ function Post() {
                         </div>
                     </div>
                 </div>
-
                 <div className="card-footer bg-white border-1 p-0">
                     <div className="d-flex justify-content-between align-items-center my-1">
                         <div className="col">
-                            <button type="button" className="btn btn-fbook btn-block btn-sm"><i
-                                className="fa fa-thumbs-up"
+                            <button type="button" className="btn btn-fbook btn-block btn-sm"
+                                    onClick={() => setLike(!like)}><i
+                                className={like ? "fa fa-heart" : "fa fa-heart-o"}
                                 aria-hidden="true"></i> Like
                             </button>
                         </div>
                         <div className="col">
                             <button type="button" className="btn btn-fbook btn-block btn-sm"
                                     onClick={() => setShowComments(!showComments)}><i
-                                className="fa fa-comment"
+                                className="fa fa-comment-o"
                                 aria-hidden="true"></i> Commente
                             </button>
                         </div>
@@ -100,15 +97,12 @@ function Post() {
                             </button>
                         </div>
                     </div>
-
-
                 </div>
                 {/*Comment*/}
                 <Comment showComments={showComments}/>
             </div>
         </>
-    )
-        ;
+    );
 }
 
 export default Post;

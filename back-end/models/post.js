@@ -1,21 +1,13 @@
-var { model, Schema } = require('mongoose');
+const {model, Schema} = require('mongoose');
 
 
-var Post = new Schema({
+const Post = new Schema({
     sujet: {
         type: String,
         required: true,
     },
-    data_creation: {
-        type: Date,
-        default: Date.now,
-    },
-    photo_post: {
-        type: String,
-    },
-    vedio_post: {
-        type: String
-    },
+    files: [],
+    video_post: [],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -24,8 +16,11 @@ var Post = new Schema({
     commantaires: [{
         type: Schema.Types.ObjectId,
         ref: 'Commantaire'
+    }],
+    like: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     }]
-
 }, {
     timestamps: true
 });
@@ -38,8 +33,6 @@ var Post = new Schema({
     } 
     next(callback);
 }); */
-
-
 
 
 var post = model('Post', Post);
