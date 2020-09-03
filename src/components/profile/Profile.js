@@ -123,7 +123,7 @@ function Profile() {
                                         {/*Post section*/}
                                         <div className="product-feed-tab current" id="feed-dd">
                                             <div className="posts-section">
-                                                <Post/>
+                                                {/*<Post/>*/}
                                             </div>
                                         </div>
                                         {/*END Post section*/}

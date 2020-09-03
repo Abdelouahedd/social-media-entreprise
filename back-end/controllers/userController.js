@@ -51,7 +51,7 @@ exports.signIn = async (req, res) => {
             } else {
                 comparePassword(req.body.mot_pass, user.mot_pass, function (err, isMatch) {
                     if (isMatch && !err) {
-                        const token = jwt.sign({user: user}, process.env.SECRET_KEY, {expiresIn: '1h'});
+                        const token = jwt.sign({user: user}, process.env.SECRET_KEY, {expiresIn: '48h'});
                         res.status(200).send({success: true, msg: 'Authentication succes', token: token});
                     } else {
                         res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});

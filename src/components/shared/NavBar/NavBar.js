@@ -13,11 +13,14 @@ import './nav.css'
 import NotificationBox from "./components/NotificationBox";
 import AccountBox from "./components/AccountBox";
 import {currentUser} from "../../../_helper/services";
+import {useDispatch} from "react-redux";
 
 const NavBar = () => {
     const [show, setShowAccount] = useState(false);
     const [showNotification, setShowNotification] = useState(false);
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false);
+
+
     const showBox = {
         display: 'block'
     }

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import user_pic from "../../../assets/images/resources/user-pic.png";
 import {currentUser} from '../../../_helper/services'
 import {Link} from "react-router-dom";
 
 const LeftSideBar = () => {
+
+    const [user, setUser] = useState(currentUser);
+
     return (
         <div className="col-lg-3 col-md-4 pd-left-none no-pd">
             <div className="main-left-sidebar no-margin">
@@ -16,7 +19,7 @@ const LeftSideBar = () => {
                             </div>
                         </div>
                         <div className="user-specs">
-                            <h3>{currentUser.nom + " " + currentUser.prenom}</h3>
+                            <h3>{user.nom + " " + user.prenom}</h3>
                             <span>{currentUser.fonction}</span>
                         </div>
                     </div>

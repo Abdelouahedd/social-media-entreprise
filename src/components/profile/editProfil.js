@@ -16,7 +16,6 @@ function EditProfil() {
     const {addToast} = useToasts();
     const [photoProfil, setPhotoProfil] = useState(currentUser.photo_profil);
     const [photoCouverture, setPhotoCouverture] = useState(currentUser.photo_couverture);
-
     const dispatch = useDispatch();
     const history = useHistory();
     const schema = Yup.object({
