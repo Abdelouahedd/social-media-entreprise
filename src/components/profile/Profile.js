@@ -50,7 +50,7 @@ function Profile() {
                 console.error(err);
                 addToast(err.toString(), {appearance: 'error', autoDismiss: true},)
             });
-    }, []);
+    }, [param.id]);
 
 
     const showProductFeed = (event) => {

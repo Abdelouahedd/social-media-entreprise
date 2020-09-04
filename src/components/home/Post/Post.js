@@ -27,6 +27,7 @@ function Post(props) {
     //State
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
+
     const [like, setLike] = useState(false);
     //filter the URL from String
     const urlify = (text) => {
@@ -46,6 +47,9 @@ function Post(props) {
         return <img className="card-img-top rounded-0 " src={file} alt="Card image cap"/>
     }
 
+    useEffect(() => {
+        console.log("comment from post changed");
+    }, [post.commantaires]);
 
     return (
         <>
@@ -55,10 +59,10 @@ function Post(props) {
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="mr-2">
                                 <img className="avatar rounded-circle" width="45"
-                                     src={post.user.photo_profil} alt=""/>
+                                     src={post.user.photo_profil} alt="user_img"/>
                             </div>
                             <div className="ml-2">
-                                <Link to="/">
+                                <Link to={`/profile/${post.user._id}`}>
                                     <div className="h5 m-0">{post.user.nom + " " + post.user.prenom}</div>
                                 </Link>
                                 {/*<div className="h7 text-muted">Miracles Lee Cross</div>*/}
@@ -180,15 +184,15 @@ function Post(props) {
             </Modal>*/}
             <div className="container-fluid detail-post ">
                 <div className="row">
-                    <div className="col-8 bg-light"   style={{
+                    <div className="col-8 bg-light" style={{
                         display: "flex",
                         alignItems: "center"
-                    }} >
+                    }}>
 
                         <Carousel className="align-self-center">
                             {post.files.map((file, i) =>
                                 <Carousel.Item key={i} interval={100000}>
-                                   {/* <div className="d-block w-100 px-2">
+                                    {/* <div className="d-block w-100 px-2">
                                     </div>*/}
                                     {filterContent(file)}
                                 </Carousel.Item>
@@ -229,7 +233,8 @@ function Post(props) {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"></i>{post.createdAt}</div>
+                                <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"></i>{post.createdAt}
+                                </div>
                                 <p className="card-text" dangerouslySetInnerHTML={{__html: urlify(post.sujet)}}></p>
                                 {post.files.length > 3 ?
                                     (<div className="photo">
@@ -241,7 +246,8 @@ function Post(props) {
                                                         :
                                                         <div>
                                                             {filterContent(file)}
-                                                            <div className="children_float" onClick={() => handleShow()}>
+                                                            <div className="children_float"
+                                                                 onClick={() => handleShow()}>
                                                                 +{post.files.length}
                                                             </div>
                                                         </div>
@@ -305,10 +311,8 @@ function Post(props) {
                     </div>
                 </div>
             </div>
-
         </>
-    )
-        ;
+    );
 }
 
 export default Post;

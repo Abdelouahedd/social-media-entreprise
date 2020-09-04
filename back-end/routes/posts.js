@@ -8,7 +8,7 @@ router.post('/createPost', verifyToken, upload.array('files', 10), createPost);
 router.put('/editPost/:id', verifyToken, isMyOwenShema, updatePost);
 router.delete('/deletePost/:id', verifyToken, isMyOwenShema, deletePost);
 router.get('/:user_id', getPostByUserId);
-router.get('/', getPosts);
+router.get('/', verifyToken, getPosts);
 // router.post('/', );
 
 module.exports = router;

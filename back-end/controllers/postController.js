@@ -91,7 +91,7 @@ exports.getPostByUserId = async (req, res) => {
 
 exports.getPosts = async (req, res) => {
     try {
-        await post.find({}).populate('user').exec((err, posts) => {
+        await post.find({}).sort({createdAt: "desc"}).populate('user').populate("commantaire").exec((err, posts) => {
             if (err) {
                 res.status(500).json({success: false, error: err.message});
             }

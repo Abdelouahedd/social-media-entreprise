@@ -1,23 +1,29 @@
-var { model, Schema } = require('mongoose');
+const {model, Schema} = require('mongoose');
+const Joi = require('joi');
 
 
-var Commantaire = new Schema({
-    sujet: {
+const Commantaire = new Schema({
+    content: {
         type: String,
         required: true,
-    },
-    data_creation: {
-        type: Date,
-        default: Date.now,
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         require: true,
     },
+    replays: [{type: Schema.Types.ObjectId, ref: 'Commantaire'}]
 }, {
     timestamps: true
-})
+});
 
 
-exports.post = model('Commantaire', Commantaire);
+exports.validateComment = (comment) => {
+    const schema = Joi.object({
+        content: Joi.string().required()
+    });
+    return schema.validate(comment);
+}
+
+
+exports.commantaire = model('Commantaire', Commantaire);

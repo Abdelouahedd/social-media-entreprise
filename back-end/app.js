@@ -14,7 +14,7 @@ var postsRouter = require('./routes/posts');
 
 var app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());

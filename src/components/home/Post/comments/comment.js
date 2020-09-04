@@ -1,99 +1,92 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './comments.css';
 
 function Comment(props) {
+    const [comment, setComment] = useState("");
+    const [commantaires, setCommantaires] = useState(props.commantaires);
+
+    const addComment = (e) => {
+        e.preventDefault();
+        const NewComment = {
+            content: comment
+        }
+        // commantaires.push(NewComment);
+        props.commantaires.push(NewComment);
+        setCommantaires(props.commantaires);
+        setComment("");
+        console.log(commantaires);
+    }
+
+    const handlerChange = (e) => setComment(e.target.value);
+
     return (
         <div className={props.showComments == true ? "section_comment active" : "section_comment"}>
             <div className="box-footer">
-                <form action="#" method="post">
+                <form onSubmit={addComment}>
                     <img className="img-responsive img-circle img-sm"
                          src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Alt Text"/>
                     <div className="img-push">
                         <input type="text" className="form-control input-sm"
-                               placeholder="Press enter to post comment"/>
+                               placeholder="Press enter to post comment" name="comment" value={comment}
+                               onChange={(e) => handlerChange(e)}
+                        />
                     </div>
                 </form>
             </div>
-            <div className=" comment container-fluid">
-                <div>
-                    <div className="media">
-                        <div className="media-left">
-                            <img src="http://fakeimg.pl/50x50" className="rounded-circle"
-                                 style={{width: "40px"}}/>
-                        </div>
-                        <div className="media-body">
-                            <h4 className="media-heading title">Fahmi Arif</h4>
-                            <p className="komen text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi architecto
-                                aspernatur atque beatae, culpa, deleniti dignissimos, dolore dolorem dolores
-                                earum
-                                facilis id libero minus obcaecati qui rerum ut veniam!<br/>
-                            </p>
-                            <a href="#">reply</a>
-                        </div>
-                    </div>
-                    <div className="geser">
-                        <div className="media">
-                            <div className="media-left">
-                                <img src="http://fakeimg.pl/50x50" className="rounded-circle"
-                                     style={{width: "40px"}}/>
-                            </div>
-                            <div className="media-body">
-                                <h4 className="media-heading title">Fahmi Arif</h4>
-                                <p className="komen">
-                                    kalo bisa ya ndak usah gan biar cepet<br/>
-                                </p>
-                                <a href="#">reply</a>
-                            </div>
-                        </div>
-                        <div className="box-footer">
-                            <form action="#" method="post">
-                                <img className="img-responsive img-circle img-sm"
-                                     src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Alt Text"/>
-                                <div className="img-push">
-                                    <input type="text" className="form-control input-sm"
-                                           placeholder="Press enter to post comment"/>
+            {
+                commantaires.length !== 0
+                    ? commantaires.map((c) =>
+                        <div className=" comment container-fluid">
+                            <div className="media">
+                                <div className="media-left">
+                                    {/*  <img src={comment.user.photo_profil} className="rounded-circle"
+                                         style={{width: "40px"}}/>*/}
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className=" comment container-fluid">
-                <div className="row">
-                    <div className="media">
-                        <div className="media-left">
-                            <img src="http://fakeimg.pl/50x50" className="rounded-circle"
-                                 style={{width: "40px"}}/>
-                        </div>
-                        <div className="media-body">
-                            <h4 className="media-heading title">Fahmi Arif</h4>
-                            <p className="komen text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi architecto
-                                aspernatur atque beatae, culpa, deleniti dignissimos, dolore dolorem dolores
-                                earum
-                                facilis id libero minus obcaecati qui rerum ut veniam!<br/>
-                                <a href="#">reply</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div className="geser">
-                        <div className="media">
-                            <div className="media-left">
-                                <img src="http://fakeimg.pl/50x50" className="rounded-circle"
-                                     style={{width: "40px"}}/>
-                            </div>
-                            <div className="media-body">
-                                <h4 className="media-heading title">Fahmi Arif</h4>
-                                <p className="komen">
-                                    kalo bisa ya ndak usah gan biar cepet<br/>
+                                <div className="media-body">
+                                    {/*<h4 className="media-heading title">{comment.user.nom}</h4>*/}
+                                    <p className="komen text-justify">
+                                        {c.content}
+                                    </p>
                                     <a href="#">reply</a>
-                                </p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            {
+                                (c.replays !== undefined && c.replays.length !== 0)
+                                    ?
+                                    c.replays.map(re => {
+                                        return <div className="geser">
+                                            <div className="media">
+                                                <div className="media-left">
+                                                    <img src={re.user.photo_profil} className="rounded-circle"
+                                                         style={{width: "40px"}}/>
+                                                </div>
+                                                <div className="media-body">
+                                                    <h4 className="media-heading title">{re.user.nom}</h4>
+                                                    <p className="komen">
+                                                        {re.content}
+                                                    </p>
+                                                    <a href="#">reply</a>
+                                                </div>
+                                            </div>
+                                            <div className="box-footer">
+                                                <form action="#" method="post">
+                                                    <img className="img-responsive img-circle img-sm"
+                                                         src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                         alt="Alt Text"/>
+                                                    <div className="img-push">
+                                                        <input type="text" className="form-control input-sm"
+                                                               placeholder="Press enter to post comment"/>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    })
+                                    : null
+                            }
+                        </div>)
+                    : null
+            }
+
         </div>
     );
 }
