@@ -3,8 +3,9 @@ import logger from "redux-logger";
 import AuthReducer from "../reducers/authReducer";
 import thunk from 'redux-thunk';
 import usersReducer from "../reducers/usersReducer";
+import PostsReducer from "../reducers/postsReducer";
 
-const rootReducers  =  combineReducers({auth: AuthReducer, users: usersReducer});
+const rootReducers = combineReducers({auth: AuthReducer, users: usersReducer, posts: PostsReducer});
 
 export default createStore(rootReducers,
     compose(

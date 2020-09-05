@@ -7,7 +7,7 @@ const Commantaire = new Schema({
         type: String,
         required: true,
     },
-    user: {
+    userComment: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         require: true,

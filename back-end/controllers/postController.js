@@ -74,16 +74,17 @@ exports.deletePost = async (req, res) => {
 
 exports.getPostByUserId = async (req, res) => {
     try {
-        await post.findOne({user: mongoose.Types.ObjectId(req.params.user_id)}).populate('user').exec((err, posts) => {
-            if (err) {
-                res.status(500).json({success: false, error: err.message});
-            }
-            console.log(posts.user);
-            res.status(200).send({
-                success: true,
-                post: posts
+        await post.findOne({user: mongoose.Types.ObjectId(req.params.user_id)})
+            .populate('user').exec((err, posts) => {
+                if (err) {
+                    res.status(500).json({success: false, error: err.message});
+                }
+                console.log(posts.user);
+                res.status(200).send({
+                    success: true,
+                    post: posts
+                });
             });
-        });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
@@ -91,15 +92,22 @@ exports.getPostByUserId = async (req, res) => {
 
 exports.getPosts = async (req, res) => {
     try {
-        await post.find({}).sort({createdAt: "desc"}).populate('user').populate("commantaire").exec((err, posts) => {
-            if (err) {
-                res.status(500).json({success: false, error: err.message});
-            }
-            res.status(200).send({
-                success: true,
-                post: posts
+        await post.find({}).sort({createdAt: "desc"})
+            .populate('user', ['nom', 'prenom', 'photo_profil'])
+            .populate({
+                path: 'commantaires',
+                populate: {path: 'userComment',select:['nom', 'prenom', 'photo_profil']}
+            })
+            .exec((err, posts) => {
+                if (err) {
+                    res.status(500).json({success: false, error: err.message});
+                }
+
+                res.status(200).send({
+                    success: true,
+                    post: posts
+                });
             });
-        });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
 

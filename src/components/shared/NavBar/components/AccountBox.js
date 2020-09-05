@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {logOut} from "../../../../redux/actions/authActions";
 
 function AccountBox(props) {
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function AccountBox(props) {
                 <li><a href="#" title="">Faqs</a></li>
                 <li><a href="#" title="">Terms & Conditions</a></li>
             </ul>
-            <h3 className="tc"><Link to="/sign" title="" onClick={() => dispatch({type: "LOGOUT"})}>Logout</Link></h3>
+            <h3 className="tc"><Link to="/sign" title="" onClick={() => dispatch(logOut())}>Logout</Link></h3>
         </div>
 
     )

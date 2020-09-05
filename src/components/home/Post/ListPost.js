@@ -4,9 +4,12 @@ import {URL} from "../../../redux/_helper/utility";
 import {message} from "antd";
 import {logger} from "redux-logger/src";
 import Axios from "axios";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {getAllPosts} from "../../../redux/actions/postActions";
 
 function ListPost(props) {
-    // <Post {...post}/>
+
+    const dispatch = useDispatch();
     const [posts, setPosts] = useState([]);
 
     const getAllPost = () => {
@@ -18,14 +21,13 @@ function ListPost(props) {
             }
         }).then(res => res.json())
             .then((response) => {
-                console.log(response)
-                setPosts(response.post)
+                dispatch(getAllPosts(response.post));
+                setPosts(response.post);
             })
             .catch(err => message.error('Error logging in please try again', err));
     }
 
     useEffect(() => {
-        console.log("UseEffect");
         getAllPost();
     }, []);
 

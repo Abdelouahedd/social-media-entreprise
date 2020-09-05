@@ -4,6 +4,7 @@ import Comment from "./comments/comment";
 import {Link} from "react-router-dom";
 // import {Carousel, Modal} from "react-bootstrap";
 import {Carousel} from "react-bootstrap";
+import Comments from "./comments/comments";
 
 function Post(props) {
     const post = props;
@@ -24,11 +25,12 @@ function Post(props) {
         nav.classList.remove('active');
         postPopUp.classList.remove('active');
     }
+
     //State
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
-
     const [like, setLike] = useState(false);
+
     //filter the URL from String
     const urlify = (text) => {
         let urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -47,9 +49,6 @@ function Post(props) {
         return <img className="card-img-top rounded-0 " src={file} alt="Card image cap"/>
     }
 
-    useEffect(() => {
-        console.log("comment from post changed");
-    }, [post.commantaires]);
 
     return (
         <>
@@ -156,7 +155,8 @@ function Post(props) {
                     </div>
                 </div>
                 {/*Comment*/}
-                <Comment commantaires={post.commantaires} showComments={showComments}/>
+                <Comments post={post} showComments={showComments}/>
+                {/*<Comment comments={post.commantaires} />*/}
             </div>
 
             {/* <Modal
@@ -182,7 +182,7 @@ function Post(props) {
                         </Carousel>
                 </Modal.Body>
             </Modal>*/}
-            <div className="container-fluid detail-post ">
+            {/*            <div className="container-fluid detail-post ">
                 <div className="row">
                     <div className="col-8 bg-light" style={{
                         display: "flex",
@@ -192,8 +192,8 @@ function Post(props) {
                         <Carousel className="align-self-center">
                             {post.files.map((file, i) =>
                                 <Carousel.Item key={i} interval={100000}>
-                                    {/* <div className="d-block w-100 px-2">
-                                    </div>*/}
+                                     <div className="d-block w-100 px-2">
+                                    </div>
                                     {filterContent(file)}
                                 </Carousel.Item>
                             )}
@@ -213,7 +213,7 @@ function Post(props) {
                                             <Link to="/">
                                                 <div className="h5 m-0">{post.user.nom + " " + post.user.prenom}</div>
                                             </Link>
-                                            {/*<div className="h7 text-muted">Miracles Lee Cross</div>*/}
+                                            <div className="h7 text-muted">Miracles Lee Cross</div>
                                         </div>
                                     </div>
                                     <div className="ed-opts">
@@ -264,7 +264,7 @@ function Post(props) {
                                         )}
                                     </div>)
                                 }
-                                {/* <div className="photo">
+                                 <div className="photo">
                         <div className="children">
                             <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
                                  alt="Card image cap"/>
@@ -280,7 +280,7 @@ function Post(props) {
                                 +8
                             </div>
                         </div>
-                    </div>*/}
+                    </div>
                             </div>
                             <div className="card-footer bg-white border-1 p-0">
                                 <div className="d-flex justify-content-between align-items-center my-1">
@@ -305,12 +305,12 @@ function Post(props) {
                                     </div>
                                 </div>
                             </div>
-                            {/*Comment*/}
-                            <Comment commantaires={post.commantaires} showComments={showComments}/>
+                            Comment
+                            <Comment postId={post._id} showComments={showComments}/>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </>
     );
 }
