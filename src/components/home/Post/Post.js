@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './post.css'
-import Comment from "./comments/comment";
 import {Link} from "react-router-dom";
 // import {Carousel, Modal} from "react-bootstrap";
-import {Carousel} from "react-bootstrap";
 import Comments from "./comments/comments";
+import moment from "moment";
 
 function Post(props) {
     const post = props;
@@ -84,7 +83,8 @@ function Post(props) {
                     </div>
                 </div>
                 <div className="card-body">
-                    <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"></i>{post.createdAt}</div>
+                    <div className="text-muted h7 mb-2"><i className="fa fa-clock-o" style={{marginRight: "2px"}}/>{moment().from(post.createdAt)}
+                    </div>
                     <p className="card-text" dangerouslySetInnerHTML={{__html: urlify(post.sujet)}}></p>
                     {post.files.length > 3 ?
                         (<div className="photo">

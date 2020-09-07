@@ -1,7 +1,6 @@
 const post = require('../models/post');
 const mongoose = require('mongoose')
 
-
 exports.createPost = async (req, res) => {
     try {
         const reqFiles = [];
@@ -96,18 +95,32 @@ exports.getPosts = async (req, res) => {
             .populate('user', ['nom', 'prenom', 'photo_profil'])
             .populate({
                 path: 'commantaires',
-                populate: {path: 'userComment',select:['nom', 'prenom', 'photo_profil']}
+                populate: [
+                    {
+                        path: 'replays',
+                        populate: {
+                            path: 'userComment',
+                            select: ['nom', 'prenom', 'photo_profil'],
+                            model: 'User',
+                        },
+                    },
+                    {
+                        path: 'userComment',
+                        select: ['nom', 'prenom', 'photo_profil'],
+                    }
+                ],
             })
-            .exec((err, posts) => {
-                if (err) {
-                    res.status(500).json({success: false, error: err.message});
+            .exec(
+                (err, posts) => {
+                    if (err) {
+                        res.status(500).json({success: false, error: err.message});
+                    }
+                    res.status(200).send({
+                        success: true,
+                        post: posts
+                    });
                 }
-
-                res.status(200).send({
-                    success: true,
-                    post: posts
-                });
-            });
+            )
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
 

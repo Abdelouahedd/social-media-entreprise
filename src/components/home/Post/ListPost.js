@@ -2,9 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Post from "./Post";
 import {URL} from "../../../redux/_helper/utility";
 import {message} from "antd";
-import {logger} from "redux-logger/src";
-import Axios from "axios";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {getAllPosts} from "../../../redux/actions/postActions";
 
 function ListPost(props) {
@@ -33,7 +31,6 @@ function ListPost(props) {
 
     return (
         <>
-            <h1>Post List</h1>
             {posts.map((post) => <Post key={post._id} {...post}/>)}
         </>
     );

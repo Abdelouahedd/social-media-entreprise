@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import Comment from "./comment";
+import React, {useState} from 'react';
 import './comments.css';
-import {shallowEqual, useDispatch, useSelector, useStore} from "react-redux";
-import {getPost, updatePost} from "../../../../redux/actions/postActions";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {updatePost} from "../../../../redux/actions/postActions";
 import {currentUser} from "../../../../_helper/services";
 import {URL} from "../../../../redux/_helper/utility";
 import {message} from "antd";
+import 'antd/dist/antd.css';
+import CommentCard from "./comment";
 
 function Comments(props) {
 
     const postsStore = useSelector(state => state.posts, shallowEqual);
-    const store = useStore();
     const [content, setContent] = useState("");
     const [comments, setComments] = useState(props.post.commantaires);
 
@@ -26,9 +26,9 @@ function Comments(props) {
             }
         }).then(res => res.json())
             .then((response) => {
-                console.log(response)
                 dispatch(updatePost(response.post));
-                console.log("use store", store.getState());
+                comments.push(response.comment);
+                setComments(comments);
                 message.success(response.msg);
             })
             .catch(err => message.error('Error logging in please try again', err));
@@ -61,7 +61,7 @@ function Comments(props) {
                     </div>
                 </form>
             </div>
-            {props.post.commantaires.map((c, index) => <Comment key={index} comment={c}/>)}
+            {comments.map((c, index) => <CommentCard key={index} comment={c}/>)}
         </div>
     );
 }
