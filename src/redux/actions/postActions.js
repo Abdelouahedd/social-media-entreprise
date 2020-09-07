@@ -35,17 +35,3 @@ export const deletePost = (id) => {
 }
 
 
-export const addComments = (comment) => {
-    return {
-        type: "ADD_COMMENT",
-        payload: comment
-    };
-}
-
-export const addReplayComment = (idCommet, replayComment) => {
-    return {
-        type: "ADD_REPLAY_COMMENT",
-        payload: replayComment,
-        _idComment: idCommet
-    };
-}

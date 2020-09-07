@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './comments.css';
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {updatePost} from "../../../../redux/actions/postActions";
 import {currentUser} from "../../../../_helper/services";
 import {URL} from "../../../../redux/_helper/utility";
@@ -10,7 +10,6 @@ import CommentCard from "./comment";
 
 function Comments(props) {
 
-    const postsStore = useSelector(state => state.posts, shallowEqual);
     const [content, setContent] = useState("");
     const [comments, setComments] = useState(props.post.commantaires);
 
@@ -41,7 +40,6 @@ function Comments(props) {
             content: content
         }
         await addComment(NewComment);
-        console.log("store", postsStore);
         setContent("");
     }
 

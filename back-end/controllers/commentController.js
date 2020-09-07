@@ -1,5 +1,4 @@
 const {commantaire, validateComment} = require('../models/commantaire');
-const mongoose = require('mongoose')
 const post = require('../models/post');
 
 exports.addComment = async (req, res) => {
@@ -10,27 +9,26 @@ exports.addComment = async (req, res) => {
         if (error) {
             return res.status(400).send({success: false, msg: error.details[0].message});
         }
-
         //create new comment
         const comment = new commantaire({
             content: content,
             userComment: req.user._id
         });
-        //save the comement
-        await comment.save(async (err, comment) => {
-            if (err)
-                res.status(500).json({success: false, error: err.message});
-            const currentPost = await post.findById(req.params.postId);
-            //add comment to array of comments in our post
-            currentPost.commantaires.push(comment);
-            await commantaire.findById(comment._id)
-                .populate("userComment", ['nom', 'prenom', 'photo_profil'])
-                .populate({
-                    path: 'replays',
-                    populate: {path: 'Commantaire'}
-                })
-                .exec(
-                    async (err, co) => {
+        //save the comment
+        await comment.save(
+            async (err, comment) => {
+                if (err)
+                    res.status(500).json({success: false, error: err.message});
+                const currentPost = await post.findById(req.params.postId);
+                //add comment to array of comments in our post
+                currentPost.commantaires.push(comment);
+                await commantaire.findById(comment._id)
+                    .populate("userComment", ['nom', 'prenom', 'photo_profil'])
+                    .populate({
+                        path: 'replays',
+                        populate: {path: 'Commantaire'}
+                    })
+                    .exec(async (err, co) => {
                         if (err) {
                             res.status(500).json({success: false, error: err.message});
                         }
@@ -43,12 +41,7 @@ exports.addComment = async (req, res) => {
                             });
                         });
                     });
-
-        });
-
-        //get the post reference to our comment
-
-
+            });
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
@@ -83,21 +76,18 @@ exports.addReplayComment = async (req, res) => {
                 commantaire.findById(replay._id)
                     .populate("userComment", ['nom', 'prenom', 'photo_profil'])
                     .populate("replays")
-                    .exec(
-                        async (err, co) => {
-                            if (err) {
-                                res.status(500).json({success: false, error: err.message});
-                            }
-                            res.status(200).send({
-                                success: true,
-                                msg: `Replay Comment is added by successfully`,
-                                replay: co
-                            });
-                        })
+                    .exec(async (err, co) => {
+                        if (err) {
+                            res.status(500).json({success: false, error: err.message});
+                        }
+                        res.status(200).send({
+                            success: true,
+                            msg: `Replay Comment is added by successfully`,
+                            replay: co
+                        });
+                    })
             });
         });
-
-
     } catch (e) {
         res.status(500).json({success: false, error: e.message});
 

@@ -1,34 +1,42 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './post.css'
 import {Link} from "react-router-dom";
-// import {Carousel, Modal} from "react-bootstrap";
 import Comments from "./comments/comments";
 import moment from "moment";
+import {Carousel, Modal} from "react-bootstrap";
 
 function Post(props) {
-    const post = props;
+    // const post = props;
     const handleShow = () => {
-        const postPopUp = document.querySelector('.detail-post');
+      /*  const postPopUp = document.querySelector('.detail-post');
         const root = document.querySelector('.wrapper');
         const nav = document.querySelector('.iq-top-navbar');
         postPopUp.classList.add('active');
         root.classList.add('overlay');
-        nav.classList.add('active');
+        nav.classList.add('active');*/
+        setShow(true)
 
     }
     const handleClose = () => {
-        const root = document.querySelector('.wrapper');
+    /*    const root = document.querySelector('.wrapper');
         const nav = document.querySelector('.iq-top-navbar');
         const postPopUp = document.querySelector('.detail-post');
         root.classList.remove('overlay');
         nav.classList.remove('active');
-        postPopUp.classList.remove('active');
+        postPopUp.classList.remove('active');*/
+        setShow(false)
     }
 
     //State
+    const [post, setPost] = useState(props);
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [like, setLike] = useState(false);
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setPost(props)
+    }, [props._id])
 
     //filter the URL from String
     const urlify = (text) => {
@@ -74,62 +82,45 @@ function Post(props) {
                             </p>
                             <ul className={editOption ? "ed-options active" : "ed-options"}>
                                 <li><a href="#" title="">Edit Post</a></li>
-                                <li><a href="#" title="">Unsaved</a></li>
-                                <li><a href="#" title="">Unbid</a></li>
-                                <li><a href="#" title="">Close</a></li>
+                                <li><a href="#" title="">delete Post</a></li>
                                 <li><a href="#" title="">Hide</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div className="card-body">
-                    <div className="text-muted h7 mb-2"><i className="fa fa-clock-o" style={{marginRight: "2px"}}/>{moment().from(post.createdAt)}
+                    <div className="text-muted h7 mb-2"><i className="fa fa-clock-o"
+                                                           style={{marginRight: "2px"}}/>{moment().from(post.createdAt)}
                     </div>
                     <p className="card-text" dangerouslySetInnerHTML={{__html: urlify(post.sujet)}}></p>
-                    {post.files.length > 3 ?
-                        (<div className="photo">
-                            {post.files.slice(0, 3).map((file, i) =>
-                                <div key={i} className="children">
-                                    {
-                                        i !== 2 ?
-                                            filterContent(file)
-                                            :
-                                            <div>
-                                                {filterContent(file)}
-                                                <div className="children_float" onClick={() => handleShow()}>
-                                                    +{post.files.length}
+                    {
+                        post.files.length > 3 ?
+                            (<div className="photo">
+                                {post.files.slice(0, 3).map((file, i) =>
+                                    <div key={i} className="children">
+                                        {
+                                            i !== 2 ?
+                                                filterContent(file)
+                                                :
+                                                <div>
+                                                    {filterContent(file)}
+                                                    <div className="children_float" onClick={() => handleShow()}>
+                                                        +{post.files.length}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                    }
-                                </div>
-                            )}
-                        </div>)
-                        :
-                        (<div className="photo_two_children">
-                            {post.files.map((file, i) =>
-                                <div key={i} className="two_children">
-                                    {filterContent(file)}
-                                </div>
-                            )}
-                        </div>)
+                                        }
+                                    </div>
+                                )}
+                            </div>)
+                            :
+                            (<div className="photo_two_children">
+                                {post.files.map((file, i) =>
+                                    <div key={i} className="two_children">
+                                        {filterContent(file)}
+                                    </div>
+                                )}
+                            </div>)
                     }
-                    {/* <div className="photo">
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                        </div>
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                        </div>
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                            <div className="children_float">
-                                +8
-                            </div>
-                        </div>
-                    </div>*/}
                 </div>
                 <div className="card-footer bg-white border-1 p-0">
                     <div className="d-flex justify-content-between align-items-center my-1">
@@ -156,10 +147,9 @@ function Post(props) {
                 </div>
                 {/*Comment*/}
                 <Comments post={post} showComments={showComments}/>
-                {/*<Comment comments={post.commantaires} />*/}
             </div>
 
-            {/* <Modal
+            <Modal
                 show={show}
                 size="lg"
                 onHide={() => handleClose()}
@@ -171,28 +161,27 @@ function Post(props) {
                     <Modal.Header closeButton>
                     </Modal.Header>
 
-                        <Carousel>
-                            {post.files.map((file, i) =>
-                                <Carousel.Item key={i} interval={100000}>
-                                    <div className="d-block w-100">
-                                        {filterContent(file)}
-                                    </div>
-                                </Carousel.Item>
-                            )}
-                        </Carousel>
+                    <Carousel>
+                        {post.files.map((file, i) =>
+                            <Carousel.Item key={i} interval={100000}>
+                                <div className="d-block w-100">
+                                    {filterContent(file)}
+                                </div>
+                            </Carousel.Item>
+                        )}
+                    </Carousel>
                 </Modal.Body>
-            </Modal>*/}
-            {/*            <div className="container-fluid detail-post ">
+            </Modal>
+            {/*  <div className="container-fluid detail-post ">
                 <div className="row">
                     <div className="col-8 bg-light" style={{
                         display: "flex",
                         alignItems: "center"
                     }}>
-
                         <Carousel className="align-self-center">
                             {post.files.map((file, i) =>
                                 <Carousel.Item key={i} interval={100000}>
-                                     <div className="d-block w-100 px-2">
+                                    <div className="d-block w-100 px-2">
                                     </div>
                                     {filterContent(file)}
                                 </Carousel.Item>
@@ -215,20 +204,6 @@ function Post(props) {
                                             </Link>
                                             <div className="h7 text-muted">Miracles Lee Cross</div>
                                         </div>
-                                    </div>
-                                    <div className="ed-opts">
-                                        <p className="ed-opts-open" style={{cursor: "pointer"}}
-                                           onClick={() => setEditOption(!editOption)}
-                                        >
-                                            <i className="la la-ellipsis-v"/>
-                                        </p>
-                                        <ul className={editOption ? "ed-options active" : "ed-options"}>
-                                            <li><a href="#" title="">Edit Post</a></li>
-                                            <li><a href="#" title="">Unsaved</a></li>
-                                            <li><a href="#" title="">Unbid</a></li>
-                                            <li><a href="#" title="">Close</a></li>
-                                            <li><a href="#" title="">Hide</a></li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -264,23 +239,6 @@ function Post(props) {
                                         )}
                                     </div>)
                                 }
-                                 <div className="photo">
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                        </div>
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                        </div>
-                        <div className="children">
-                            <img className="card-img-top rounded-0 " src="https://picsum.photos/320/250/?random"
-                                 alt="Card image cap"/>
-                            <div className="children_float">
-                                +8
-                            </div>
-                        </div>
-                    </div>
                             </div>
                             <div className="card-footer bg-white border-1 p-0">
                                 <div className="d-flex justify-content-between align-items-center my-1">
@@ -305,8 +263,7 @@ function Post(props) {
                                     </div>
                                 </div>
                             </div>
-                            Comment
-                            <Comment postId={post._id} showComments={showComments}/>
+                            <Comments post={post} showComments={showComments}/>
                         </div>
                     </div>
                 </div>

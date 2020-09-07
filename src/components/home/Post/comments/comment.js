@@ -4,22 +4,24 @@ import {Avatar, Comment, message} from 'antd';
 import 'antd/dist/antd.css';
 import {currentUser} from "../../../../_helper/services";
 import {URL} from "../../../../redux/_helper/utility";
-import {useDispatch} from "react-redux";
 
 
-const CommentReplay = (commantaire) => (
-    <Comment
-        actions={[]}
-        author={<a>{commantaire.userComment.nom + " " + commantaire.userComment.prenom}</a>}
-        avatar={
-            <Avatar
-                src={commantaire.userComment.photo_profil}
-                alt={commantaire.userComment.nom}
-            />
-        }
-        content={<p className="komen text-justify">{commantaire.content}</p>}
-    />
-);
+const CommentReplay = (props) => {
+        console.log(props);
+        const commantaire = props;
+        return <Comment
+            actions={[]}
+            author={<a>{commantaire.userComment.nom + " " + commantaire.userComment.prenom}</a>}
+            avatar={
+                <Avatar
+                    src={commantaire.userComment.photo_profil}
+                    alt={commantaire.userComment.nom}
+                />
+            }
+            content={<p className="komen text-justify">{commantaire.content}</p>}
+        />
+    }
+;
 
 function CommentCard(props) {
 
@@ -27,26 +29,26 @@ function CommentCard(props) {
     const [replays, setReplays] = useState(props.comment.replays);
     const [replayComment, setReplayComment] = useState("");
     const [showReplay, setReplay] = useState(false);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setComment(props.comment);
     }, [props.comment]);
 
-    const addReplayComment = async (comment) => {
+    const addReplayComment = async (content) => {
         await fetch(`${URL}/comment/addReplayComment/${props.comment._id}`, {
             method: 'POST',
-            body: JSON.stringify(comment),
+            body: JSON.stringify(content),
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
             }
         }).then(res => res.json())
             .then((response) => {
-                // dispatch(updatePost(response.post));
                 console.log(response);
                 replays.push(response.replay);
                 setReplays(replays);
+                comment.replays = replays;
+                setComment(comment);
                 message.success(response.msg);
             })
             .catch(err => message.error('Error logging in please try again', err));
