@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
+import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
 import TopProfiles from "../topProfils/TopProfils";
+import Post from "../Post/Post";
 import './home.css'
-import {Button, message, Upload} from 'antd';
+import {currentUser} from "../../../_helper/services";
+import {Upload, message, Button, Input} from 'antd';
 import {UploadOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css'
 import {URL} from "../../../redux/_helper/utility";
 import ListPost from "../Post/ListPost";
-import {currentUser} from "../../../_helper/services";
-import user_pic from "../../../assets/images/page-img/06.jpg"
+
 const Home = () => {
 
     const [files, setFiles] = useState([]);
@@ -73,8 +75,6 @@ const Home = () => {
         files,
     };
 
-
-
     return (
         <>
             <main className="home-main">
@@ -86,7 +86,7 @@ const Home = () => {
                                 <div className="col-lg-6 col-md-8 no-pd">
                                     <div className="main-ws-sec">
                                         {/*add post form*/}
-                                             <div className="post-topbar">
+                                        <div className="post-topbar">
                                             <div className="user-picy">
                                                 <img
                                                     src={currentUser.photo_profil == "" ? user_pic : currentUser.photo_profil}
