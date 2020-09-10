@@ -1,6 +1,8 @@
 var { user, validationRegister, validationConnecter, validationUpdate } = require('../models/user');
 var { generateHash, comparePassword } = require('../helper/helper');
 var jwt = require('jsonwebtoken');
+const { log } = require('debug');
+const { object } = require('joi');
 
 exports.signUp = async (req, res) => {
     try {
@@ -43,17 +45,16 @@ exports.adminSignIn = async (req, res) => {
         user.findOne({
             email: req.body.email,
             role: "SUPER_ADMIN"
-        }, (err, user) => {
+        }, (err, currentUser) => {
             if (err) {
                 res.status(500).send({ success: false, msg: err.message });
             };
-            if (!user) {
+            if (!currentUser) {
                 res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
             } else {
-                comparePassword(req.body.mot_pass, user.mot_pass, function (err, isMatch) {
+                comparePassword(req.body.mot_pass, currentUser.mot_pass, function (err, isMatch) {
                     if (isMatch && !err) {
-                        delete user.mot_pass;
-                        const token = jwt.sign({ user: user }, process.env.SECRET_KEY, { expiresIn: '48h' });
+                        const token = jwt.sign({ user: currentUser }, process.env.SECRET_KEY, { expiresIn: '48h' });
                         res.status(200).send({ success: true, msg: 'Authentication succes', token: token });
                     } else {
                         res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
