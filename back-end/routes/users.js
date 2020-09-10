@@ -7,12 +7,16 @@ var {
     changeProfilImg,
     changeCuverImg,
     getUserByID,
-    updatePassword
+    updatePassword,
+    getUsers,
+    adminSignIn
 } = require('../controllers/userController');
-var {upload} = require('../helper/upload');
-var {verifyToken} = require('../helper/helper');
+var { upload } = require('../helper/upload');
+var { verifyToken } = require('../helper/helper');
 
 router.post('/signIN', signIn);
+
+router.post('/admin/signIn',adminSignIn)
 
 router.post('/signUP', signUp);
 
@@ -25,5 +29,7 @@ router.put('/imgCuver/:id', verifyToken, upload.single('imgCuver'), changeCuverI
 router.put('/updatePass/:id', verifyToken, updatePassword);
 
 router.get('/:id', verifyToken, getUserByID);
+
+router.get('/',verifyToken, getUsers);
 
 module.exports = router;

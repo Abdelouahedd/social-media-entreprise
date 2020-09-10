@@ -28,19 +28,32 @@ exports.verifyToken = (req, res, next) => {
                     success: false,
                     message: 'Token is not valid'
                 });
-            req.user = decoded.user;
+            if (decoded.user.role === "USER")
+                req.user = decoded.user;
+            else if (decoded.user.role === "ADMIN")
+                req.admin = decoded.user;
+            else if (decoded.user.role === "SUPER_ADMIN")
+                req.SuperAdmin = decoded.user;
             next();
         });
     } else {
-        res.status(403).send({success: false, msg: "Auth token is not supplied"});
+        res.status(403).send({ success: false, msg: "Auth token is not supplied" });
     }
 }
 
 //verifier if the schema is owen to user
 
 exports.isMyOwenShema = (req, res, next) => {
-    if (req.user._id != req.body.user) {
+    if (req.user._id !== req.body.user) {
         next(new Error("Don't have a right to update or delete this post"));
+    }
+    next();
+}
+// allow super admin
+
+exports.isSuperAdmin = (req, res, next) => {
+    if (req.SuperAdmin) {
+        next(new Error("You are not a super admin"));
     }
     next();
 }
