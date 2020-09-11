@@ -15,6 +15,44 @@ exports.addCommunaute = async (req, res) => {
         });
         newCommunaute.admin.push(admin);
 
+        await newCommunaute.save(async (err, communaute) => {
+            if (err) {
+                res.status(500).json({ success: false, error: err.message });
+            }
+            await user.findByIdAndUpdate(admin, {
+                $set: {
+                    role: "ADMIN"
+                }
+            }, (err) => {
+                if (err) {
+                    res.status(500).json({ success: false, error: err.message });
+                }
+                res.status(200).send({ success: true, msg: `Communaute ${communaute.titre} is created by succesfully` });
+            })
+        })
+
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+exports.addUserToCommunaute = async (req, res) => {
+    try {
+        const idCommunaute = req.params.idCommunaute
+        const { user } = req.body
+
+        await communaute.findById(idCommunaute, async (err, result) => {
+            if (err) {
+                res.status(500).json({ success: false, error: err.message });
+            }
+            result.membre.push(user);
+            await result.save((err) => {
+                if (err) {
+                    res.status(500).json({ success: false, error: err.message });
+                }
+                res.status(200).send({ success: true, msg: `Memebre add by success` });
+            })
+        })
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
