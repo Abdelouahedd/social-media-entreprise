@@ -188,7 +188,9 @@ exports.updatePassword = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
     try {
-        await user.find({})
+        await user.find()
+            .where('role')
+            .ne('SUPER_ADMIN')
             .select("-mot_pass")
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
