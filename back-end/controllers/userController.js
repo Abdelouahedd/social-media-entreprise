@@ -225,3 +225,14 @@ exports.addUser = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+exports.deleteUser = async (req, res) => {
+    try {
+        await user.findByIdAndDelete(req.params.userId, (err, result) => {
+            if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+            res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}

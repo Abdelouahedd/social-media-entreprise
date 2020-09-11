@@ -57,3 +57,29 @@ exports.addUserToCommunaute = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+exports.getCommunauties = async (req, res) => {
+    try {
+        await communaute.find()
+            .exec((err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+                res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
+            });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+exports.getSearchableCommunauties = async (req, res) => {
+    try {
+        await communaute.find()
+        .where('visibilite')
+        .ne('SECRET')
+            .exec((err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+                res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
+            });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}

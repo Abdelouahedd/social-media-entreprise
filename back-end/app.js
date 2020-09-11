@@ -12,7 +12,8 @@ require("dotenv").config();
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var commentsRouter = require('./routes/comment');
-var adminController = require('./routes/admin');
+var adminRouter = require('./routes/admin');
+var CommunauteRouter = require('./routes/communaute');
 var app = express();
 
 // app.use(logger('dev'));
@@ -33,7 +34,8 @@ app.use('/public', express.static('public'));
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/comment', commentsRouter);
-app.use('/admin', adminController)
+app.use('/admin', adminRouter);
+app.use('/communaute', CommunauteRouter);
 //middleware ERROR
 
 app.use((req, res, next) => {
