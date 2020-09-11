@@ -52,7 +52,7 @@ exports.isMyOwenShema = (req, res, next) => {
 // allow super admin
 
 exports.isSuperAdmin = (req, res, next) => {
-    if (req.SuperAdmin) {
+    if (!req.SuperAdmin) {
         next(new Error("You are not a super admin"));
     }
     next();

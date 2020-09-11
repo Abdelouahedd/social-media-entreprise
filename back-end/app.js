@@ -12,6 +12,7 @@ require("dotenv").config();
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var commentsRouter = require('./routes/comment');
+var adminController = require('./routes/admin');
 var app = express();
 
 // app.use(logger('dev'));
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public', express.static('public'));
@@ -32,6 +33,7 @@ app.use('/public', express.static('public'));
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/comment', commentsRouter);
+app.use('/admin', adminController)
 //middleware ERROR
 
 app.use((req, res, next) => {

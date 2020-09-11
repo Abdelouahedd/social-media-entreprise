@@ -1,8 +1,6 @@
 var { user, validationRegister, validationConnecter, validationUpdate } = require('../models/user');
 var { generateHash, comparePassword } = require('../helper/helper');
 var jwt = require('jsonwebtoken');
-const { log } = require('debug');
-const { object } = require('joi');
 
 exports.signUp = async (req, res) => {
     try {

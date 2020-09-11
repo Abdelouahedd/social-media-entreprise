@@ -1,4 +1,3 @@
-const { Schema } = require("mongoose");
 var { model, Schema } = require('mongoose');
 var { visibilite } = require('../helper/enums/enum');
 
@@ -17,7 +16,7 @@ const Communaute = new Schema({
         required: true,
     },
     visibilite: {
-        type: string,
+        type: String,
         enum: Object.values(visibilite),
         default: visibilite.PUBLIC
     },
