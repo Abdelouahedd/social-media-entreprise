@@ -125,10 +125,9 @@ exports.updateInfo = async (req, res) => {
 
 exports.changeProfilImg = async (req, res) => {
     try {
-        const url = req.protocol + '://' + req.get('host')
         user.findOneAndUpdate({ _id: req.params.id }, {
             $set: {
-                photo_profil: url + '/public/images/' + req.file.filename
+                photo_profil: '/public/images/' + req.file.filename
             },
         }, { new: true },
             (err, result) => {
@@ -142,10 +141,9 @@ exports.changeProfilImg = async (req, res) => {
 
 exports.changeCuverImg = async (req, res) => {
     try {
-        const url = req.protocol + '://' + req.get('host')
         user.findOneAndUpdate({ _id: req.params.id }, {
             $set: {
-                photo_couverture: url + '/public/images/' + req.file.filename
+                photo_couverture: '/public/images/' + req.file.filename
             },
         }, { new: true },
             (err, result) => {
@@ -194,6 +192,35 @@ exports.getUsers = async (req, res) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
             });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+exports.addUser = async (req, res) => {
+    try {
+        const { nom, prenom, email, telephone, gender, fonction, mot_pass } = req.body;
+        //check if user existe
+        let chekUser = await user.findOne({ email: req.body.email });
+        if (chekUser) {
+            return res.status(400).send({ success: false, msg: 'That user already exisits!' });
+        }
+        // Insert the new user if they do not exist yet
+        var Newuser = new user({
+            email: email,
+            nom: nom,
+            prenom: prenom,
+            telephone: telephone,
+            fonction: fonction,
+            gender: gender,
+            mot_pass: generateHash(mot_pass),
+        });
+        await Newuser.save((err) => {
+            if (err) {
+                res.status(500).json({ success: false, error: err.message });
+            }
+            res.status(200).send({ success: true, msg: `User ${Newuser.nom} is created by succesfully` });
+        });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }

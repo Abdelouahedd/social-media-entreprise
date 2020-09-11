@@ -21,16 +21,16 @@ exports.getAllInformation = async (req, res) => {
             .ne('SUPER_ADMIN').count({})
             .catch((error) => {
                 res.status(500).json({ success: false, error: error.message });
-            });;
+            });
         dashObject.nbrCommunities = await communaute.countDocuments()
             .catch((error) => {
                 res.status(500).json({ success: false, error: error.message });
-            });;
-        dashObject.newUser = await user.find({}).where('role').ne('SUPER_ADMIN').select("-mot_pass").
-            sort({ createdAt: "desc" }).limit(5)
+            });
+        dashObject.newUser = await user.find({}).where('role').ne('SUPER_ADMIN').select("-mot_pass")
+            .sort({ createdAt: "desc" }).limit(5)
             .catch((error) => {
                 res.status(500).json({ success: false, error: error.message });
-            });;
+            });
 
 
         res.status(200).json({
@@ -42,3 +42,43 @@ exports.getAllInformation = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+
+exports.getUsers = async (req, res) => {
+    try {
+        await user.find()
+            .where('role')
+            .ne('SUPER_ADMIN')
+            .select("-mot_pass")
+            .exec((err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+                res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
+            });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+
+
+exports.getCommunotie = async (req, res) => {
+    try {
+        await communaute.find({})
+            .exec((err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+                res.send({ success: true, msg: "GET COMMUNOTIE BY SUCCES", communaute: result });
+            });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+
+
+
+
+
+
+
+
+
