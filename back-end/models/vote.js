@@ -21,4 +21,4 @@ var Vote = new Schema({
 });
 
 
-exports.post = model('Vote', Vote);
+exports.vote = model('Vote', Vote);

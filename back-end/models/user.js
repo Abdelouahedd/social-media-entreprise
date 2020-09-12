@@ -1,7 +1,15 @@
 var mongoose = require('mongoose');
 const Joi = require('joi');
 var Schema = mongoose.Schema;
-var {role} = require('../helper/enums/enum');
+var { role } = require('../helper/enums/enum');
+
+const post = require('./post');
+const { commantaire } = require('./commantaire');
+const { event } = require('./evenement');
+const { communaute } = require('./communaute');
+const { vote } = require('./vote');
+
+
 var User = new Schema({
     nom: {
         type: String,
@@ -67,6 +75,24 @@ var User = new Schema({
     timestamps: true
 });
 
+
+User.post('findByIdAndDelete', async (next) => {
+    await post.deleteMany({ user: this._id });
+    await commantaire.deleteMany({ user: this._id });
+    await event.deleteMany({ user: this._id });
+    await vote.deleteMany({ user: this._id });
+    await communaute.find()
+        .populate({
+            path: 'membre',
+            match: { _id: this._id }
+        }).remove();
+    await communaute.find()
+        .populate({
+            path: 'admin',
+            match: { _id: this._id }
+        }).remove();
+});
+
 exports.validationRegister = (user) => {
     const schema = Joi.object({
         nom: Joi.string().required(),
@@ -91,7 +117,7 @@ exports.validationUpdate = (user) => {
             .email()
             .required(),
         nom: Joi.string()
-            .min(2 )
+            .min(2)
             .max(50)
             .required(),
         telephone: Joi.string()

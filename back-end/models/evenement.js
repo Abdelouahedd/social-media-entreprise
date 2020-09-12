@@ -33,4 +33,4 @@ var Evenment = new Schema({
 });
 
 
-exports.post = model('Evenment', Evenment);
+exports.event = model('Evenment', Evenment);

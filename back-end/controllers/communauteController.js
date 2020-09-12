@@ -6,7 +6,7 @@ exports.addCommunaute = async (req, res) => {
         const { error } = validateShemaAdd(req.body);
         const { titre, visibilite, admin } = req.body
         if (error) {
-            return res.status(400).send({ success: false, msg: error.details[0].message });
+            return res.status(400).send({ success: false, error: error.details[0].message });
         }
         const newCommunaute = new communaute({
             titre: titre,
