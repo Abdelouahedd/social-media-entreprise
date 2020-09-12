@@ -14,7 +14,6 @@ const Communaute = new Schema({
     },
     coverture: {
         type: String,
-        required: true,
     },
     visibilite: {
         type: String,

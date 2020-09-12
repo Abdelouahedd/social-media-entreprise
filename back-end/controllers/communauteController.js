@@ -13,7 +13,11 @@ exports.addCommunaute = async (req, res) => {
             visibilite: visibilite,
             photo_com: '/public/images/' + req.file.filename
         });
+        //add admin 
         newCommunaute.admin.push(admin);
+        //add admin as membre
+        newCommunaute.membre.push(admin);
+
 
         await newCommunaute.save(async (err, communaute) => {
             if (err) {
@@ -61,6 +65,15 @@ exports.addUserToCommunaute = async (req, res) => {
 exports.getCommunauties = async (req, res) => {
     try {
         await communaute.find()
+            .populate([{
+                path: 'membre',
+                model: 'User',
+                select: ['nom', 'prenom', 'photo_profil'],
+            }, {
+                path: 'admin',
+                model: 'User',
+                select: ['nom', 'prenom', 'photo_profil'],
+            }])
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
@@ -73,8 +86,8 @@ exports.getCommunauties = async (req, res) => {
 exports.getSearchableCommunauties = async (req, res) => {
     try {
         await communaute.find()
-        .where('visibilite')
-        .ne('SECRET')
+            .where('visibilite')
+            .ne('SECRET')
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
