@@ -75,6 +75,44 @@ exports.getCommunotie = async (req, res) => {
 }
 
 
+exports.getCommunauteInfo = async (req, res) => {
+
+    try {
+        var commVue = {
+            communaute: [],
+            users: []
+        }
+        await communaute.find()
+            .populate([
+                {
+                    path: 'membre',
+                    model: 'User',
+                    select: ['nom', 'prenom', 'photo_profil'],
+                },
+                {
+                    path: 'admin',
+                    model: 'User',
+                    select: ['nom', 'prenom', 'photo_profil'],
+                }
+            ])
+            .exec(async (err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
+                commVue.communaute = result;
+                commVue.users = await user.find({})
+                    .where('role')
+                    .ne('ADMIN')
+                    .ne('SUPER_ADMIN')
+                    .select('nom prenom photo_profil')
+                res.send({ success: true, msg: "GET COMMUNAUTEIS vue BY SUCCES", data: commVue });
+            });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+
+
+
 
 
 

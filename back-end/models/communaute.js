@@ -24,10 +24,10 @@ const Communaute = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    admin: [{
+    admin: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-    }]
+    }
 });
 
 exports.validateShemaAdd = (communaute) => {
