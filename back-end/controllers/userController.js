@@ -199,7 +199,7 @@ exports.getUsers = async (req, res) => {
 
 exports.addUser = async (req, res) => {
     try {
-        const { nom, prenom, email, telephone, gender, fonction, mot_pass } = req.body;
+        const { nom, prenom, email, telephone,photo_profil, gender, fonction, mot_pass } = req.body;
         //check if user existe
         let chekUser = await user.findOne({ email: req.body.email });
         if (chekUser) {
@@ -213,16 +213,17 @@ exports.addUser = async (req, res) => {
             telephone: telephone,
             fonction: fonction,
             gender: gender,
+            photo_profil:photo_profil,
             mot_pass: generateHash(mot_pass),
         });
-        await Newuser.save((err) => {
+        await Newuser.save((err,result) => {
             if (err) {
-                res.status(500).json({ success: false, error: err.message });
+                res.status(500).json({ success: false, msg: err.message });
             }
-            res.status(200).send({ success: true, msg: `User ${Newuser.nom} is created by succesfully` });
+            res.status(200).send({ success: true,user:result, msg: `User ${Newuser.nom} is created by succesfully` });
         });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ success: false, msg: error.message });
     }
 }
 
@@ -230,9 +231,9 @@ exports.deleteUser = async (req, res) => {
     try {
         await user.findByIdAndDelete(req.params.userId, (err, result) => {
             if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-            res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
+            res.send({ success: true, msg: "USER DELETED BY SUCCES", user: result });
         });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ success: false, msg: error.message });
     }
 }
