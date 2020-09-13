@@ -11,10 +11,9 @@ exports.addCommunaute = async (req, res) => {
         const newCommunaute = new communaute({
             titre: titre,
             visibilite: visibilite,
+            admin: admin,
             photo_com: '/public/images/' + req.file.filename
         });
-        //add admin 
-        newCommunaute.admin.push(admin);
         //add admin as membre
         newCommunaute.membre.push(admin);
 
@@ -27,12 +26,15 @@ exports.addCommunaute = async (req, res) => {
                 $set: {
                     role: "ADMIN"
                 }
-            }, (err) => {
+            }, (err, user) => {
                 if (err) {
                     res.status(500).json({ success: false, error: err.message });
+                    const result = { ...newCommunaute, admin: { ...user } }
+                    console.log(result);
+                    res.status(200).send({ success: true, msg: `Communaute ${communaute.titre} is created by succesfully`, communautie: result });
                 }
-                res.status(200).send({ success: true, msg: `Communaute ${communaute.titre} is created by succesfully` });
-            })
+            });
+
         })
 
     } catch (error) {

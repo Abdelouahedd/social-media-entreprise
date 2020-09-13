@@ -98,11 +98,15 @@ exports.getCommunauteInfo = async (req, res) => {
             .exec(async (err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 commVue.communaute = result;
-                commVue.users = await user.find({})
-                    .where('role')
-                    .ne('ADMIN')
-                    .ne('SUPER_ADMIN')
-                    .select('nom prenom photo_profil')
+                commVue.users = await user.find({
+                    role: {
+                        $not: {
+                            $in: ['ADMIN', 'SUPER_ADMIN']
+                        }
+                    }
+                })
+                    .select('nom prenom photo_profil role')
+                    .exec();
                 res.send({ success: true, msg: "GET COMMUNAUTEIS vue BY SUCCES", data: commVue });
             });
     } catch (error) {
