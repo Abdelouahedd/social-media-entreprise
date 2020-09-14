@@ -101,7 +101,7 @@ exports.getCommunauteInfo = async (req, res) => {
                 commVue.users = await user.find({
                     role: {
                         $not: {
-                            $in: ['ADMIN', 'SUPER_ADMIN']
+                            $in: ['SUPER_ADMIN']
                         }
                     }
                 })

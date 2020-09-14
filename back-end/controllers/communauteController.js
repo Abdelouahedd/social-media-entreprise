@@ -17,26 +17,26 @@ exports.addCommunaute = async (req, res) => {
         //add admin as membre
         newCommunaute.membre.push(admin);
 
+        const response = await newCommunaute.save();
 
-        await newCommunaute.save(async (err, communaute) => {
-            if (err) {
-                res.status(500).json({ success: false, error: err.message });
+        await user.findByIdAndUpdate(admin, {
+            $set: {
+                role: "ADMIN"
             }
-            await user.findByIdAndUpdate(admin, {
-                $set: {
-                    role: "ADMIN"
-                }
-            }, (err, user) => {
-                if (err) {
+        });
+
+        await communaute.findById(response._id)
+            .populate({
+                path: 'admin', select: ['nom', 'prenom', 'photo_profil'],
+            }).exec((err, co) => {
+                if (err)
                     res.status(500).json({ success: false, error: err.message });
-                    const result = { ...newCommunaute, admin: { ...user } }
-                    console.log(result);
-                    res.status(200).send({ success: true, msg: `Communaute ${communaute.titre} is created by succesfully`, communautie: result });
-                }
-            });
-
-        })
-
+                res.status(200).send({
+                    success: true,
+                    msg: `Communaute ${co.titre} is created by succesfully`,
+                    communaute: co
+                });
+            })
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
