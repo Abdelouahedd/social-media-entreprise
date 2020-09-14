@@ -98,3 +98,27 @@ exports.getSearchableCommunauties = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+
+exports.deleteCommunautie = async (req, res) => {
+    try {
+        var admin;
+        await communaute.findByIdAndDelete(req.params.idCommunaute)
+            .exec(async (err, result) => {
+                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err });
+                admin = result.admin;
+            });
+        await communaute.find({ admin: admin }, async (err, results) => {
+            if (results)
+                await user.findByIdAndUpdate(admin, {
+                    $set: {
+                        role: "USER"
+                    }
+                });
+            res.send({ success: true, msg: "DELETE COMMUNAUTEIS BY SUCCES" });
+        });
+
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
