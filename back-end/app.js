@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public', express.static('public'));
 
-//middleware for /users    
+//middleware for /users
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 app.use('/comment', commentsRouter);

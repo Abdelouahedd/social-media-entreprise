@@ -1,12 +1,12 @@
-const { communaute, validateShemaAdd } = require('../models/communaute');
-const { user } = require('../models/user');
+const {communaute, validateShemaAdd} = require('../models/communaute');
+const {user} = require('../models/user');
 
 exports.addCommunaute = async (req, res) => {
     try {
-        const { error } = validateShemaAdd(req.body);
-        const { titre, visibilite, admin } = req.body
+        const {error} = validateShemaAdd(req.body);
+        const {titre, visibilite, admin} = req.body
         if (error) {
-            return res.status(400).send({ success: false, error: error.details[0].message });
+            return res.status(400).send({success: false, error: error.details[0].message});
         }
         const newCommunaute = new communaute({
             titre: titre,
@@ -30,7 +30,7 @@ exports.addCommunaute = async (req, res) => {
                 path: 'admin', select: ['nom', 'prenom', 'photo_profil'],
             }).exec((err, co) => {
                 if (err)
-                    res.status(500).json({ success: false, error: err.message });
+                    res.status(500).json({success: false, error: err.message});
                 res.status(200).send({
                     success: true,
                     msg: `Communaute ${co.titre} is created by succesfully`,
@@ -38,29 +38,29 @@ exports.addCommunaute = async (req, res) => {
                 });
             })
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({success: false, error: error.message});
     }
 }
 
 exports.addUserToCommunaute = async (req, res) => {
     try {
         const idCommunaute = req.params.idCommunaute
-        const { user } = req.body
+        const {user} = req.body
 
         await communaute.findById(idCommunaute, async (err, result) => {
             if (err) {
-                res.status(500).json({ success: false, error: err.message });
+                res.status(500).json({success: false, error: err.message});
             }
             result.membre.push(user);
             await result.save((err) => {
                 if (err) {
-                    res.status(500).json({ success: false, error: err.message });
+                    res.status(500).json({success: false, error: err.message});
                 }
-                res.status(200).send({ success: true, msg: `Memebre add by success` });
+                res.status(200).send({success: true, msg: `Memebre add by success`});
             })
         })
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({success: false, error: error.message});
     }
 }
 
@@ -77,11 +77,11 @@ exports.getCommunauties = async (req, res) => {
                 select: ['nom', 'prenom', 'photo_profil'],
             }])
             .exec((err, result) => {
-                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-                res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
+                if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err})
+                res.send({success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result});
             });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({success: false, error: error.message});
     }
 }
 
@@ -91,34 +91,38 @@ exports.getSearchableCommunauties = async (req, res) => {
             .where('visibilite')
             .ne('SECRET')
             .exec((err, result) => {
-                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-                res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
+                if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err})
+                res.send({success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result});
             });
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({success: false, error: error.message});
     }
 }
 
 
 exports.deleteCommunautie = async (req, res) => {
     try {
-        var admin;
-        await communaute.findByIdAndDelete(req.params.idCommunaute)
-            .exec(async (err, result) => {
-                if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err });
-                admin = result.admin;
-            });
-        await communaute.find({ admin: admin }, async (err, results) => {
-            if (results)
-                await user.findByIdAndUpdate(admin, {
-                    $set: {
-                        role: "USER"
-                    }
-                });
-            res.send({ success: true, msg: "DELETE COMMUNAUTEIS BY SUCCES" });
-        });
+        console.log("req.body ", req.body);
 
+        await communaute.findByIdAndDelete(req.params.idCommunaute)
+            .exec((err) => {
+                if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err});
+            });
+
+        let communauteAsAdmin = await communaute.find({admin: req.body.admin}).countDocuments();
+
+        console.log("nbr of communautie as admin is :", communauteAsAdmin);
+        if (communauteAsAdmin === 0) {
+            await user.findByIdAndUpdate(req.body.admin, {
+                $set: {
+                    role: "USER"
+                }
+            }, (err) => {
+                if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err});
+            });
+        }
+        res.send({success: true, msg: "DELETE COMMUNAUTEIS BY SUCCES"});
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({success: false, error: error.message});
     }
 }

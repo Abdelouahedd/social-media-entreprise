@@ -24,7 +24,7 @@ exports.verifyToken = (req, res, next) => {
         beareHeader = beareHeader.split(' ')[1];
         jwt.verify(beareHeader, process.env.SECRET_KEY, function (err, decoded) {
             if (err)
-                return res.json({
+                return res.status(403).json({
                     success: false,
                     message: 'Token is not valid'
                 });

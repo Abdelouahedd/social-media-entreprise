@@ -64,3 +64,5 @@ typings/
 /bin/www
 
 public/
+
+.idea

@@ -13,12 +13,12 @@ exports.getAllInformation = async (req, res) => {
             newUser: []
         }
 
-        dashObject.nbrPost = await post.count({})
+        dashObject.nbrPost = await post.countDocuments({})
             .catch((error) => {
                 res.status(500).json({ success: false, msg: error.message });
             });
         dashObject.nbrUsers = await user.countDocuments().where('role')
-            .ne('SUPER_ADMIN').count({})
+            .ne('SUPER_ADMIN').countDocuments({})
             .catch((error) => {
                 res.status(500).json({ success: false, msg: error.message });
             });
@@ -113,16 +113,3 @@ exports.getCommunauteInfo = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
