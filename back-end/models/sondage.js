@@ -37,4 +37,4 @@ var Sondage = new Schema({
 });
 
 
-exports.post = model('Sondage', Sondage);
+exports.sondage = model('Sondage', Sondage);

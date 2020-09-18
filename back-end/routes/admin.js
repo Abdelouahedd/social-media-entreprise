@@ -1,5 +1,5 @@
 var express = require('express');
-const {getAllInformation, getUsers, getCommunauteInfo, getDataChartUser} = require('../controllers/adminController');
+const {getAllInformation, getUsers, getCommunauteInfo} = require('../controllers/adminController');
 const {addCommunaute, addUserToCommunaute, getCommunauties, deleteCommunautie} = require('../controllers/communauteController');
 const {addUser, deleteUser} = require('../controllers/userController');
 var router = express.Router();
@@ -8,7 +8,6 @@ var {upload} = require('../helper/upload');
 
 
 router.get('/dash', verifyToken, isSuperAdmin, getAllInformation);
-router.get('/dashChart', verifyToken, isSuperAdmin, getDataChartUser);
 router.get('/users', verifyToken, isSuperAdmin, getUsers);
 router.post('/addUser', verifyToken, isSuperAdmin, addUser);
 router.delete('/deleteUser/:userId', verifyToken, isSuperAdmin, deleteUser);
