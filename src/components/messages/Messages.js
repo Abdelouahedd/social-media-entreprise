@@ -55,44 +55,6 @@ function Messages(props) {
                                                 <span className="posted_time">1:55 PM</span>
                                             </div>
                                         </li>
-
-                                       {/* <li>
-                                            <div className="usr-msg-details">
-                                                <div className="usr-ms-img">
-                                                    <img src="images/resources/m-img5.png" alt="">
-                                                        <span className="msg-status"></span>
-                                                </div>
-                                                <div className="usr-mg-info">
-                                                    <h3>James Dilan</h3>
-                                                    <p>Vivamus magna just..</p>
-                                                </div>
-                                                <span className="posted_time">1:55 PM</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="usr-msg-details">
-                                                <div className="usr-ms-img">
-                                                    <img src="images/resources/m-img6.png" alt="">
-                                                </div>
-                                                <div className="usr-mg-info">
-                                                    <h3>Mike Dorn</h3>
-                                                    <p>Praesent sapien massa.</p>
-                                                </div>
-                                                <span className="posted_time">1:55 PM</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="usr-msg-details">
-                                                <div className="usr-ms-img">
-                                                    <img src="images/resources/m-img7.png" alt="">
-                                                </div>
-                                                <div className="usr-mg-info">
-                                                    <h3>Patrick Morison</h3>
-                                                    <p>Convallis a pellente...</p>
-                                                </div>
-                                                <span className="posted_time">1:55 PM</span>
-                                            </div>
-                                        </li>*/}
                                     </ul>
                                 </div>
                             </div>

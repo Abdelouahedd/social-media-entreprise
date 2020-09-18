@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import './editProdil.css'
 import user_img from '../../assets/images/resources/user-pro-img.png';
 import cuver from "../../assets/images/resources/cover-img.jpg";
@@ -189,7 +189,7 @@ function EditProfil() {
                                                     email: currentUser.email,
                                                     nom: currentUser.nom,
                                                     prenom: currentUser.prenom,
-                                                    date_naissance: currentUser.date_naissance == undefined ? "" : currentUser.date_naissance,
+                                                    date_naissance: currentUser.date_naissance === undefined ? "" : currentUser.date_naissance,
                                                     ville: currentUser.ville,
                                                     address: currentUser.address,
                                                     fonction: currentUser.fonction,

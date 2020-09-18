@@ -65,13 +65,13 @@ function TopProfiles() {
                                 <h3>{user.name}</h3>
                                 <span>{user.job}</span>
                                 <ul>
-                                    <li><a href="#" title="" className="followw">Follow</a>
+                                    <li><a href="/" title="" className="followw">Follow</a>
                                     </li>
-                                    <li><a href="#" title="" className="envlp"><img
+                                    <li><a href="/" title="" className="envlp"><img
                                         src={envelop} alt=""/></a></li>
-                                    <li><a href="#" title="" className="hire">hire</a></li>
+                                    <li><a href="/" title="" className="hire">hire</a></li>
                                 </ul>
-                                <a href="#" title="">View Profile</a>
+                                <a href="/" title="">View Profile</a>
                             </div>
                     )}
             </Slider>

@@ -10,7 +10,6 @@ function GroupCard(props) {
                 <div className="company-up-info">
                     <img src={require("../../../assets/images/resources/cmp-icon1.png")} alt=""/>
                     <h3>{name}</h3>
-                    {/*<h4>Establish Feb, 2004</h4>*/}
                     <ul>
                         <li className="pl-3 pr-3">
                             <p className="mb-0">Post </p>
@@ -22,7 +21,6 @@ function GroupCard(props) {
                         </li>
                     </ul>
                 </div>
-                {/*<a href="/" title="" className="view-more-pro">Join</a>*/}
                 <button className="btn btn-primary d-block w-100 ">Join</button>
             </div>
         </div>

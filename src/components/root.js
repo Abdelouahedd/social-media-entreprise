@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavBar from "./shared/NavBar/NavBar";
 import CreateRoutes from '../routes/route'
 

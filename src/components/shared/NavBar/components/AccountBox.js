@@ -38,9 +38,9 @@ function AccountBox(props) {
             <h3>Setting</h3>
             <ul className="us-links">
                 <li><Link to="/settings">Account Setting</Link></li>
-                <li><a href="#" title="">Privacy</a></li>
+                {/* <li><a href="#" title="">Privacy</a></li>
                 <li><a href="#" title="">Faqs</a></li>
-                <li><a href="#" title="">Terms & Conditions</a></li>
+                <li><a href="#" title="">Terms & Conditions</a></li> */}
             </ul>
             <h3 className="tc"><Link to="/sign" title="" onClick={() => dispatch(logOut())}>Logout</Link></h3>
         </div>

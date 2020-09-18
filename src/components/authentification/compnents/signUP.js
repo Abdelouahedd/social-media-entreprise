@@ -86,16 +86,6 @@ const SignUp = () => {
     }
     return (
         <div className="sign_in_sec" id="tab-2">
-            {/*   <div className="signup-tab">
-                <i className="fa fa-long-arrow-left" />
-                <h2>johndoe@example.com</h2>
-                <ul>
-                    <li data-tab="tab-3" className="current"><a href="#"
-                        title="">User</a>
-                    </li>
-                    <li data-tab="tab-4"><a href="#" title="">Company</a></li>
-                </ul>
-            </div> */}
             <div className="dff-tab current" id="tab-3">
                 <Formik
                     initialValues={{

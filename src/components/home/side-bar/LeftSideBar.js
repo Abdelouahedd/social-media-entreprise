@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import user_pic from "../../../assets/images/resources/user-pic.png";
 import {currentUser} from '../../../_helper/services'
 import {Link} from "react-router-dom";
 
 const LeftSideBar = () => {
 
-    const [user, setUser] = useState(currentUser);
+    const [user] = useState(currentUser);
 
     return (
         <div className="col-lg-3 col-md-4 pd-left-none no-pd">
@@ -14,7 +14,7 @@ const LeftSideBar = () => {
                     <div className="user-profile">
                         <div className="username-dt">
                             <div className="usr-pic">
-                                <img src={currentUser.photo_profil == "" ? user_pic : currentUser.photo_profil}
+                                <img src={currentUser.photo_profil === "" ? user_pic : currentUser.photo_profil}
                                      alt={currentUser.photo_profil}/>
                             </div>
                         </div>

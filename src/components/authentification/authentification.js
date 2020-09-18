@@ -27,7 +27,7 @@ export default function Authentification() {
 
         var newTab = document.getElementById(tab.data);
         newTab.classList.add("current", "animated", "fadeIn");
-        var indexNewTab = tabs.findIndex((e) => e.class == "");
+        var indexNewTab = tabs.findIndex((e) => e.class === "");
         tabs[indexNewTab].class = "current";
 
         var indexOldTab = tabs.findIndex((e) => e.data !== tab.data);
@@ -71,7 +71,7 @@ export default function Authentification() {
                                                         className={tab.class}
                                                         onClick={switchTab.bind(null, tab)}
                                                     >
-                                                        <a href="#">{tab.title}</a>
+                                                        <p style={{ cursor: 'pointer' }}>{tab.title}</p>
                                                     </li>
                                                 )
                                             }
@@ -90,16 +90,15 @@ export default function Authentification() {
                             <ul>
                                 <li><a href="help-center.html" title="">Help Center</a></li>
                                 <li><a href="about.html" title="">About</a></li>
-                                <li><a href="#" title="">Privacy Policy</a></li>
-                                <li><a href="#" title="">Community Guidelines</a></li>
-                                <li><a href="#" title="">Cookies Policy</a></li>
-                                <li><a href="#" title="">Career</a></li>
+                                <li><a href="/" title="">Privacy Policy</a></li>
+                                <li><a href="/" title="">Community Guidelines</a></li>
+                                <li><a href="/" title="">Cookies Policy</a></li>
+                                <li><a href="/" title="">Career</a></li>
                                 <li><a href="forum.html" title="">Forum</a></li>
-                                <li><a href="#" title="">Language</a></li>
-                                <li><a href="#" title="">Copyright Policy</a></li>
+                                <li><a href="/" title="">Language</a></li>
+                                <li><a href="/" title="">Copyright Policy</a></li>
                             </ul>
                             <p><i className="fa fa-copyright"> Copyright 2019</i></p>
-                            {/*<p><img src="images/copy-icon.png" alt=""/>Copyright 2019</p>*/}
                         </div>
                     </div>
                 </div>

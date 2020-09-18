@@ -271,8 +271,8 @@ function AccountSetting(props) {
                                             </div>
                                         </div>
                                         <div className="btns">
-                                            <a href="#">Save</a>
-                                            <a href="#">Cancel</a>
+                                            <p style={{cursor:'pointer'}}>Save</p>
+                                            <p style={{cursor:'pointer'}}>Cancel</p>
                                         </div>
                                     </div>
                                 </div>
@@ -420,7 +420,7 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="dropdown privacydropd">
-                                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">Who
+                                                    <a href="#/" className="dropdown-toggle" data-toggle="dropdown">Who
                                                         can see your email address</a>
                                                     <div className="dropdown-menu">
                                                         <p>Choose who can see your email address on your profile</p>
@@ -463,7 +463,7 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="dropdown privacydropd">
-                                                    <a href="#" className="dropdown-toggle"
+                                                    <a href="#/" className="dropdown-toggle"
                                                        data-toggle="dropdown">Who can see your Friends</a>
                                                     <div className="dropdown-menu">
                                                         <p>Choose who can see your list of connections</p>
@@ -512,7 +512,7 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="dropdown privacydropd">
-                                                    <a href="#" className="dropdown-toggle"
+                                                    <a href="#/" className="dropdown-toggle"
                                                        data-toggle="dropdown">Manage who can discover your
                                                         profile from your email address</a>
                                                     <div className="dropdown-menu">
@@ -564,7 +564,7 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="dropdown privacydropd">
-                                                    <a href="#" className="dropdown-toggle"
+                                                    <a href="#/" className="dropdown-toggle"
                                                        data-toggle="dropdown">Search history</a>
                                                     <div className="dropdown-menu">
                                                         <p>Clear all previous searches performed on
@@ -584,7 +584,7 @@ function AccountSetting(props) {
                                                                     </div>
                                                                 </form>
                                                                 <div className="privabtns">
-                                                                    <a href="#">Clear All History</a>
+                                                                    <a href="#/">Clear All History</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -596,7 +596,7 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="dropdown privacydropd">
-                                                    <a href="#" className="dropdown-toggle"
+                                                    <a href="#/" className="dropdown-toggle"
                                                        data-toggle="dropdown">Sharing your profile
                                                         when you click apply</a>
                                                     <div className="dropdown-menu">
@@ -641,8 +641,8 @@ function AccountSetting(props) {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="privabtns">
-                                                    <a href="#">Save</a>
-                                                    <a href="#">Cancel</a>
+                                                    <p style={{cursor:'pointer'}}>Save</p>
+                                                    <p style={{cursor:'pointer'}}>Cancel</p>
                                                 </div>
                                             </div>
                                         </div>

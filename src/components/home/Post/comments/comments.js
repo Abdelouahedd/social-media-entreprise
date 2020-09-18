@@ -46,7 +46,7 @@ function Comments(props) {
 
     const handlerChange = (e) => setContent(e.target.value);
     return (
-        <div className={props.showComments == true ? "section_comment active" : "section_comment"}>
+        <div className={props.showComments === true ? "section_comment active" : "section_comment"}>
             <div className="box-footer">
                 <form onSubmit={onSubmit}>
                     <img className="img-responsive img-circle img-sm"

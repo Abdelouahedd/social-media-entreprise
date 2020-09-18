@@ -13,7 +13,6 @@ import './nav.css'
 import NotificationBox from "./components/NotificationBox";
 import AccountBox from "./components/AccountBox";
 import {currentUser} from "../../../_helper/services";
-import {useDispatch} from "react-redux";
 
 const NavBar = () => {
     const [show, setShowAccount] = useState(false);
@@ -82,7 +81,7 @@ const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a href="#" title="" className="not-box-open"
+                                <a href="#/" title="" className="not-box-open"
                                    onClick={() => setShowNotification(!showNotification)}>
                                     <span><img src={notification} alt=""/></span>
                                     Notification
@@ -92,12 +91,12 @@ const NavBar = () => {
                         </ul>
                     </nav>
                     <div className="menu-btn" onClick={() => setActive(!active)}>
-                        <a href="#" title=""><i className="fa fa-bars"/></a>
+                        <a href="#/" title=""><i className="fa fa-bars"/></a>
                     </div>
                     <div className="user-account">
                         <div className="user-info" onClick={() => setShowAccount(!show)}>
                             <img className="avatar_nav"
-                                 src={currentUser.photo_profil == "" ? user : currentUser.photo_profil}
+                                 src={currentUser.photo_profil === "" ? user : currentUser.photo_profil}
                                  alt={currentUser.nom}/>
                             <i className="la la-sort-down"/>
                         </div>

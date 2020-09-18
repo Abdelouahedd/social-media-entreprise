@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
 import TopProfiles from "../topProfils/TopProfils";
-import Post from "../Post/Post";
 import './home.css'
-import {currentUser} from "../../../_helper/services";
-import {Upload, message, Button, Input} from 'antd';
-import {UploadOutlined} from '@ant-design/icons';
+import { currentUser } from "../../../_helper/services";
+import { Upload, message, Button } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css'
-import {URL} from "../../../redux/_helper/utility";
+import { URL } from "../../../redux/_helper/utility";
 import ListPost from "../Post/ListPost";
 
 const Home = () => {
@@ -82,21 +81,24 @@ const Home = () => {
                     <div className="container">
                         <div className="main-section-data">
                             <div className="row">
-                                <LeftSideBar/>
+                                <LeftSideBar />
                                 <div className="col-lg-6 col-md-8 no-pd">
                                     <div className="main-ws-sec">
                                         {/*add post form*/}
                                         <div className="post-topbar">
                                             <div className="user-picy">
                                                 <img
-                                                    src={currentUser.photo_profil == "" ? user_pic : currentUser.photo_profil}
-                                                    alt=""/>
+                                                    src={currentUser.photo_profil === "" ? user_pic : currentUser.photo_profil}
+                                                    alt="" />
                                             </div>
                                             <div className="post-st">
                                                 <ul>
                                                     <li>
-                                                        <a className="post_project" href="#" title=""
-                                                           onClick={handleShow}>Add a post</a>
+                                                        <Button className='post_project' onClick={handleShow}>
+                                                            Add a post
+                                                        </Button>
+                                                        {/* <a className="post_project" href="#" title=""
+                                                            onClick={handleShow}>Add a post</a> */}
                                                     </li>
                                                 </ul>
                                             </div>
@@ -104,13 +106,13 @@ const Home = () => {
                                         {/*end of add post form*/}
                                         {/*start list view of posts*/}
                                         <div className="posts-section">
-                                            <TopProfiles/>
-                                            <ListPost/>
+                                            <TopProfiles />
+                                            <ListPost />
                                             {/*  end list view of posts*/}
                                         </div>
                                     </div>
                                 </div>
-                                <RightSideBar/>
+                                <RightSideBar />
                             </div>
                         </div>
                     </div>
@@ -125,7 +127,7 @@ const Home = () => {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <textarea name="description" rows={4} value={content}
-                                              onChange={event => setContent(event.target.value)}/>
+                                        onChange={event => setContent(event.target.value)} />
                                 </div>
                             </div>
                             <div className="row">
@@ -137,13 +139,13 @@ const Home = () => {
                                 <div className="col-lg-6">
                                     {/*<Upload {...settings} >*/}
                                     <Upload {...uploadSettings}>
-                                        <Button icon={<UploadOutlined/>} block>Click to Upload</Button>
+                                        <Button icon={<UploadOutlined />} block>Click to Upload</Button>
                                     </Upload>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <a href="#" title="" onClick={handleClose}><i className="la la-times-circle-o"/></a>
+                    <p style={{ cursor: 'pointer' }} onClick={handleClose}><i className="la la-times-circle-o" /></p>
                 </div>
             </div>
         </>

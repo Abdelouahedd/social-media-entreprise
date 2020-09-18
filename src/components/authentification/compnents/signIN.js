@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { useToasts } from 'react-toast-notifications'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { authStart, authSuccess, authFail } from '../../../redux/actions/authActions';
 import { URL } from '../../../redux/_helper/utility';
 import SpinnerLoad from '../../shared/spinner/SpinnerLoad';
@@ -128,12 +128,12 @@ export default function SignIn() {
                                                 </label>
                                                 <small>Remember me</small>
                                             </div>
-                                            <a href="#" title="">Forgot Password?</a>
+                                            <Link to={'/'} >Forgot Password?</Link>
                                         </div>
                                     </div>
                                     <div className="col-lg-12 no-pdd">
                                         {
-                                            authentification.loading == true ?
+                                            authentification.loading === true ?
                                                 <SpinnerLoad /> :
                                                 <button type="submit" value="submit">Sign in</button>
                                         }

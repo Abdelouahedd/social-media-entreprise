@@ -1,27 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './comments.css';
-import {Avatar, Comment, message} from 'antd';
+import { Avatar, Comment, message } from 'antd';
 import 'antd/dist/antd.css';
-import {currentUser} from "../../../../_helper/services";
-import {URL} from "../../../../redux/_helper/utility";
+import { currentUser } from "../../../../_helper/services";
+import { URL } from "../../../../redux/_helper/utility";
+import { Link } from 'react-router-dom';
 
 
 const CommentReplay = (props) => {
-        console.log(props);
-        const commantaire = props;
-        return <Comment
-            actions={[]}
-            author={<a>{commantaire.userComment.nom + " " + commantaire.userComment.prenom}</a>}
-            avatar={
-                <Avatar
-                    src={commantaire.userComment.photo_profil}
-                    alt={commantaire.userComment.nom}
-                />
-            }
-            content={<p className="komen text-justify">{commantaire.content}</p>}
-        />
-    }
-;
+    console.log(props);
+    const commantaire = props;
+    return <Comment
+        actions={[]}
+        author={<Link to={`/profile/${commantaire.userComment._id}`}>{commantaire.userComment.nom + " " + commantaire.userComment.prenom}</Link>}
+        avatar={
+            <Avatar
+                src={commantaire.userComment.photo_profil}
+                alt={commantaire.userComment.nom}
+            />
+        }
+        content={<p className="komen text-justify">{commantaire.content}</p>}
+    />
+}
+    ;
 
 function CommentCard(props) {
 
@@ -125,9 +126,9 @@ function CommentCard(props) {
                 }
             </div>*/}
             <Comment
-                style={{paddingRight: "15px", paddingLeft: "15px"}}
+                style={{ paddingRight: "15px", paddingLeft: "15px" }}
                 actions={[<span key="comment-nested-reply-to" onClick={() => setReplay(true)}>Reply to</span>]}
-                author={<a>{comment.userComment.nom + " " + comment.userComment.prenom}</a>}
+                author={<Link to={`/profile/${comment.userComment._id}`}>{comment.userComment.nom + " " + comment.userComment.prenom}</Link>}
                 avatar={
                     <Avatar
                         src={comment.userComment.photo_profil}
@@ -140,17 +141,17 @@ function CommentCard(props) {
             >
                 {
                     replays.map((re, index) =>
-                        <CommentReplay key={index} {...re}/>)
+                        <CommentReplay key={index} {...re} />)
                 }
                 <div className={showReplay ? "box-footer" : "box-footer active"}>
                     <form onSubmit={onSubmit}>
                         <img className="img-responsive img-circle img-sm"
-                             src={currentUser.photo_profil}
-                             alt="Alt Text"/>
+                            src={currentUser.photo_profil}
+                            alt="Alt Text" />
                         <div className="img-push">
                             <input type="text" className="form-control input-sm"
-                                   placeholder="Press enter to post comment" value={replayComment}
-                                   onChange={(e) => setReplayComment(e.target.value)}
+                                placeholder="Press enter to post comment" value={replayComment}
+                                onChange={(e) => setReplayComment(e.target.value)}
                             />
                         </div>
                     </form>
