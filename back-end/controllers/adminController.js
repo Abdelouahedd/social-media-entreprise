@@ -3,6 +3,7 @@ const { user } = require('../models/user');
 const { communaute } = require('../models/communaute');
 const { event } = require('../models/evenement');
 const { sondage } = require('../models/sondage');
+const { status, role } = require('../helper/enums/enum');
 
 exports.getAllInformation = async (req, res) => {
     try {
@@ -13,8 +14,8 @@ exports.getAllInformation = async (req, res) => {
             nbrUsers: 0,
             nbrCommunities: 0,
             nbrRequest: 0,
-            newUser: [],
-            nbrUserByDate: []
+            nbrUserByDate: [],
+            requestUsers: []
         }
 
         dashObject.nbrPost = await post.countDocuments({})
@@ -30,7 +31,11 @@ exports.getAllInformation = async (req, res) => {
                 return res.status(500).json({ success: false, msg: error.message });
             });
         dashObject.nbrUsers = await user.countDocuments().where('role')
-            .ne('SUPER_ADMIN').countDocuments({})
+            .ne(role.SUPER_ADMIN).countDocuments({})
+            .catch((error) => {
+                return res.status(500).json({ success: false, msg: error.message });
+            });
+        dashObject.nbrRequest = await user.where('status', status.WAIT).countDocuments({})
             .catch((error) => {
                 return res.status(500).json({ success: false, msg: error.message });
             });
@@ -38,8 +43,10 @@ exports.getAllInformation = async (req, res) => {
             .catch((error) => {
                 return res.status(500).json({ success: false, msg: error.message });
             });
-        dashObject.newUser = await user.find({}).where('role').ne('SUPER_ADMIN').select("-mot_pass")
-            .sort({ createdAt: "desc" }).limit(5)
+
+        dashObject.requestUsers = await user.find({ status: status.WAIT })
+            .where('role').ne(role.SUPER_ADMIN).select("-mot_pass")
+            .sort({ createdAt: "desc" }).limit(10)
             .catch((error) => {
                 return res.status(500).json({ success: false, msg: error.message });
             });
@@ -70,11 +77,12 @@ exports.getAllInformation = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
     try {
-        await user.find()
+        await user.find({ status: status.ACCEPT })
             .where('role')
-            .ne('SUPER_ADMIN')
+            .ne(role.SUPER_ADMIN)
             .select("-mot_pass")
             .sort({ createdAt: "desc" })
+            .limit(10)
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
@@ -137,34 +145,4 @@ exports.getCommunauteInfo = async (req, res) => {
     }
 }
 
-/*
-exports.getDataChartUser = async (req, res) => {
-   try {
-      await user.find({
-   createdAt: {
-       $gte: momment(Date.now()).subtract(5, 'days'),
-       $lte: Date.now()
-   }
-}, (err, result) => {
-   if (err) return res.status(500).send({success: false, msg: "ERROR FROM SERVER", error: err});
-   res.status(200).send(result);
-});
-user.aggregate(
-   [
 
-       {
-           $group: {
-               _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-               count: { $sum: 1 }
-           }
-       }
-   ]
-   , (err, result) => {
-       if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err });
-       res.status(200).send(result);
-   }
-)
-} catch (error) {
-res.status(500).json({ success: false, error: error.message });
-}
-}*/

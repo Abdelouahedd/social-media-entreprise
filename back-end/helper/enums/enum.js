@@ -9,3 +9,9 @@ exports.visibilite = {
     PRIVATE: 'PRIVATE',
     SECRECT: 'SECRET'
 }
+
+exports.status = {
+    ACCEPT: 'ACCEPT',
+    WAIT: 'WAIT',
+    DESACTIVE: 'DESACTIVE'
+}

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 const Joi = require('joi');
 var Schema = mongoose.Schema;
-var { role } = require('../helper/enums/enum');
+var { role, status } = require('../helper/enums/enum');
 
 const post = require('./post');
 const { commantaire } = require('./commantaire');
@@ -70,6 +70,11 @@ var User = new Schema({
         type: String,
         enum: Object.values(role),
         default: role.USER
+    },
+    status: {
+        type: String,
+        enum: Object.values(status),
+        default: status.WAIT
     }
 }, {
     timestamps: true
