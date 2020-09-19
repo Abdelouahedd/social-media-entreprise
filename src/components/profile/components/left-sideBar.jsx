@@ -1,5 +1,6 @@
 import React from 'react'
 import user_img from '../../../assets/images/resources/user-pro-img.png';
+import { URL } from '../../../redux/_helper/utility';
 
 export const LeftSideBar = (props) => {
 
@@ -7,7 +8,7 @@ export const LeftSideBar = (props) => {
         <div className="main-left-sidebar">
             <div className="user_profile">
                 <div className="user-pro-img">
-                    <img src={props.user.photo_profil === "" ? user_img : props.user.photo_profil} alt=""/>
+                    <img src={props.user.photo_profil === "" ? user_img : URL + props.user.photo_profil} alt="" />
                 </div>
                 <div className="user_pro_status">
                     <ul className="flw-status">

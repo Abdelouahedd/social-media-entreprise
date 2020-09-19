@@ -79,7 +79,7 @@ function Profile() {
     return (
         <div className="wrapper">
             <section className="cover-sec">
-                <img src={user.photo_couverture === "" ? cuver : user.photo_couverture} alt={"cuver img"}
+                <img src={user.photo_couverture === "" ? cuver : URL+user.photo_couverture} alt={"cuver img"}
                     className="img-fluid bg-img" />
             </section>
             <main>

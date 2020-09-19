@@ -52,7 +52,7 @@ export default function Authentification() {
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
                                                 consequuntur deserunt, dolor, est illo non nulla officia pariatur
-                                                quam
+                                                quamhref
                                                 rem repellendus saepe soluta, voluptas! Facilis laboriosam minima
                                                 minus
                                                 nam officiis.
@@ -71,7 +71,7 @@ export default function Authentification() {
                                                         className={tab.class}
                                                         onClick={switchTab.bind(null, tab)}
                                                     >
-                                                        <p style={{ cursor: 'pointer' }}>{tab.title}</p>
+                                                        <a href="#/">{tab.title}</a>
                                                     </li>
                                                 )
                                             }

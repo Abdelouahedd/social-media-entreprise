@@ -27,7 +27,8 @@ function ListPost(props) {
                 .catch(err => message.error('Error logging in please try again', err));
         }
         fetchData();
-    }, [posts, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

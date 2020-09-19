@@ -121,14 +121,23 @@ label {
     border-color: #50b5ff;
 }
 
-.user-pro-img {
+.user_profile {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+    /* margin-top: 0px ; */
+}
+
+.user-img {
     float: left;
     width: 100%;
     text-align: center;
     position: relative;
 }
 
-.user-pro-img .add-dp {
+.user-img .add-dp {
     position: absolute;
     top: 10px;
     left: 60%;
@@ -166,7 +175,7 @@ label {
     display: none;
 }
 
-.user-pro-img img {
+.user-img img {
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     -ms-border-radius: 100px;

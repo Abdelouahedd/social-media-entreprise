@@ -14,6 +14,7 @@ import ListPost from "../Post/ListPost";
 const Home = () => {
 
     const [files, setFiles] = useState([]);
+    const [user] = useState(currentUser);
     const [content, setContent] = useState("");
 
     const handleShow = () => {
@@ -88,15 +89,29 @@ const Home = () => {
                                         <div className="post-topbar">
                                             <div className="user-picy">
                                                 <img
-                                                    src={currentUser.photo_profil === "" ? user_pic : currentUser.photo_profil}
+                                                    src={user.photo_profil === "" ? user_pic : URL + user.photo_profil}
                                                     alt="" />
                                             </div>
                                             <div className="post-st">
                                                 <ul>
                                                     <li>
-                                                        <Button className='post_project' onClick={handleShow}>
+                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
                                                             Add a post
-                                                        </Button>
+                                                        </button>
+                                                        {/* <a className="post_project" href="#" title=""
+                                                            onClick={handleShow}>Add a post</a> */}
+                                                    </li>
+                                                    <li>
+                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
+                                                            Add a Event
+                                                        </button>
+                                                        {/* <a className="post_project" href="#" title=""
+                                                            onClick={handleShow}>Add a post</a> */}
+                                                    </li>
+                                                    <li>
+                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
+                                                            Add a sondage
+                                                        </button>
                                                         {/* <a className="post_project" href="#" title=""
                                                             onClick={handleShow}>Add a post</a> */}
                                                     </li>
