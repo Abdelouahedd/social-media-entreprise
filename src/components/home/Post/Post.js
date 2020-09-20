@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Comments from "./comments/comments";
 import moment from "moment";
 import { Carousel, Modal } from "react-bootstrap";
+import { URL } from '../../../redux/_helper/utility';
 
 function Post(props) {
     // const post = props;
@@ -12,14 +13,15 @@ function Post(props) {
 
 
     //State
-    const [post, setPost] = useState(props);
+    const [post,setPost] = useState(props);
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [like, setLike] = useState(false);
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        setPost(props)
+        setPost(props);
+        console.log("props",props);
     }, [props])
 
     //filter the URL from String
@@ -49,7 +51,7 @@ function Post(props) {
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="mr-2">
                                 <img className="avatar rounded-circle" width="45"
-                                    src={post.user.photo_profil} alt="user_img" />
+                                    src={URL + post.user.photo_profil} alt="user_img" />
                             </div>
                             <div className="ml-2">
                                 <Link to={`/profile/${post.user._id}`}>

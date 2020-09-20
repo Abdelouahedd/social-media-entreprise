@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import user_pic from '../../../assets/images/resources/user-pic.png';
 import LeftSideBar from "../side-bar/LeftSideBar";
 import RightSideBar from "../side-bar/RightSideBar";
@@ -10,12 +10,18 @@ import { UploadOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css'
 import { URL } from "../../../redux/_helper/utility";
 import ListPost from "../Post/ListPost";
+import { useEffect } from 'react';
+import {  useDispatch } from 'react-redux';
+import { addPost, getAllPosts } from '../../../redux/actions/postActions';
 
 const Home = () => {
 
     const [files, setFiles] = useState([]);
-    const [user] = useState(currentUser);
+    const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState({});
     const [content, setContent] = useState("");
+    const dispatch = useDispatch();
+
 
     const handleShow = () => {
         const postPopUp = document.querySelector('.post-popup.pst-pj');
@@ -34,13 +40,13 @@ const Home = () => {
         postPopUp.classList.remove('active');
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         const formData = new FormData();
         files.forEach(file => {
             formData.append('files', file);
         });
         formData.append('sujet', content);
-        fetch(`${URL}/posts/createPost`, {
+        await fetch(`${URL}/posts/createPost`, {
             method: 'POST',
             body: formData,
             headers: {
@@ -49,13 +55,15 @@ const Home = () => {
         }).then(res => res.json())
             .then((response) => {
                 console.info(response);
-                if (response.status === 200) {
-                    message.success(`${response.msg}`);
-                } else {
-                    setTimeout(() => {
-                        message.error(`${response.msg}`);
-                    }, 1000);
+                const newPost = {
+                    ...response.post,
+                    user: currentUser
                 }
+                message.success(`${response.msg}`);
+                dispatch(addPost(newPost));
+                posts.unshift(newPost);
+                setPosts(posts);
+                setTimeout(() => handleClose(), 2000);
             }).catch(err => message.error('Error logging in please try again', err));
     }
     const uploadSettings = {
@@ -74,6 +82,32 @@ const Home = () => {
         },
         files,
     };
+
+    useEffect(() => {
+        setUser(currentUser)
+    }, [user]);
+
+    const fetchData = useCallback(
+        async () => {
+            await fetch(`${URL}/posts/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }).then(res => res.json())
+                .then((response) => {
+                    dispatch(getAllPosts(response.post));
+                    setPosts(response.post);
+                })
+                .catch(err => message.error('Error logging in please try again', err));
+        },
+        [dispatch],
+    )
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
 
     return (
         <>
@@ -122,7 +156,7 @@ const Home = () => {
                                         {/*start list view of posts*/}
                                         <div className="posts-section">
                                             <TopProfiles />
-                                            <ListPost />
+                                            <ListPost posts={posts} />
                                             {/*  end list view of posts*/}
                                         </div>
                                     </div>

@@ -131,7 +131,7 @@ function CommentCard(props) {
                 author={<Link to={`/profile/${comment.userComment._id}`}>{comment.userComment.nom + " " + comment.userComment.prenom}</Link>}
                 avatar={
                     <Avatar
-                        src={comment.userComment.photo_profil}
+                        src={URL + comment.userComment.photo_profil}
                         alt={comment.userComment.nom}
                     />
                 }
@@ -146,8 +146,9 @@ function CommentCard(props) {
                 <div className={showReplay ? "box-footer" : "box-footer active"}>
                     <form onSubmit={onSubmit}>
                         <img className="img-responsive img-circle img-sm"
-                            src={currentUser.photo_profil}
-                            alt="Alt Text" />
+                            src={URL + currentUser.photo_profil}
+                            alt={currentUser.nom} />
+
                         <div className="img-push">
                             <input type="text" className="form-control input-sm"
                                 placeholder="Press enter to post comment" value={replayComment}

@@ -170,10 +170,10 @@ function EditProfil() {
                                                 <div className="col-md-12 d-flex justify-content-center">
                                                     <div className="user_profile">
                                                         <div className="user-img">
-                                                                <div className="usr-pic">
-                                                                    <img src={currentUser.photo_profil === "" ? user_img : URL + currentUser.photo_profil}
-                                                                        alt={currentUser.photo_profil} />
-                                                                </div>
+                                                            <div className="usr-pic">
+                                                                <img src={photoProfil === "" ? user_img : URL + currentUser.photo_profil}
+                                                                    alt={currentUser.photo_profil} />
+                                                            </div>
                                                             {/* <img
                                                                 src={photoProfil === "" ? user_img : URL + photoProfil}
                                                                 alt="" /> */}

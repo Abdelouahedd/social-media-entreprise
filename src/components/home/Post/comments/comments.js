@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './comments.css';
-import {useDispatch} from "react-redux";
-import {updatePost} from "../../../../redux/actions/postActions";
-import {currentUser} from "../../../../_helper/services";
-import {URL} from "../../../../redux/_helper/utility";
-import {message} from "antd";
+import { useDispatch } from "react-redux";
+import { updatePost } from "../../../../redux/actions/postActions";
+import { currentUser } from "../../../../_helper/services";
+import { URL } from "../../../../redux/_helper/utility";
+import { message } from "antd";
 import 'antd/dist/antd.css';
 import CommentCard from "./comment";
 
@@ -50,16 +50,16 @@ function Comments(props) {
             <div className="box-footer">
                 <form onSubmit={onSubmit}>
                     <img className="img-responsive img-circle img-sm"
-                         src={currentUser.photo_profil} alt="Alt Text"/>
+                        src={URL + currentUser.photo_profil} alt={currentUser.nom} />
                     <div className="img-push">
                         <input type="text" className="form-control input-sm"
-                               placeholder="Press enter to post comment" value={content}
-                               onChange={(e) => handlerChange(e)}
+                            placeholder="Press enter to post comment" value={content}
+                            onChange={(e) => handlerChange(e)}
                         />
                     </div>
                 </form>
             </div>
-            {comments.map((c, index) => <CommentCard key={index} comment={c}/>)}
+            {comments.map((c, index) => <CommentCard key={index} comment={c} />)}
         </div>
     );
 }
