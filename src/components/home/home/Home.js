@@ -13,29 +13,53 @@ import ListPost from "../Post/ListPost";
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPost, getAllPosts } from '../../../redux/actions/postActions';
+import Dragger from 'antd/lib/upload/Dragger';
+import { InboxOutlined } from '@ant-design/icons';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+
+const schemaEvent = Yup.object().shape({
+    titre: Yup.string()
+        .required('Required'),
+    date_debut: Yup.date()
+        .min(new Date(), 'Please choose future date')
+        .required('Required'),
+    date_fin: Yup.date()
+        .min(Yup.ref('date_debut'), 'End date must be grater than start date')
+        .required('Required'),
+    place: Yup.string()
+        .required('Required'),
+});
+
 
 const Home = () => {
 
     const [files, setFiles] = useState([]);
+    const [coverEvent, setCoverEvent] = useState([]);
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(currentUser);
     const [content, setContent] = useState("");
+    const [editOption, setEditOption] = useState(false);
+    const [errorCover, setErrorCover] = useState(false);
+
     const dispatch = useDispatch();
 
 
 
-    const handleShow = () => {
-        const postPopUp = document.querySelector('.post-popup.pst-pj');
+    const handleShow = (selector) => {
+        const postPopUp = document.querySelector(selector);
         const root = document.querySelector('.wrapper');
         const nav = document.querySelector('.iq-top-navbar');
         postPopUp.classList.add('active');
         root.classList.add('overlay');
         nav.classList.add('active');
+        setEditOption(false);
     }
-    const handleClose = () => {
+    const handleClose = (selector) => {
         const root = document.querySelector('.wrapper');
         const nav = document.querySelector('.iq-top-navbar');
-        const postPopUp = document.querySelector('.post-popup.pst-pj');
+        const postPopUp = document.querySelector(selector);
         root.classList.remove('overlay');
         nav.classList.remove('active');
         postPopUp.classList.remove('active');
@@ -71,7 +95,25 @@ const Home = () => {
         [content, dispatch, files, posts],
     )
 
-
+    const formik = useFormik({
+        initialValues: {
+            titre: '',
+            date_debut: '',
+            date_fin: '',
+            place: ''
+        },
+        validationSchema: schemaEvent,
+        onSubmit: async (values, actions) => {
+            try {
+                await onAddEvent(values);
+                actions.setStatus({ success: true })
+            } catch (error) {
+                actions.setStatus({ success: false })
+                actions.setSubmitting(false)
+                actions.setErrors({ submit: error.message })
+            }
+        },
+    });
 
     const uploadSettings = {
         onRemove: file => {
@@ -89,6 +131,51 @@ const Home = () => {
         },
         files,
     };
+
+
+    const uploadSettingsEvent = {
+        fileList: coverEvent,
+        onRemove: file => {
+            const index = coverEvent.indexOf(file);
+            const newFileList = coverEvent.slice();
+            newFileList.splice(index, 1);
+            setCoverEvent(newFileList);
+            return {
+                fileList: newFileList,
+            };
+        },
+        beforeUpload: file => {
+            setCoverEvent([file]);
+            return false;
+        },
+        coverEvent,
+    };
+
+    const onAddEvent = useCallback(
+        async (values) => {
+            if (coverEvent.length === 0)
+                setErrorCover(true);
+            const formData = new FormData();
+            coverEvent.forEach(file => formData.append('cover_img', file));
+            formData("titre", values.titre)
+            formData("date_debut", values.date_debut)
+            formData("date_fin", values.date_fin)
+            formData("place", values.place)
+            await fetch(`${URL}/posts/createPost`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }).then(res => res.json())
+                .then((response) => {
+                    console.info(response);
+                    message.success(`${response.msg}`);
+                    setTimeout(() => handleClose('.post-popup.event'), 2000);
+                }).catch(err => message.error('Error logging in please try again', err));
+        },
+        [coverEvent]
+    )
 
     useEffect(() => {
         setUser(currentUser);
@@ -136,30 +223,35 @@ const Home = () => {
                                                     alt="" />
                                             </div>
                                             <div className="post-st">
-                                                <ul>
-                                                    <li>
-                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
-                                                            Add a post
+                                                <div className="ed-opts">
+                                                    <p className="ed-opts-open" style={{ cursor: "pointer" }}
+                                                        onClick={() => setEditOption(!editOption)}
+                                                    >
+                                                        <i className="la la-bars" />
+                                                    </p>
+                                                    <ul
+                                                        className={editOption ? "ed-options active" : "ed-options"}
+                                                        style={{ width: "200px" }}
+                                                    >
+                                                        <li>
+                                                            <button className='btn btn-danger btn-sm btn-block' onClick={() => handleShow('.post-popup.pst-pj')}>
+                                                                Add a post
                                                         </button>
-                                                        {/* <a className="post_project" href="#" title=""
-                                                            onClick={handleShow}>Add a post</a> */}
-                                                    </li>
-                                                    <li>
-                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
-                                                            Add a Event
+                                                        </li>
+                                                        <li>
+                                                            <button className='btn btn-danger btn-sm btn-block' onClick={() => handleShow('.post-popup.event')}>
+                                                                Add a Event
                                                         </button>
-                                                        {/* <a className="post_project" href="#" title=""
-                                                            onClick={handleShow}>Add a post</a> */}
-                                                    </li>
-                                                    <li>
-                                                        <button className='btn btn-danger lift lift-sm' onClick={handleShow}>
-                                                            Add a sondage
+                                                        </li>
+                                                        <li>
+                                                            <button className='btn btn-danger btn-sm btn-block' onClick={() => handleShow('.post-popup.sondage')}>
+                                                                Add a sondage
                                                         </button>
-                                                        {/* <a className="post_project" href="#" title=""
-                                                            onClick={handleShow}>Add a post</a> */}
-                                                    </li>
-                                                </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
+
                                         </div>
                                         {/*end of add post form*/}
                                         {/*start list view of posts*/}
@@ -203,7 +295,106 @@ const Home = () => {
                             </div>
                         </form>
                     </div>
-                    <p style={{ cursor: 'pointer' }} onClick={handleClose}><i className="la la-times-circle-o" /></p>
+                    <p style={{ cursor: 'pointer' }} onClick={() => handleClose('.post-popup.pst-pj')}><i className="la la-times-circle-o" /></p>
+                </div>
+            </div>
+            {/*pop up Add event*/}
+            <div className="post-popup event">
+                <div className="post-project">
+                    <h3>Add a Event</h3>
+                    <div className="post-project-fields">
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className="row">
+                                <div className="col-lg-12 no-pdd">
+                                    <div className="sn-field">
+                                        <input type="text" name="titre" placeholder="Title" onChange={formik.handleChange} />
+                                        {formik.touched.titre && formik.errors.titre ? (
+                                            <div className="sn-field alert alert-danger">{formik.errors.titre}</div>
+                                        ) : null}
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="sn-field">
+                                        <input type="date" name="date_debut" placeholder="start date" onChange={formik.handleChange} />
+                                        {formik.touched.date_debut && formik.errors.date_debut ? (
+                                            <div className="sn-field alert alert-danger">{formik.errors.date_debut}</div>
+                                        ) : null}
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="sn-field">
+                                        <input type="date" name="date_fin" placeholder="end date" onChange={formik.handleChange} />
+                                        {formik.touched.date_fin && formik.errors.date_fin ? (
+                                            <div className="sn-field alert alert-danger">{formik.errors.date_fin}</div>
+                                        ) : null}
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="sn-field no-pdd">
+                                        <input type="text" name="place" placeholder="place" onChange={formik.handleChange} />
+                                        {formik.touched.place && formik.errors.place ? (
+                                            <div className="sn-field alert alert-danger">{formik.errors.place}</div>
+                                        ) : null}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-12">
+                                <Dragger {...uploadSettingsEvent}>
+                                    <p className="ant-upload-drag-icon">
+                                        <InboxOutlined />
+                                    </p>
+                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                    <p className="ant-upload-hint">
+                                        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                                        band files
+                                        </p>
+                                </Dragger>
+                                {errorCover ? (
+                                    <div className="sn-field alert alert-danger py-2">Cover for event is required</div>
+                                ) : null}
+                            </div>
+                            <div className="col-lg-6 py-2 offset-lg-3 justify-content-center">
+                                <button className="btn btn-primary btn-block" type="submit">
+                                    Add Event
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <p style={{ cursor: 'pointer' }} onClick={() => handleClose('.post-popup.event')}><i className="la la-times-circle-o" /></p>
+                </div>
+            </div>
+            {/*pop up Add sondage*/}
+            <div className="post-popup sondage">
+                <div className="post-project">
+                    <h3>Add a post</h3>
+                    <div className="post-project-fields">
+                        <form>
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <textarea name="description" rows={4} value={content}
+                                        onChange={event => setContent(event.target.value)} />
+                                </div>
+                                <div className="col-lg-6">
+                                    <textarea name="description" rows={4} value={content}
+                                        onChange={event => setContent(event.target.value)} />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <Button type="primary" block onClick={onSubmit}>
+                                        <span>Add post</span>
+                                    </Button>
+                                </div>
+                                <div className="col-lg-6">
+                                    {/*<Upload {...settings} >*/}
+                                    <Upload {...uploadSettings}>
+                                        <Button icon={<UploadOutlined />} block>Click to Upload</Button>
+                                    </Upload>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <p style={{ cursor: 'pointer' }} onClick={() => handleClose('.post-popup.sondage')}><i className="la la-times-circle-o" /></p>
                 </div>
             </div>
         </>
