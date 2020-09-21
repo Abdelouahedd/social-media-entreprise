@@ -6,18 +6,20 @@ var Evenment = new Schema({
         type: String,
         required: true,
     },
-    data_creation: {
-        type: Date,
-        default: Date.now,
-    },
     data_debut: {
         type: Date,
+        required: true,
     },
     data_fin: {
         type: Date,
     },
     place: {
         type: String,
+        required: true,
+    },
+    cover_img: {
+        type: String,
+        required: true,
     },
     user: {
         type: Schema.Types.ObjectId,
