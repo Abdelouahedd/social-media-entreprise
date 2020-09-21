@@ -1,28 +1,98 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './post.css'
 import { Link } from "react-router-dom";
 import Comments from "./comments/comments";
 import moment from "moment";
 import { Carousel, Modal } from "react-bootstrap";
 import { URL } from '../../../redux/_helper/utility';
+import { currentUser } from '../../../_helper/services';
+import { useDispatch } from 'react-redux';
+import { updatePost } from '../../../redux/actions/postActions';
+import { message } from 'antd';
 
 function Post(props) {
+
+
     // const post = props;
     const handleShow = () => setShow(true)
     const handleClose = () => setShow(false)
 
-
     //State
-    const [post,setPost] = useState(props);
+    const [post, setPost] = useState(props);
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState();
     const [show, setShow] = useState(false);
+
+    const liket = useCallback(
+        () => {
+            if (post.like.includes(currentUser._id)) {
+                return true;
+            }
+            return false;
+        },
+        [post.like]
+    )
+
+    const dispatch = useDispatch();
+
+    const handlerLike = useCallback(
+        async () => {
+            await fetch(`${URL}/posts/like/${post._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }).then(res => res.json())
+                .then((response) => {
+                    console.log("like==>", response);
+                    dispatch(updatePost(response.post));
+                    post.like.push(currentUser._id);
+                    setPost(post)
+                })
+                .catch(err => message.error('Error please try again', err));
+        },
+        [dispatch, post],
+    );
+
+    const handlerDesLike = useCallback(
+        async () => {
+            await fetch(`${URL}/posts/deslike/${post._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }).then(res => res.json())
+                .then((response) => {
+                    console.log("deslike==>", response);
+                    dispatch(updatePost(response.post));
+                    const newLikes = post.like.filter(likeId => likeId !== currentUser._id);
+                    post.like = newLikes;
+                    setPost(post);
+                })
+                .catch(err => message.error('Error please try again', err));
+        },
+        [dispatch, post],
+    );
+
+    const handlerChangeLike = () => {
+        if (like === true) {
+            handlerDesLike();
+            setLike(false);
+        } else if (like === false) {
+            handlerLike();
+            setLike(true);
+        }
+    }
 
     useEffect(() => {
         setPost(props);
-        console.log("props",props);
-    }, [props])
+        setLike(liket());
+    }, [liket, props]);
+
+
 
     //filter the URL from String
     const urlify = (text) => {
@@ -112,7 +182,7 @@ function Post(props) {
                     <div className="d-flex justify-content-between align-items-center my-1">
                         <div className="col">
                             <button type="button" className="btn btn-fbook btn-block btn-sm"
-                                onClick={() => setLike(!like)}><i
+                                onClick={() => handlerChangeLike()}><i
                                     className={like ? "fa fa-heart" : "fa fa-heart-o"}
                                     aria-hidden="true" /> Like
                             </button>

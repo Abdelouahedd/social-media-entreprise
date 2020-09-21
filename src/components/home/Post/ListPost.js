@@ -9,10 +9,7 @@ function ListPost(props) {
 
     useEffect(() => {
         setposts(props.posts);
-        console.log(props.posts);
     }, [props]);
-
-    console.log("Render", posts);
 
     return (
         <>
