@@ -93,7 +93,19 @@ const Home = () => {
                 }).catch(err => message.error('Error logging in please try again', err));
         },
         [content, dispatch, files, posts],
-    )
+    );
+
+    const onSubmitAddEvent = async (values, actions) => {
+        try {
+            console.log("submit");
+            dispatch(onAddEvent(values));
+            actions.setStatus({ success: true })
+        } catch (error) {
+            actions.setStatus({ success: false })
+            actions.setSubmitting(false)
+            actions.setErrors({ submit: error.message })
+        }
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -103,16 +115,7 @@ const Home = () => {
             place: ''
         },
         validationSchema: schemaEvent,
-        onSubmit: async (values, actions) => {
-            try {
-                await onAddEvent(values);
-                actions.setStatus({ success: true })
-            } catch (error) {
-                actions.setStatus({ success: false })
-                actions.setSubmitting(false)
-                actions.setErrors({ submit: error.message })
-            }
-        },
+        onSubmit: onSubmitAddEvent,
     });
 
     const uploadSettings = {
@@ -157,11 +160,11 @@ const Home = () => {
                 setErrorCover(true);
             const formData = new FormData();
             coverEvent.forEach(file => formData.append('cover_img', file));
-            formData("titre", values.titre)
-            formData("date_debut", values.date_debut)
-            formData("date_fin", values.date_fin)
-            formData("place", values.place)
-            await fetch(`${URL}/posts/createPost`, {
+            formData.append("titre", values.titre)
+            formData.append("date_debut", values.date_debut)
+            formData.append("date_fin", values.date_fin)
+            formData.append("place", values.place)
+            await fetch(`${URL}/event/createEvent`, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -354,7 +357,7 @@ const Home = () => {
                                 ) : null}
                             </div>
                             <div className="col-lg-6 py-2 offset-lg-3 justify-content-center">
-                                <button className="btn btn-primary btn-block" type="submit">
+                                <button className="btn btn-primary btn-block" type="submit" onClick={formik.handleSubmit}>
                                     Add Event
                                 </button>
                             </div>

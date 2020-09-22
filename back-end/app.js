@@ -14,6 +14,7 @@ var postsRouter = require('./routes/posts');
 var commentsRouter = require('./routes/comment');
 var adminRouter = require('./routes/admin');
 var CommunauteRouter = require('./routes/communaute');
+var EventRouter = require('./routes/event');
 var app = express();
 
 // app.use(logger('dev'));
@@ -36,6 +37,7 @@ app.use('/posts', postsRouter);
 app.use('/comment', commentsRouter);
 app.use('/admin', adminRouter);
 app.use('/communaute', CommunauteRouter);
+app.use('/event', EventRouter);
 //middleware ERROR
 
 app.use((req, res, next) => {

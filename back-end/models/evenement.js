@@ -6,11 +6,11 @@ var Evenment = new Schema({
         type: String,
         required: true,
     },
-    data_debut: {
+    date_debut: {
         type: Date,
         required: true,
     },
-    data_fin: {
+    date_fin: {
         type: Date,
     },
     place: {
