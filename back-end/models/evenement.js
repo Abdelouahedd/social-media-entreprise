@@ -29,7 +29,11 @@ var Evenment = new Schema({
     commantaires: [{
         type: Schema.Types.ObjectId,
         ref: 'Commantaire'
-    }]
+    }],
+    type:{
+        type:String,
+        default:'event'
+    }
 }, {
     timestamps: true
 });

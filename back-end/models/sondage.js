@@ -6,14 +6,10 @@ var Sondage = new Schema({
         type: String,
         required: true,
     },
-    data_creation: {
-        type: Date,
-        default: Date.now,
-    },
-    data_debut: {
+    date_debut: {
         type: Date,
     },
-    data_fin: {
+    date_fin: {
         type: Date,
     },
     choix: [{
@@ -31,7 +27,11 @@ var Sondage = new Schema({
     votes: [{
         type: Schema.Types.ObjectId,
         ref: 'Vote',
-    }]
+    }],
+    type: {
+        type: String,
+        default: 'sondage'
+    }
 }, {
     timestamps: true
 });

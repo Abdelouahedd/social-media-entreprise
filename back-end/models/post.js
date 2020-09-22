@@ -14,7 +14,11 @@ const Post = new Schema({
         required: true,
     },
     commantaires: [{type: Schema.Types.ObjectId, ref: 'Commantaire'}],
-    like: [{type: Schema.Types.ObjectId, ref: 'User'}]
+    like: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    type:{
+        type:String,
+        default:'post'
+    }
 }, {
     timestamps: true
 });
