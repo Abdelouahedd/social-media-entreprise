@@ -195,8 +195,13 @@ const Home = () => {
             }).then(res => res.json())
                 .then((response) => {
                     console.log(response);
-                    dispatch(getAllPosts(response.post));
-                    setPosts(response.post);
+                    const arrayPost = [];
+                    response.posts.map((post)=>arrayPost.push(post));
+                    response.events.map((event)=>arrayPost.push(event));
+                    // arrayPost.push(response.events);
+                    arrayPost.sort((p,e)=>new Date(p.createdAt) - new Date(e.createdAt));
+                    dispatch(getAllPosts(response.posts));
+                    setPosts(arrayPost);
                 })
                 .catch(err => message.error('Error logging in please try again', err));
         },

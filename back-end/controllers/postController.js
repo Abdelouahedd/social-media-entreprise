@@ -89,7 +89,7 @@ exports.getPostByUserId = async (req, res) => {
     }
 }
 
-exports.getPosts = async (req, res) => {
+exports.getPosts = async (req, res,next) => {
     try {
         await post.find({}).sort({ createdAt: "desc" })
             .populate('user', ['nom', 'prenom', 'photo_profil'])
@@ -115,10 +115,12 @@ exports.getPosts = async (req, res) => {
                     if (err) {
                         res.status(500).json({ success: false, error: err.message });
                     }
-                    res.status(200).send({
-                        success: true,
-                        post: posts
-                    });
+                    // res.status(200).send({
+                    //     success: true,
+                    //     post: posts
+                    // });
+                    res.locals.posts = posts
+                    next();
                 }
             )
     } catch (error) {

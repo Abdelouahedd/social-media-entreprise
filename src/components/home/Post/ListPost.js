@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Event from './event';
 import Post from "./Post";
 
 
@@ -13,7 +14,14 @@ function ListPost(props) {
 
     return (
         <>
-            { posts.map((post) => <Post key={post._id} {...post} />)}
+            { posts.map((post) => {
+                if (post.type === 'post') {
+                    return <Post key={post._id} {...post} />
+                } else if (post.type === 'event') {
+                    return <Event key={post._id} {...post} />
+                }
+                return null;
+            })}
         </>
     );
 }
