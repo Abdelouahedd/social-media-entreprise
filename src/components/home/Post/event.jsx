@@ -2,25 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { URL } from '../../../redux/_helper/utility';
 import moment from "moment";
-
-
+import './event.css'
 function Event(props) {
     const event = { ...props }
     const [editOption, setEditOption] = useState(false);
     const [showComments, setShowComments] = useState(false);
 
 
-    //filter the URL from String
-    const urlify = (text) => {
-        let urlRegex = /(https?:\/\/[^\s]+)/g;
-        return text.replace(urlRegex, function (url) {
-            return `<a className="card-link" href=${url} target="_blank">${url}</a>`;
-        })
-    }
+    
 
 
     return (
-        <div className="card gedf-card">
+        <div className="card gedf-card" id="">
             <div className="card-header">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex justify-content-between align-items-center">
@@ -47,20 +40,62 @@ function Event(props) {
                     </div>
                 </div>
             </div>
-            <div className="card ">
-                <img className="img-fluid card-img-top h-30" src={URL + event.cover_img} alt={event.titre} />
+
+            {/* <div className="card ">
+            <i className="fa fa-clock-o text-info" style={{ marginRight: "2px" }} /> {moment().from(event.createdAt)}
+                <img className="card-img-top" src={URL + event.cover_img} alt={event.titre} />
                 <div className="card-body">
                     <div className="row">
-                        <div className="col-6">
-                            <i className="fa fa-clock-o text-info" style={{ marginRight: "2px" }} /> {moment().from(event.createdAt)}
+                        <div className="col-4">
+                           <h4  className="card-title center" dangerouslySetInnerHTML={{ __html: urlify(event.titre) }}></h4>
                         </div>
-                        <div className="col-6">
+                        <div className="col-4">
+                            
+                        </div>
+                        <div className="col-4">
+                            
                             <i className="fa fa-users text-info" style={{ marginRight: "2px" }}></i>4 portions
                         </div>
+                    </div>
+                    <div className="row">
                         <div className="col-6">
-                            <p className="card-text center" dangerouslySetInnerHTML={{ __html: urlify(event.titre) }}></p>
-                            <a href="/" className="btn btn-info">participant</a>
+
                         </div>
+                        <div className="col-6">
+                        </div>
+                    </div>
+                    <div className="row">
+                    <a href="/" className="btn btn-info">participant</a>
+
+                    </div>
+                </div>
+            </div> */}
+
+            <div className="card pb-2">
+                <img src={URL + event.cover_img} alt={event.titre} sizes="" height="300" />
+                <div className="container-fluid pt-4 " id="test">
+                    <div className="row">
+                        <div className="col"><h2 className="text-uppercase font-weight-bolder">{event.titre} </h2></div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <i className="fa fa-map-marker text-info" aria-hidden="true" style={{ marginRight: "2px" }}></i>
+                            {event.place}
+                        </div>
+                    </div>
+                    <div className="row pt-3">
+                        <div className="col-6">DE : {moment(event.date_debut).format('YYYY-MM-DD')}</div>
+                        <div className="col-6">A : {moment(event.date_fin).format('YYYY-MM-DD')}</div>
+                    </div>
+                    <div className="row mt-4">
+                        <div className="col-4">
+                            <button type="button" class="btn btn-outline-dark btn-sm btn-block">participer</button>
+                        </div>
+
+                        <div className="col my-auto">
+                            <i className="fa fa-users text-info" style={{ marginRight: "2px" }}></i>
+          1000 autres participants...
+        </div>
                     </div>
                 </div>
             </div>

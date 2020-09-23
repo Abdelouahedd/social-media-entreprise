@@ -46,7 +46,6 @@ function Post(props) {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.log("like==>", response);
                     dispatch(updatePost(response.post));
                     post.like.push(currentUser._id);
                     setPost(post)
@@ -66,7 +65,6 @@ function Post(props) {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.log("deslike==>", response);
                     dispatch(updatePost(response.post));
                     const newLikes = post.like.filter(likeId => likeId !== currentUser._id);
                     post.like = newLikes;

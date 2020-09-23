@@ -89,7 +89,7 @@ const Home = () => {
                     dispatch(addPost(newPost));
                     posts.push(newPost);
                     setPosts(posts);
-                    setTimeout(() => handleClose(), 2000);
+                    setTimeout(() => handleClose('.post-popup.pst-pj'), 2000);
                 }).catch(err => message.error('Error logging in please try again', err));
         },
         [content, dispatch, files, posts],
