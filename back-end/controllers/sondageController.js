@@ -4,13 +4,13 @@ const { sondage } = require("../models/sondage");
 exports.addSondage = async (req, res) => {
     try {
         const { description, date_fin, choix } = req.body;
-        const sondageBody = {
+        const sondageBody = new sondage({
             description: description,
             date_fin: date_fin,
             choix: choix,
             user: req.user._id
-        }
-        await sondage.save(sondageBody, (err, newSondage) => {
+        })
+        await sondageBody.save(sondageBody, (err, newSondage) => {
             if (err) {
                 res.status(500).json({ success: false, error: err.message });
             }

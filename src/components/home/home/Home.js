@@ -17,6 +17,7 @@ import Dragger from 'antd/lib/upload/Dragger';
 import { InboxOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useToasts } from 'react-toast-notifications';
 
 const schemaEvent = Yup.object().shape({
     titre: Yup.string()
@@ -48,6 +49,8 @@ const Home = () => {
     const [option, setoption] = useState("")
     const [msgErrorOption, setMsgErrorOption] = useState("")
     const dispatch = useDispatch();
+    const { addToast } = useToasts()
+
 
 
 
@@ -114,29 +117,42 @@ const Home = () => {
 
     const onAddVote = useCallback(
         async (vote) => {
-            await fetch(`${URL}/posts/createPost`, {
+            await fetch(`${URL}/sondage/addSondage`, {
                 method: 'POST',
                 body: JSON.stringify(vote),
                 headers: {
+                    'Content-Type': 'application/json',
                     'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
                 }
             }).then(res => res.json())
                 .then((response) => {
-
-                    setTimeout(() => handleClose('.post-popup.pst-pj'), 2000);
+                    console.log(response);
+                    // dispatch(addPost(response.sondage));
+                    if (response.success === true) {
+                        addToast(response.msg, { appearance: 'success', autoDismiss: true },);
+                        setTimeout(() => handleClose('.post-popup.sondage'), 2000);
+                    } else {
+                        addToast(response.error, { appearance: 'error', autoDismiss: true },);
+                    }
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [],
+        [addToast],
     )
 
 
 
     const onSubmitAddVote = async (values, actions) => {
         try {
-            alert(JSON.stringify(values));
+            const afterDate = new Date().setDate(new Date().getDate() + values.end_date);
             const vote = {
-                desciption:values.desciption,
+                description: values.description,
+                date_fin: afterDate,
+                choix: options,
             }
+            console.log(afterDate);
+            console.log("from submit");
+            console.log(vote);
+            await onAddVote(vote);
             actions.setStatus({ success: true })
         } catch (error) {
             actions.setStatus({ success: false })

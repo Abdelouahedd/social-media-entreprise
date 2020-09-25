@@ -15,6 +15,7 @@ var commentsRouter = require('./routes/comment');
 var adminRouter = require('./routes/admin');
 var CommunauteRouter = require('./routes/communaute');
 var EventRouter = require('./routes/event');
+var SondageRouter = require('./routes/sondage');
 var app = express();
 
 // app.use(logger('dev'));
@@ -38,6 +39,7 @@ app.use('/comment', commentsRouter);
 app.use('/admin', adminRouter);
 app.use('/communaute', CommunauteRouter);
 app.use('/event', EventRouter);
+app.use('/sondage', SondageRouter);
 //middleware ERROR
 
 app.use((req, res, next) => {
