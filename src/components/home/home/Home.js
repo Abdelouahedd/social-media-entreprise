@@ -18,7 +18,6 @@ import { InboxOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-
 const schemaEvent = Yup.object().shape({
     titre: Yup.string()
         .required('Required'),
@@ -32,6 +31,9 @@ const schemaEvent = Yup.object().shape({
         .required('Required'),
 });
 
+const schemaSondage = Yup.object().shape({
+    description: Yup.string().required('Required'),
+});
 
 const Home = () => {
 
@@ -42,7 +44,9 @@ const Home = () => {
     const [content, setContent] = useState("");
     const [editOption, setEditOption] = useState(false);
     const [errorCover, setErrorCover] = useState(false);
-
+    const [options, setoptions] = useState([])
+    const [option, setoption] = useState("")
+    const [msgErrorOption, setMsgErrorOption] = useState("")
     const dispatch = useDispatch();
 
 
@@ -107,6 +111,42 @@ const Home = () => {
         }
     }
 
+
+    const onAddVote = useCallback(
+        async (vote) => {
+            await fetch(`${URL}/posts/createPost`, {
+                method: 'POST',
+                body: JSON.stringify(vote),
+                headers: {
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            }).then(res => res.json())
+                .then((response) => {
+
+                    setTimeout(() => handleClose('.post-popup.pst-pj'), 2000);
+                }).catch(err => message.error('Error logging in please try again', err));
+        },
+        [],
+    )
+
+
+
+    const onSubmitAddVote = async (values, actions) => {
+        try {
+            alert(JSON.stringify(values));
+            const vote = {
+                desciption:values.desciption,
+            }
+            actions.setStatus({ success: true })
+        } catch (error) {
+            actions.setStatus({ success: false })
+            actions.setSubmitting(false)
+            actions.setErrors({ submit: error.message })
+        }
+    }
+
+
+
     const formik = useFormik({
         initialValues: {
             titre: '',
@@ -117,6 +157,15 @@ const Home = () => {
         validationSchema: schemaEvent,
         onSubmit: onSubmitAddEvent,
     });
+
+    const formikVote = useFormik({
+        initialValues: {
+            description: '',
+            end_date: 1
+        },
+        validationSchema: schemaSondage,
+        onSubmit: onSubmitAddVote,
+    })
 
     const uploadSettings = {
         onRemove: file => {
@@ -196,10 +245,10 @@ const Home = () => {
                 .then((response) => {
                     console.log(response);
                     const arrayPost = [];
-                    response.posts.map((post)=>arrayPost.push(post));
-                    response.events.map((event)=>arrayPost.push(event));
+                    response.posts.map((post) => arrayPost.push(post));
+                    response.events.map((event) => arrayPost.push(event));
                     // arrayPost.push(response.events);
-                    arrayPost.sort((p,e)=>new Date(p.createdAt) - new Date(e.createdAt));
+                    arrayPost.sort((p, e) => new Date(p.createdAt) - new Date(e.createdAt));
                     dispatch(getAllPosts(response.posts));
                     setPosts(arrayPost);
                 })
@@ -211,6 +260,25 @@ const Home = () => {
     useEffect(() => {
         fetchData();
     }, [fetchData]);
+
+    const handlerChange = (e) => setoption(e.target.value);
+
+    const onAddOption = (e) => {
+        e.preventDefault();
+        if (option === "") {
+            setMsgErrorOption("Option is required !!")
+            return false;
+        }
+        setMsgErrorOption("")
+        options.push(option);
+        setoptions(options);
+        setoption("");
+    }
+
+    const onRemoveItem = (option) => {
+        const newOption = options.filter(op => op !== option)
+        setoptions(newOption);
+    }
 
 
     return (
@@ -376,28 +444,95 @@ const Home = () => {
                 <div className="post-project">
                     <h3>Add a post</h3>
                     <div className="post-project-fields">
-                        <form>
+                        <form onSubmit={formikVote.handleSubmit}>
                             <div className="row">
-                                <div className="col-lg-6">
-                                    <textarea name="description" rows={4} value={content}
-                                        onChange={event => setContent(event.target.value)} />
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <input type="text"
+                                            className="form-control"
+                                            name="description" id="description"
+                                            aria-describedby="helpId" placeholder="Add Description for your vote"
+                                            onChange={formikVote.handleChange}
+                                        />
+                                    </div>
+                                    {formikVote.touched.description && formikVote.errors.description ? (
+                                        <div className="sn-field alert alert-danger">{formikVote.errors.description}</div>
+                                    ) : null}
                                 </div>
-                                <div className="col-lg-6">
-                                    <textarea name="description" rows={4} value={content}
-                                        onChange={event => setContent(event.target.value)} />
+                                <div className="col-lg-12">
+                                    <div className="row">
+                                        <div className="col-lg-5 my-auto">
+                                            <p className="">Select the time for stop this vote :</p>
+                                        </div>
+                                        <div className="col-lg">
+                                            <div className="form-group">
+                                                <select mode="tags" className="form-control form-control-sm" name="end_date"
+                                                    id="end-date"
+                                                    placeholder="add max date for this vote"
+                                                    onChange={formikVote.handleChange}
+                                                >
+                                                    <option select="true" value="1">1 day</option>
+                                                    <option value="7">1 week</option>
+                                                    <option value="30">1 month</option>
+                                                </select>
+                                                {formikVote.touched.end_date && formikVote.errors.end_date ? (
+                                                    <div className="sn-field alert alert-danger">{formikVote.errors.end_date}</div>
+                                                ) : null}
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <Button type="primary" block onClick={onSubmit}>
-                                        <span>Add post</span>
-                                    </Button>
+                                <div className="col-lg-12">
+                                    <div className="row">
+                                        <div className="col-lg-8 my-auto">
+                                            <div className="form-group">
+                                                <input type="text"
+                                                    className="form-control"
+                                                    name="option"
+                                                    id="option"
+                                                    aria-describedby="helpId"
+                                                    placeholder="Options"
+                                                    value={option}
+                                                    required
+                                                    onChange={(e) => handlerChange(e)}
+                                                />
+                                            </div>
+                                            {
+                                                msgErrorOption !== "" ?
+                                                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        <strong>{msgErrorOption}</strong>
+                                                    </div> : null
+                                            }
+                                        </div>
+                                        <div className="col-lg">
+                                            <button type="button" onClick={onAddOption} className="btn btn-danger btn-sm btn-block">
+                                                <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-lg-6">
-                                    {/*<Upload {...settings} >*/}
-                                    <Upload {...uploadSettings}>
-                                        <Button icon={<UploadOutlined />} block>Click to Upload</Button>
-                                    </Upload>
+
+                                <div className="col-lg-12" >
+                                    <ul className="list-inline px-2">
+                                        {
+                                            options.map((op, index) =>
+                                                <li key={index} className="list-inline-item list-group-item">
+                                                    {op}
+                                                    <i className="fa fa-trash text-danger "
+                                                        aria-hidden="true" style={{ marginLeft: "5px", cursor: 'pointer' }}
+                                                        onClick={() => onRemoveItem(op)}
+                                                    ></i>
+                                                </li>
+                                            )
+                                        }
+
+                                    </ul>
+                                </div>
+                                <div className="col-lg-6 py-2 offset-lg-3 justify-content-center">
+                                    <button className="btn btn-success btn-block" type="submit" onClick={formikVote.handleSubmit}>
+                                        Add Vote
+                                </button>
                                 </div>
                             </div>
                         </form>

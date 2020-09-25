@@ -6,9 +6,6 @@ var Sondage = new Schema({
         type: String,
         required: true,
     },
-    date_debut: {
-        type: Date,
-    },
     date_fin: {
         type: Date,
     },

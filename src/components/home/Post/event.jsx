@@ -9,7 +9,7 @@ function Event(props) {
     const [showComments, setShowComments] = useState(false);
 
 
-    
+
 
 
     return (
@@ -89,7 +89,7 @@ function Event(props) {
                     </div>
                     <div className="row mt-4">
                         <div className="col-4">
-                            <button type="button" class="btn btn-outline-dark btn-sm btn-block">participer</button>
+                            <button type="button" className="btn btn-outline-dark btn-sm btn-block">participer</button>
                         </div>
 
                         <div className="col my-auto">
