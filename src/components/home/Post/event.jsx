@@ -13,7 +13,7 @@ function Event(props) {
 
 
     return (
-        <div className="card gedf-card" id="">
+        <div className="card gedf-Applecard" id="">
             <div className="card-header">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex justify-content-between align-items-center">

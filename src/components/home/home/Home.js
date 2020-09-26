@@ -127,7 +127,7 @@ const Home = () => {
             }).then(res => res.json())
                 .then((response) => {
                     console.log(response);
-                    // dispatch(addPost(response.sondage));
+                    dispatch(addPost(response.sondage));
                     if (response.success === true) {
                         addToast(response.msg, { appearance: 'success', autoDismiss: true },);
                         setTimeout(() => handleClose('.post-popup.sondage'), 2000);
@@ -136,7 +136,7 @@ const Home = () => {
                     }
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [addToast],
+        [addToast, dispatch],
     )
 
 
@@ -263,9 +263,9 @@ const Home = () => {
                     const arrayPost = [];
                     response.posts.map((post) => arrayPost.push(post));
                     response.events.map((event) => arrayPost.push(event));
-                    // arrayPost.push(response.events);
+                    response.sondages.map((sondage) => arrayPost.push(sondage));
                     arrayPost.sort((p, e) => new Date(p.createdAt) - new Date(e.createdAt));
-                    dispatch(getAllPosts(response.posts));
+                    dispatch(getAllPosts(arrayPost));
                     setPosts(arrayPost);
                 })
                 .catch(err => message.error('Error logging in please try again', err));

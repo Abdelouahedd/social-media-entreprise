@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Event from './event';
 import Post from "./Post";
+import Sondage from './sondage';
 
 
 
@@ -19,6 +20,8 @@ function ListPost(props) {
                     return <Post key={post._id} {...post} />
                 } else if (post.type === 'event') {
                     return <Event key={post._id} {...post} />
+                } else if (post.type === 'sondage') {
+                    return <Sondage key={post._id} {...post} />
                 }
                 return null;
             })}

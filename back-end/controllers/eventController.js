@@ -89,7 +89,8 @@ exports.getEvents = async (req, res) => {
                     res.status(200).send({
                         success: true,
                         events: events,
-                        posts: res.locals.posts
+                        posts: res.locals.posts,
+                        sondages: res.locals.sondages
                     });
                 }
             )
