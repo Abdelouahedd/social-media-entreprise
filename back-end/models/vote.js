@@ -12,10 +12,10 @@ var Vote = new Schema({
         ref: 'User',
         required: true,
     },
-    choix: [{
+    choix: {
         type: String,
         required: true
-    }]
+    }
 }, {
     timestamps: true
 });

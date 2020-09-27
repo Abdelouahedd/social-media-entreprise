@@ -1,4 +1,5 @@
 const { sondage } = require("../models/sondage");
+const { vote } = require("../models/vote");
 
 
 exports.addSondage = async (req, res) => {
@@ -55,4 +56,46 @@ exports.getSondage = async (req, res, next) => {
         res.status(500).json({ success: false, error: error.message });
 
     }
+}
+
+
+exports.addVote = async (req, res) => {
+    try {
+        const oldVote = await vote.findOne({ sondage: req.params._idSondage, user: req.user._id });
+        if (oldVote) {
+            oldVote.choix = req.body.checkedOption;
+            oldVote.save();
+        } else {
+            const newVote = new vote({
+                sondage: req.params._idSondage,
+                user: req.user._id,
+                choix: req.body.checkedOption
+            });
+            newVote.save((err, vote) => {
+                if (err) {
+                    res.status(500).json({ success: false, error: err.message });
+                }
+                res.status(200).send({ success: true, msg: `YOUR VOTE ID ADDED`, vote: vote });
+            })
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+
+}
+
+exports.getDefaultOption = async (req, res) => {
+    try {
+        await vote.findOne({ sondage: req.params._idSondage, user: req.user._id }, (err, vote) => {
+            if (err) {
+                res.status(500).json({ success: false, error: err.message });
+            }
+            res.status(200).send({ success: true, defaultChoix: vote.choix });
+        });
+
+
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+
 }

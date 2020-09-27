@@ -21,10 +21,6 @@ var Sondage = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Commantaire'
     }],
-    votes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Vote',
-    }],
     type: {
         type: String,
         default: 'sondage'
