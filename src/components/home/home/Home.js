@@ -92,10 +92,12 @@ const Home = () => {
                         ...response.post,
                         user: currentUser
                     }
-                    message.success(`${response.msg}`);
-                    dispatch(addPost(newPost));
-                    posts.push(newPost);
-                    setPosts(posts);
+                    if (response.success === true) {
+                        message.success(`${response.msg}`);
+                        dispatch(addPost(newPost));
+                        posts.push(newPost);
+                        setPosts(posts);
+                    }
                     setTimeout(() => handleClose('.post-popup.pst-pj'), 2000);
                 }).catch(err => message.error('Error logging in please try again', err));
         },
@@ -149,9 +151,6 @@ const Home = () => {
                 date_fin: afterDate,
                 choix: options,
             }
-            console.log(afterDate);
-            console.log("from submit");
-            console.log(vote);
             await onAddVote(vote);
             actions.setStatus({ success: true })
         } catch (error) {
@@ -214,6 +213,7 @@ const Home = () => {
         },
         beforeUpload: file => {
             setCoverEvent([file]);
+            setErrorCover(false);
             return false;
         },
         coverEvent,
@@ -221,8 +221,10 @@ const Home = () => {
 
     const onAddEvent = useCallback(
         async (values) => {
-            if (coverEvent.length === 0)
+            if (coverEvent.length === 0) {
                 setErrorCover(true);
+                return;
+            }
             const formData = new FormData();
             coverEvent.forEach(file => formData.append('cover_img', file));
             formData.append("titre", values.titre)
@@ -238,11 +240,14 @@ const Home = () => {
             }).then(res => res.json())
                 .then((response) => {
                     console.info(response);
-                    message.success(`${response.msg}`);
+                    if (response.success === true) {
+                        message.success(`${response.msg}`);
+                        dispatch(addPost(response.event));
+                    }
                     setTimeout(() => handleClose('.post-popup.event'), 2000);
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [coverEvent]
+        [coverEvent, dispatch]
     )
 
     useEffect(() => {

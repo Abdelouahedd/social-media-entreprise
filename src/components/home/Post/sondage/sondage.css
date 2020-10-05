@@ -3,3 +3,14 @@
     height: 30px;
     line-height: 30px;
 }
+@media (min-width: 992px) {
+    .gedf-card {
+        margin-bottom: 2.77rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .gedf-card {
+        margin-bottom: 2rem;
+    }
+}

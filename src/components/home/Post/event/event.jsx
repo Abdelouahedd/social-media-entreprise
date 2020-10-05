@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import { URL } from '../../../../redux/_helper/utility';
 import moment from "moment";
 import './event.css'
-import '../post/post.css';
 
 function Event(props) {
     const event = { ...props }
     const [editOption, setEditOption] = useState(false);
     return (
-        <div className="card gedf-card" id="">
+        <div className="card gedf-card">
             <div className="card-header">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex justify-content-between align-items-center">
@@ -37,7 +36,7 @@ function Event(props) {
                 </div>
             </div>
 
-            <div className="card pb-2">
+            <div className="card">
                 <img src={URL + event.cover_img} alt={event.titre} sizes="" height="300" />
                 <div className="container-fluid pt-4 " id="test">
                     <div className="row">
@@ -53,15 +52,10 @@ function Event(props) {
                         <div className="col-6">DE : {moment(event.date_debut).format('YYYY-MM-DD')}</div>
                         <div className="col-6">A : {moment(event.date_fin).format('YYYY-MM-DD')}</div>
                     </div>
-                    <div className="row mt-4">
+                    <div className="row mt-4 mb-2">
                         <div className="col-4">
                             <button type="button" className="btn btn-outline-dark btn-sm btn-block">participer</button>
                         </div>
-
-                        <div className="col my-auto">
-                            <i className="fa fa-users text-info" style={{ marginRight: "2px" }}></i>
-          1000 autres participants...
-        </div>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { URL } from '../../../../redux/_helper/utility';
 import './sondage.css'
-import '../post/post.css';
+
+
 function Sondage(props) {
     const sondage = { ...props };
 
