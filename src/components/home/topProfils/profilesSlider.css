@@ -51,7 +51,7 @@
     -ms-box-shadow: 0px 0.5px 0.2px rgba(0,0,0,0.24);
     -o-box-shadow: 0px 0.5px 0.2px rgba(0,0,0,0.24);
     box-shadow: 0px 0.5px 0.2px rgba(0,0,0,0.24);
-    padding: 20px 0 0 0;
+    padding: 20px;
 }
 .user-profy > img {
     float: none;

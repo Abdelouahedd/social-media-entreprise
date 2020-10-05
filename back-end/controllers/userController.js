@@ -192,10 +192,13 @@ exports.getUsers = async (req, res) => {
         await user.find()
             .where('role')
             .ne(role.SUPER_ADMIN)
+            .where('_id')
+            .ne(req.user._id)
             .select("-mot_pass")
+            .limit(10)
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-                res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
+                return res.send({ success: true, msg: "GET USERS BY SUCCES", user: result });
             });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
