@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { URL } from '../../../redux/_helper/utility';
+import { URL } from '../../../../redux/_helper/utility';
 import './sondage.css'
-
+import '../post/post.css';
 function Sondage(props) {
     const sondage = { ...props };
 
     const [editOption, setEditOption] = useState(false);
-    const [like, setLike] = useState(false);
-    const [showComments, setShowComments] = useState(false);
     const [checkedOption, setcheckedOption] = useState("");
 
 
@@ -61,7 +59,7 @@ function Sondage(props) {
 
 
     return (
-        <div className="card gedf-Applecard">
+        <div className="card gedf-card">
             <div className="card-header">
                 {/* Header of the card */}
                 <div className="d-flex justify-content-between align-items-center">
@@ -100,42 +98,19 @@ function Sondage(props) {
                         >
                             {
                                 sondage?.choix.map((op, index) =>
-                                    <Radio key={index} className="radio_style" value={op}>
-                                        {op}
-                                    </Radio>
+                                    <div key={index} className='row'>
+                                        <div className="col-lg-4">
+                                            <Radio className="radio_style" value={op}>
+                                                {op}
+                                            </Radio>
+                                        </div>
+                                    </div>
                                 )
                             }
                         </Radio.Group>
-
-
                     </div>
                 </div>
             </div>
-            {/* footer of the card */}
-            <div className="card-footer bg-white border-1 p-0">
-                <div className="d-flex justify-content-between align-items-center my-1">
-                    <div className="col">
-                        <button type="button" className="btn btn-fbook btn-block btn-sm"
-                            onClick={() => setLike(!like)}><i
-                                className={like ? "fa fa-heart" : "fa fa-heart-o"}
-                                aria-hidden="true" /> Like
-                            </button>
-                    </div>
-                    <div className="col">
-                        <button type="button" className="btn btn-fbook btn-block btn-sm"
-                            onClick={() => setShowComments(!showComments)}><i
-                                className="fa fa-comment-o"
-                                aria-hidden="true" /> Commente
-                    </button>
-                    </div>
-                    <div className="col">
-                        <button type="button" className="btn btn-fbook btn-block btn-sm">
-                            <i className="fa fa-share" aria-hidden="true" /> Share
-                    </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     );
 }

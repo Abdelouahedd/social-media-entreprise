@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 
 const CommentReplay = (props) => {
-    console.log(props);
     const commantaire = props;
     return <Comment
         actions={[]}
@@ -22,7 +21,6 @@ const CommentReplay = (props) => {
         content={<p className="komen text-justify">{commantaire.content}</p>}
     />
 }
-    ;
 
 function CommentCard(props) {
 
@@ -66,65 +64,6 @@ function CommentCard(props) {
 
     return (
         <div>
-            {/* <div className=" comment container-fluid">
-                <div className="media">
-                    <div className="media-left">
-                        <img src={comment.userComment.photo_profil} className="rounded-circle"
-                             style={{width: "40px"}}/>
-                    </div>
-                    <div className="media-body">
-                        <h4 className="media-heading title">{comment.userComment.nom}</h4>
-                        <p className="komen text-justify">
-                            {comment.content}
-                        </p>
-                        <p style={{cursor: "pointer"}}>reply</p>
-                    </div>
-                </div>
-                <div className="geser">
-                    <div className="box-footer">
-                        <form action="#" method="post">
-                            <img className="img-responsive img-circle img-sm"
-                                 src={currentUser.photo_profil}
-                                 alt="Alt Text"/>
-                            <div className="img-push">
-                                <input type="text" className="form-control input-sm"
-                                       placeholder="Press enter to post comment"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                {
-
-                        comment.replays.map((re, index) => {
-                            return <div key={index} className="geser">
-                                //replay comment
-                                <div className="media">
-                                    <div className="media-left">
-                                        <img src={re.userComment.photo_profil} className="rounded-circle"
-                                             style={{width: "40px"}}/>
-                                    </div>
-                                    <div className="media-body">
-                                        <h4 className="media-heading title">{re.userComment.nom}</h4>
-                                        <p className="komen">
-                                            {re.content}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="box-footer">
-                                    <form action="#" method="post">
-                                        <img className="img-responsive img-circle img-sm"
-                                             src={currentUser.photo_profil}
-                                             alt="Alt Text"/>
-                                        <div className="img-push">
-                                            <input type="text" className="form-control input-sm"
-                                                   placeholder="Press enter to post comment"/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        }))
-                }
-            </div>*/}
             <Comment
                 style={{ paddingRight: "15px", paddingLeft: "15px" }}
                 actions={[<span key="comment-nested-reply-to" onClick={() => setReplay(true)}>Reply to</span>]}
@@ -135,14 +74,9 @@ function CommentCard(props) {
                         alt={comment.userComment.nom}
                     />
                 }
-                content={
-                    <p className="komen text-justify">{comment.content}</p>
-                }
+                content={<p className="komen text-justify">{comment.content}</p>}
             >
-                {
-                    replays.map((re, index) =>
-                        <CommentReplay key={index} {...re} />)
-                }
+                {replays.map((re, index) => <CommentReplay key={index} {...re} />)}
                 <div className={showReplay ? "box-footer" : "box-footer active"}>
                     <form onSubmit={onSubmit}>
                         <img className="img-responsive img-circle img-sm"

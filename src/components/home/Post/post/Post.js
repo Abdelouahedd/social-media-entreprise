@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './post.css'
 import { Link } from "react-router-dom";
-import Comments from "./comments/comments";
+import Comments from "../comments/comments";
 import moment from "moment";
 import { Carousel, Modal } from "react-bootstrap";
-import { URL } from '../../../redux/_helper/utility';
-import { currentUser } from '../../../_helper/services';
+import { URL } from '../../../../redux/_helper/utility';
+import { currentUser } from '../../../../_helper/services';
 import { useDispatch } from 'react-redux';
-import { updatePost } from '../../../redux/actions/postActions';
+import { updatePost } from '../../../../redux/actions/postActions';
 import { message } from 'antd';
 
 function Post(props) {

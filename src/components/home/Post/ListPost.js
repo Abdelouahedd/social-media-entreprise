@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Event from './event';
-import Post from "./Post";
-import Sondage from './sondage';
+import Event from './event/event';
+import Post from './post/Post';
+import Sondage from './sondage/sondage';
+
 
 
 
