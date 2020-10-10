@@ -30,8 +30,10 @@ exports.verifyToken = (req, res, next) => {
                 });
             if (decoded.user.role === "USER")
                 req.user = decoded.user;
-            else if (decoded.user.role === "ADMIN")
+            else if (decoded.user.role === "ADMIN") {
                 req.admin = decoded.user;
+                req.user = decoded.user;
+            }
             else if (decoded.user.role === "SUPER_ADMIN")
                 req.SuperAdmin = decoded.user;
             next();

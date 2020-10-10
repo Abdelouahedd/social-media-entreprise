@@ -1,13 +1,13 @@
 
 .companies-info {
-    padding: 60px 0;
+    padding: 10px 0;
 }
 
 .company-title {
     float: left;
-    width: 100%;
+    width: 50%;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 70px;
     padding: 0 15px;
 }
 

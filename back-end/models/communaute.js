@@ -20,7 +20,7 @@ const Communaute = new Schema({
         enum: Object.values(visibilite),
         default: visibilite.PUBLIC
     },
-    membre: [{
+    members: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],

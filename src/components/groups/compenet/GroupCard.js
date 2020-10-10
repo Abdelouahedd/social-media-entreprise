@@ -1,29 +1,25 @@
 import React from 'react';
+import { URL } from '../../../redux/_helper/utility';
 
 function GroupCard(props) {
-    const {name, img, post, member} = props;
-
+    const { name, img } = props;
 
     return (
-        <div className="col-lg-3 col-md-4 col-sm-6">
-            <div className="company_profile_info">
-                <div className="company-up-info">
-                    <img src={require("../../../assets/images/resources/cmp-icon1.png")} alt=""/>
-                    <h3>{name}</h3>
-                    <ul>
-                        <li className="pl-3 pr-3">
-                            <p className="mb-0">Post </p>
-                            <h6>{post}</h6>
-                        </li>
-                        <li>
-                            <p className="mb-0">Member </p>
-                            <h6>{member}</h6>
-                        </li>
-                    </ul>
+        <>
+           
+            <div className="card mb-3" >
+                <div className="row no-gutters d-flex align-items-center justify-content-center">
+                    <div className="col-md-4 col-sm-12">
+                        <img src={URL + img} alt="" className="card-img" />
+                    </div>
+                    <div className="col-md-8 col-sm-12">
+                        <div className="card-body">
+                            <h5 className="card-title">{name}</h5>
+                        </div>
+                    </div>
                 </div>
-                <button className="btn btn-primary d-block w-100 ">Join</button>
             </div>
-        </div>
+        </>
     );
 }
 
