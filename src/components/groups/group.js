@@ -4,6 +4,7 @@ import GroupCard from "./compenet/GroupCard";
 import { URL } from '../../redux/_helper/utility';
 
 import './group.css'
+import { Link } from 'react-router-dom';
 
 function Group(props) {
 
@@ -50,13 +51,15 @@ function Group(props) {
                                 {
                                     groups.map(group =>
                                         <li key={group._id} className="list-group-item d-flex justify-content-between align-items-center">
-                                            <GroupCard
-                                                id={group?._id}
-                                                name={group?.titre}
-                                                img={group?.photo_com}
-                                                coverture={group?.coverture}
-                                                members={group?.members}
-                                            />
+                                            <Link to="/group">
+                                                <GroupCard
+                                                    id={group?._id}
+                                                    name={group?.titre}
+                                                    img={group?.photo_com}
+                                                    coverture={group?.coverture}
+                                                    members={group?.members}
+                                                />
+                                            </Link>
                                         </li>
                                     )
                                 }
