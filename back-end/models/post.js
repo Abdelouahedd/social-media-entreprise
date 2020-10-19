@@ -15,6 +15,10 @@ const Post = new Schema({
     },
     commantaires: [{type: Schema.Types.ObjectId, ref: 'Commantaire'}],
     like: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    group: {
+        type: Schema.Types.ObjectId,
+        ref: 'Communaute'
+    },
     type:{
         type:String,
         default:'post'

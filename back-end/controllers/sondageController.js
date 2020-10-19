@@ -4,11 +4,12 @@ const { vote } = require("../models/vote");
 
 exports.addSondage = async (req, res) => {
     try {
-        const { description, date_fin, choix } = req.body;
+        const { description, date_fin, choix, group } = req.body;
         const sondageBody = new sondage({
             description: description,
             date_fin: date_fin,
             choix: choix,
+            group: group,
             user: req.user._id
         })
         await sondageBody.save(sondageBody, (err, newSondage) => {
@@ -43,12 +44,50 @@ exports.getSondage = async (req, res, next) => {
                     }
                 ],
             })
+            .populate('group', ['titre'])
             .exec(
                 (err, sondages) => {
                     if (err) {
                         res.status(500).json({ success: false, error: err.message });
                     }
                     res.locals.sondages = sondages
+                    next();
+                }
+            )
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+
+    }
+}
+
+exports.getSondageByGroupId = async (req, res, next) => {
+    try {
+        await sondage.find({ group: req.params.id }).sort({ createdAt: "desc" })
+            .populate('user', ['nom', 'prenom', 'photo_profil'])
+            .populate({
+                path: 'commantaires',
+                populate: [
+                    {
+                        path: 'replays',
+                        populate: {
+                            path: 'userComment',
+                            select: ['nom', 'prenom', 'photo_profil'],
+                            model: 'User',
+                        },
+                    },
+                    {
+                        path: 'userComment',
+                        select: ['nom', 'prenom', 'photo_profil'],
+                    }
+                ],
+            })
+            .populate('group', ['titre'])
+            .exec(
+                (err, sondages) => {
+                    if (err) {
+                        res.status(500).json({ success: false, error: err.message });
+                    }
+                    res.locals.sondagesGroup = sondages
                     next();
                 }
             )

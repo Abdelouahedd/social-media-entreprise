@@ -8,11 +8,12 @@ exports.createPost = async (req, res) => {
         for (let i = 0; i < req.files.length; i++) {
             reqFiles.push(url + req.files[i].path);
         }
-        const { sujet } = req.body;
+        const { sujet, group } = req.body;
 
         const newPost = new post({
             sujet: sujet,
             user: req.user._id,
+            group: group,
             files: reqFiles
         });
 
@@ -89,7 +90,7 @@ exports.getPostByUserId = async (req, res) => {
     }
 }
 
-exports.getPosts = async (req, res,next) => {
+exports.getPosts = async (req, res, next) => {
     try {
         await post.find({}).sort({ createdAt: "desc" })
             .populate('user', ['nom', 'prenom', 'photo_profil'])
@@ -110,24 +111,21 @@ exports.getPosts = async (req, res,next) => {
                     }
                 ],
             })
+            .populate('group', ['titre'])
             .exec(
                 (err, posts) => {
                     if (err) {
                         res.status(500).json({ success: false, error: err.message });
                     }
-                    // res.status(200).send({
-                    //     success: true,
-                    //     post: posts
-                    // });
                     res.locals.posts = posts
                     next();
                 }
             )
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
-
     }
 }
+
 
 exports.getPostById = async (req, res) => {
     try {
@@ -150,6 +148,7 @@ exports.getPostById = async (req, res) => {
                     }
                 ],
             })
+            .populate('group', ['titre'])
             .exec(
                 (err, posts) => {
                     if (err) {
@@ -159,6 +158,43 @@ exports.getPostById = async (req, res) => {
                         success: true,
                         post: posts
                     });
+                }
+            )
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+
+    }
+}
+
+exports.getPostByGroupId = async (req, res, next) => {
+    try {
+        await post.find({ group: mongoose.Types.ObjectId(req.params.id) })
+            .populate('user', ['nom', 'prenom', 'photo_profil'])
+            .populate({
+                path: 'commantaires',
+                populate: [
+                    {
+                        path: 'replays',
+                        populate: {
+                            path: 'userComment',
+                            select: ['nom', 'prenom', 'photo_profil'],
+                            model: 'User',
+                        },
+                    },
+                    {
+                        path: 'userComment',
+                        select: ['nom', 'prenom', 'photo_profil'],
+                    }
+                ],
+            })
+            .populate('group', ['titre'])
+            .exec(
+                (err, posts) => {
+                    if (err) {
+                        res.status(500).json({ success: false, error: err.message });
+                    }
+                    res.locals.postsGroup = posts
+                    next();
                 }
             )
     } catch (error) {

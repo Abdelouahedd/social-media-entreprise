@@ -99,12 +99,7 @@ exports.getSearchableCommunauties = async (req, res) => {
             }])
             .where('visibilite')
             .ne('SECRET')
-            .exec(
-                //     (err, result) => {
-                //     if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-                //     res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
-                // }
-            );
+            .exec();
         const ownGroup = await communaute.find({ "members": { "$ne": req.user._id } })
             .populate([{
                 path: 'members',
@@ -117,12 +112,7 @@ exports.getSearchableCommunauties = async (req, res) => {
             }])
             .where('visibilite')
             .ne('SECRET')
-            .exec(
-                //     (err, result) => {
-                //     if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
-                //     res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
-                // }
-            );
+            .exec();
         res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: mygroups, oderGroup: ownGroup });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

@@ -17,10 +17,10 @@ var Sondage = new Schema({
         ref: 'User',
         required: true,
     },
-    commantaires: [{
+    group: {
         type: Schema.Types.ObjectId,
-        ref: 'Commantaire'
-    }],
+        ref: 'Communaute'
+    },
     type: {
         type: String,
         default: 'sondage'

@@ -26,13 +26,13 @@ var Evenment = new Schema({
         ref: 'User',
         required: true,
     },
-    commantaires: [{
+    group: {
         type: Schema.Types.ObjectId,
-        ref: 'Commantaire'
-    }],
-    type:{
-        type:String,
-        default:'event'
+        ref: 'Communaute',
+    },
+    type: {
+        type: String,
+        default: 'event'
     }
 }, {
     timestamps: true
