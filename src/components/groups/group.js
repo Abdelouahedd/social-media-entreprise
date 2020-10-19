@@ -51,7 +51,7 @@ function Group(props) {
                                 {
                                     groups.map(group =>
                                         <li key={group._id} className="list-group-item d-flex justify-content-between align-items-center">
-                                            <Link to="/group">
+                                            <Link to={'/group/' + group._id}>
                                                 <GroupCard
                                                     id={group?._id}
                                                     name={group?.titre}

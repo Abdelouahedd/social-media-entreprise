@@ -5,6 +5,7 @@ import LeftSideBar from '../profile/components/left-sideBar';
 import { currentUser } from '../../_helper/services';
 import '../profile/profile.css'
 import '../home/home/home.css';
+import './groupProfil.css';
 import RightSideBar from '../profile/components/right-sideBar';
 import TopProfiles from '../home/topProfils/TopProfils';
 import ListPost from '../home/Post/ListPost';
@@ -18,6 +19,7 @@ import * as Yup from 'yup';
 import { useToasts } from 'react-toast-notifications';
 import { addPost, getAllPosts } from '../../redux/actions/postActions';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const schemaEvent = Yup.object().shape({
     titre: Yup.string()
@@ -48,8 +50,30 @@ const GroupProfil = (props) => {
     const [options, setoptions] = useState([])
     const [option, setoption] = useState("")
     const [msgErrorOption, setMsgErrorOption] = useState("");
-    const posts = useSelector(state => state.posts, shallowEqual);
+    const [group, setGroup] = useState({});
 
+    const posts = useSelector(state => state.posts, shallowEqual);
+    const param = useParams();
+    const { addToast } = useToasts();
+
+
+    useEffect(() => {
+        // fetch(`${URL}/users/${param.id}`,
+        //     {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+        //         }
+        //     }
+        // ).then(res => res.json())
+        //     .then((res) => setGroup(res.user))
+        //     .catch(err => {
+        //         console.error(err);
+        //         addToast(err.toString(), { appearance: 'error', autoDismiss: true },)
+        //     });
+        console.log('id params -->', param.id);
+    }, [param.id]);
 
     const handleShow = (selector) => {
         const postPopUp = document.querySelector(selector);
@@ -70,7 +94,6 @@ const GroupProfil = (props) => {
     }
 
     const dispatch = useDispatch();
-    const { addToast } = useToasts();
 
 
     const onSubmit = useCallback(
@@ -406,11 +429,7 @@ const GroupProfil = (props) => {
                                                                     <table className="files-lists table table-striped mt-4">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th scope="col">
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
-                                                                                    </div>
-                                                                                </th>
+
                                                                                 <th scope="col">File Name</th>
                                                                                 <th scope="col">File Type</th>
                                                                                 <th scope="col">Date</th>
@@ -422,145 +441,58 @@ const GroupProfil = (props) => {
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
+                                                                                    <div className="d-flex flex-row pt-2">
+                                                                                        <i className="fa fa-file-pdf-o mr-2 fa-2x" aria-hidden="true"></i>
+                                                                                        <p>post report</p>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/43.png" alt="profile" /> post report
-                                       </td>
                                                                                 <td>Document</td>
-                                                                                <td>
-                                                                                    Mar 12, 2020
-                                       </td>
+                                                                                <td> Mar 12, 2020</td>
                                                                                 <td>390 kb</td>
-                                                                                <td>
-                                                                                    Anna Sthesia
-                                       </td>
+                                                                                <td>Anna Sthesia</td>
                                                                                 <td>
                                                                                     <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
+                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#dowload">
+                                                                                            <i className="fa fa-download fa-2x" aria-hidden="true"></i>
+                                                                                        </a>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
+                                                                                    <div className="d-flex flex-row pt-2">
+                                                                                        <i className="fa fa-file-word-o mr-2 fa-2x" aria-hidden="true"></i>
+                                                                                        <p>post report</p>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/44.png" alt="profile" /> usages
-                                       </td>
                                                                                 <td>Document</td>
-                                                                                <td>
-                                                                                    Mar 18, 2020
-                                       </td>
-                                                                                <td>600 kb</td>
-                                                                                <td>
-                                                                                    Paul Molive
-                                       </td>
+                                                                                <td> Mar 12, 2020</td>
+                                                                                <td>390 kb</td>
+                                                                                <td>Anna Sthesia</td>
                                                                                 <td>
                                                                                     <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
+                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#dowload">
+                                                                                            <i className="fa fa-download fa-2x" aria-hidden="true"></i>
+                                                                                        </a>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
+                                                                                    <div className="d-flex flex-row pt-2">
+                                                                                        <i className="fa fa-file-image-o mr-2 fa-2x" aria-hidden="true"></i>
+                                                                                        <p>post report</p>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/45.png" alt="profile" /> Images file
-                                       </td>
-                                                                                <td>Slide</td>
-                                                                                <td>
-                                                                                    Mar 19, 2020
-                                       </td>
-                                                                                <td>800 kb</td>
-                                                                                <td>
-                                                                                    Bob Frapples
-                                       </td>
-                                                                                <td>
-                                                                                    <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/46.png" alt="profile" /> total comments
-                                       </td>
                                                                                 <td>Document</td>
-                                                                                <td>
-                                                                                    Mar 21, 2020
-                                       </td>
-                                                                                <td>500 kb</td>
-                                                                                <td>
-                                                                                    Barb Ackue
-                                       </td>
+                                                                                <td> Mar 12, 2020</td>
+                                                                                <td>390 kb</td>
+                                                                                <td>Anna Sthesia</td>
                                                                                 <td>
                                                                                     <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/47.png" alt="profile" /> popular events
-                                       </td>
-                                                                                <td>Pdf</td>
-                                                                                <td>
-                                                                                    Mar 24, 2020
-                                       </td>
-                                                                                <td>320 kb</td>
-                                                                                <td>
-                                                                                    Barb Ackue
-                                       </td>
-                                                                                <td>
-                                                                                    <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <div className="checkbox text-center">
-                                                                                        <input type="checkbox" className="checkbox-input" />
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <img className="rounded-circle img-fluid avatar-40 mr-2" src="images/page-img/43.png" alt="profile" /> todo list
-                                       </td>
-                                                                                <td>excel</td>
-                                                                                <td>
-                                                                                    Mar 28, 2020
-                                       </td>
-                                                                                <td>600 kb</td>
-                                                                                <td>
-                                                                                    Ira Membrit
-                                       </td>
-                                                                                <td>
-                                                                                    <div className="flex align-items-center list-user-action">
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#"><i className="ri-download-line"></i></a>
-                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i className="ri-delete-bin-line"></i></a>
+                                                                                        <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" href="#dowload">
+                                                                                            <i className="fa fa-download fa-2x" aria-hidden="true"></i>
+                                                                                        </a>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
