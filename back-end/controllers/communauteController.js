@@ -1,5 +1,6 @@
 const { communaute, validateShemaAdd } = require('../models/communaute');
 const { user } = require('../models/user');
+const mongoose = require('mongoose');
 
 exports.addCommunaute = async (req, res) => {
     try {
@@ -142,6 +143,26 @@ exports.deleteCommunautie = async (req, res) => {
             });
         }
         res.send({ success: true, msg: "DELETE COMMUNAUTEIS BY SUCCES" });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+
+exports.getCommunautieById = async (req, res) => {
+    try {
+        const mygroups = await communaute.findById(mongoose.Types.ObjectId(req.params.id))
+            .populate([{
+                path: 'members',
+                model: 'User',
+                select: ['nom', 'prenom', 'photo_profil', 'fonction', 'email'],
+            }, {
+                path: 'admin',
+                model: 'User',
+                select: ['nom', 'prenom', 'photo_profil', 'fonction', 'email'],
+            }])
+            .exec();
+        res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: mygroups });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }

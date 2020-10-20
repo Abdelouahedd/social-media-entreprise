@@ -9,7 +9,6 @@ import './groupProfil.css';
 import RightSideBar from '../profile/components/right-sideBar';
 import TopProfiles from '../home/topProfils/TopProfils';
 import ListPost from '../home/Post/ListPost';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Button, message, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import Dragger from 'antd/lib/upload/Dragger';
@@ -17,7 +16,6 @@ import { InboxOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useToasts } from 'react-toast-notifications';
-import { addPost, getAllPosts } from '../../redux/actions/postActions';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -51,29 +49,32 @@ const GroupProfil = (props) => {
     const [option, setoption] = useState("")
     const [msgErrorOption, setMsgErrorOption] = useState("");
     const [group, setGroup] = useState({});
+    const [posts, setPost] = useState([]);
 
-    const posts = useSelector(state => state.posts, shallowEqual);
+
     const param = useParams();
     const { addToast } = useToasts();
 
 
     useEffect(() => {
-        // fetch(`${URL}/users/${param.id}`,
-        //     {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
-        //         }
-        //     }
-        // ).then(res => res.json())
-        //     .then((res) => setGroup(res.user))
-        //     .catch(err => {
-        //         console.error(err);
-        //         addToast(err.toString(), { appearance: 'error', autoDismiss: true },)
-        //     });
-        console.log('id params -->', param.id);
-    }, [param.id]);
+        fetch(`${URL}/communaute/${param.id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+                }
+            })
+            .then(res => res.json())
+            .then((res) => {
+                setGroup(res.communaute);
+                console.log('res ==>', res);
+            })
+            .catch(err => {
+                console.error(err);
+                addToast(err.toString(), { appearance: 'error', autoDismiss: true },)
+            });
+    }, [param.id, addToast]);
 
     const handleShow = (selector) => {
         const postPopUp = document.querySelector(selector);
@@ -93,7 +94,6 @@ const GroupProfil = (props) => {
         postPopUp.classList.remove('active');
     }
 
-    const dispatch = useDispatch();
 
 
     const onSubmit = useCallback(
@@ -103,6 +103,7 @@ const GroupProfil = (props) => {
                 formData.append('files', file);
             });
             formData.append('sujet', content);
+            formData.append('group', param.id);
             await fetch(`${URL}/posts/createPost`, {
                 method: 'POST',
                 body: formData,
@@ -118,19 +119,19 @@ const GroupProfil = (props) => {
                     }
                     if (response.success === true) {
                         message.success(`${response.msg}`);
-                        dispatch(addPost(newPost));
-                        posts.push(newPost);
+                        posts.unshift(newPost);
+                        setPost(posts)
                     }
                     setTimeout(() => handleClose('.post-popup.pst-pj'), 2000);
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [content, dispatch, files, posts],
+        [content, files, param.id, posts],
     );
 
     const onSubmitAddEvent = async (values, actions) => {
         try {
             console.log("submit");
-            dispatch(onAddEvent(values));
+            onAddEvent(values);
             actions.setStatus({ success: true })
         } catch (error) {
             actions.setStatus({ success: false })
@@ -151,7 +152,8 @@ const GroupProfil = (props) => {
             }).then(res => res.json())
                 .then((response) => {
                     console.log(response);
-                    dispatch(addPost(response.sondage));
+                    posts.unshift(response.sondage);
+                    setPost(posts);
                     if (response.success === true) {
                         addToast(response.msg, { appearance: 'success', autoDismiss: true },);
                         setTimeout(() => handleClose('.post-popup.sondage'), 2000);
@@ -160,7 +162,7 @@ const GroupProfil = (props) => {
                     }
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [addToast, dispatch],
+        [addToast, posts],
     );
 
 
@@ -171,6 +173,7 @@ const GroupProfil = (props) => {
                 description: values.description,
                 date_fin: afterDate,
                 choix: options,
+                group: param.id
             }
             await onAddVote(vote);
             actions.setStatus({ success: true })
@@ -248,6 +251,7 @@ const GroupProfil = (props) => {
             formData.append("date_debut", values.date_debut)
             formData.append("date_fin", values.date_fin)
             formData.append("place", values.place)
+            formData.append("group", param.id)
             await fetch(`${URL}/event/createEvent`, {
                 method: 'POST',
                 body: formData,
@@ -259,17 +263,18 @@ const GroupProfil = (props) => {
                     console.info(response);
                     if (response.success === true) {
                         message.success(`${response.msg}`);
-                        dispatch(addPost(response.event));
+                        posts.unshift(response.event);
+                        setPost(posts);
                     }
                     setTimeout(() => handleClose('.post-popup.event'), 2000);
                 }).catch(err => message.error('Error logging in please try again', err));
         },
-        [coverEvent, dispatch]
+        [coverEvent, param.id, posts]
     );
 
     const fetchData = useCallback(
         async () => {
-            await fetch(`${URL}/posts/`, {
+            await fetch(`${URL}/posts/${param.id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -283,15 +288,16 @@ const GroupProfil = (props) => {
                     response.events.map((event) => arrayPost.push(event));
                     response.sondages.map((sondage) => arrayPost.push(sondage));
                     arrayPost.sort((p, e) => new Date(p.createdAt) - new Date(e.createdAt));
-                    dispatch(getAllPosts(arrayPost));
+                    setPost(arrayPost);
                 })
                 .catch(err => message.error('Error logging in please try again', err));
         },
-        [dispatch],
+        [param.id],
     );
+
     useEffect(() => {
         fetchData()
-    }, [dispatch, fetchData]);
+    }, [fetchData]);
 
     const handlerChange = (e) => setoption(e.target.value);
 
@@ -325,7 +331,25 @@ const GroupProfil = (props) => {
                             <div className="main-section-data">
                                 <div className="row">
                                     <div className="col-lg-3 justify-content-center">
-                                        <LeftSideBar user={currentUser} />
+                                        <div className="main-left-sidebar">
+                                            <div className="user_profile">
+                                                <div className="user-pro-img">
+                                                    <img src={URL + group?.photo_com} alt="" />
+                                                </div>
+                                                <div className="user_pro_status">
+                                                    <ul className="flw-status">
+                                                        <li>
+                                                            <span>Admin</span>
+                                                            <b>{group.admin?.nom}</b>
+                                                        </li>
+                                                        <li>
+                                                            <span>Members</span>
+                                                            <b>{group.members?.length}</b>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="col-lg-6">
                                         <div className="main-ws-sec">
@@ -385,7 +409,7 @@ const GroupProfil = (props) => {
                                                             {/*start list view of posts*/}
                                                             <div className="posts-section">
                                                                 <TopProfiles />
-                                                                {/* <ListPost posts={posts.posts} /> */}
+                                                                <ListPost posts={posts} />
                                                                 {/*  end list view of posts*/}
                                                             </div>
                                                         </div>
@@ -405,6 +429,30 @@ const GroupProfil = (props) => {
                                                                         </svg>
                                                                     </span>
                                                                 </div>
+                                                            </div>
+
+                                                            <div className="forum-questions mt-5">
+                                                                {
+                                                                    group?.members?.map(user =>
+                                                                        <div key={user._id} className="usr-question">
+                                                                            <div className="usr_img">
+                                                                                <img src={URL + user.photo_profil} alt="" />
+                                                                            </div>
+                                                                            <div className="usr_quest">
+                                                                                <h3>{user.nom + " " + user.prenom}</h3>
+                                                                                <ul className="react-links">
+                                                                                    <li><i className="fa fa-email"></i>{user.email}</li>
+                                                                                </ul>
+                                                                                <ul className="quest-tags">
+                                                                                    <li>{user.fonction}</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                }
+
+
+
                                                             </div>
                                                         </div>
                                                     </div>

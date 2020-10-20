@@ -129,7 +129,7 @@ exports.getDefaultOption = async (req, res) => {
             if (err) {
                 res.status(500).json({ success: false, error: err.message });
             }
-            res.status(200).send({ success: true, defaultChoix: vote.choix });
+            res.status(200).send({ success: true, defaultChoix: vote === null ? null : vote.choix });
         });
 
 
