@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { URL } from "../../redux/_helper/utility";
 import cuver from '../../assets/images/resources/company-cover.jpg';
-import LeftSideBar from '../profile/components/left-sideBar';
 import { currentUser } from '../../_helper/services';
 import '../profile/profile.css'
 import '../home/home/home.css';
@@ -351,7 +350,7 @@ const GroupProfil = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-8">
                                         <div className="main-ws-sec">
                                             <div className="container">
                                                 <div className="list-group list-group-horizontal" id="list-tab" role="tablist">
@@ -559,9 +558,7 @@ const GroupProfil = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-3">
-                                        <RightSideBar />
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

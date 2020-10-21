@@ -72,3 +72,17 @@ exports.isMyGroup = async (req, res, next) => {
     }
     next();
 }
+
+//allow admin to validate request
+
+exports.isAdmin = async (req, res, next) => {
+    if (!req.admin) {
+        next(new Error("You are not a  admin"));
+    } else {
+        const IsAdminOfTheGroup = await communaute.find().and([{ _id: req.params.groupID }, { admin: req.admin }]);
+        if (!IsAdminOfTheGroup) {
+            next(new Error("You are not a admin of this group"));
+        }
+        next();
+    }
+}
