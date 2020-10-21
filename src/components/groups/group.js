@@ -35,6 +35,27 @@ function Group(props) {
         fetchData();
     }, []);
 
+    const joinGroup = async (idGroup) => {
+        const cardGroup = document.getElementById(idGroup);
+
+        await fetch(`${URL}/communaute/joinGroup/${idGroup}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+            }
+        }).then(res => res.json())
+            .then((response) => {
+                console.info(response);
+                if (response.success === true) {
+                    cardGroup.classList.remove('fadeIn');
+                    cardGroup.classList.add('fadeOut');
+                    console.info(response.msg);
+                }
+            })
+            .catch(err => message.error('Error please try again', err));
+    }
+
     return (
         <section className="companies-info my-3">
             <div className="container ">
@@ -69,7 +90,7 @@ function Group(props) {
                             <div className="row">
                                 {
                                     Odergroups.map(group =>
-                                        <div key={group._id} className="col-lg-4 col-md-6 col-sm-6">
+                                        <div key={group._id} id={group._id} className="col-lg-4 col-md-6 col-sm-6 animated fadeIn">
                                             <div className="company_profile_info">
                                                 <div className="company-up-info">
                                                     <img className="img-fluid img-thumbnail" src={URL + group?.photo_com} alt="" />
@@ -77,7 +98,7 @@ function Group(props) {
 
                                                     <h6 className="card-subtitle text-muted">{group?.visibilite}</h6>
                                                 </div>
-                                                <button className="btn btn-primary d-block w-100">Join</button>
+                                                <button className="btn btn-primary d-block w-100" onClick={() => joinGroup(group._id)}>Join</button>
                                             </div>
                                         </div>
                                     )

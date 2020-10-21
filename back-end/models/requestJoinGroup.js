@@ -14,4 +14,4 @@ const Request = mongoose.Schema({
     },
 })
 
-export const requestJoinGroup = mongoose.model('requestJoinGroup', Request);
+exports.requestJoinGroup = mongoose.model('requestJoinGroup', Request);

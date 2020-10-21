@@ -1,6 +1,7 @@
 const { communaute, validateShemaAdd } = require('../models/communaute');
 const { user } = require('../models/user');
 const mongoose = require('mongoose');
+const { requestJoinGroup } = require('../models/requestJoinGroup');
 
 exports.addCommunaute = async (req, res) => {
     try {
@@ -67,16 +68,12 @@ exports.addUserToCommunaute = async (req, res) => {
 
 exports.getCommunauties = async (req, res) => {
     try {
-        await communaute.find()
-            .populate([{
-                path: 'members',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }, {
-                path: 'admin',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }])
+
+        const groupsRequest = await requestJoinGroup.find().select('group');
+
+        console.log('group request', groupsRequest);
+
+        await communaute.find({ _id: { $nin: groupsRequest } })
             .exec((err, result) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err })
                 res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: result });
@@ -88,29 +85,17 @@ exports.getCommunauties = async (req, res) => {
 
 exports.getSearchableCommunauties = async (req, res) => {
     try {
-        const mygroups = await communaute.find({ "members": { "$in": req.user._id } })
-            .populate([{
-                path: 'members',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }, {
-                path: 'admin',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }])
+        const groupsRequest = await requestJoinGroup.find().select({ group: 1, _id: 0 });
+
+        const groupIds = groupsRequest.map(idGroup => mongoose.Types.ObjectId(idGroup.group));
+        
+        const mygroups = await communaute.find({ members: { $in: req.user._id } })
             .where('visibilite')
             .ne('SECRET')
             .exec();
-        const ownGroup = await communaute.find({ "members": { "$ne": req.user._id } })
-            .populate([{
-                path: 'members',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }, {
-                path: 'admin',
-                model: 'User',
-                select: ['nom', 'prenom', 'photo_profil'],
-            }])
+
+        const ownGroup = await communaute.find()
+            .and([{ members: { $ne: req.user._id } }, { _id: { $nin: groupIds } }])
             .where('visibilite')
             .ne('SECRET')
             .exec();
@@ -123,8 +108,6 @@ exports.getSearchableCommunauties = async (req, res) => {
 
 exports.deleteCommunautie = async (req, res) => {
     try {
-        console.log("req.body ", req.body);
-
         await communaute.findByIdAndDelete(req.params.idCommunaute)
             .exec((err) => {
                 if (err) return res.status(500).send({ success: false, msg: "ERROR FROM SERVER", error: err });
@@ -132,7 +115,6 @@ exports.deleteCommunautie = async (req, res) => {
 
         let communauteAsAdmin = await communaute.find({ admin: req.body.admin }).countDocuments();
 
-        console.log("nbr of communautie as admin is :", communauteAsAdmin);
         if (communauteAsAdmin === 0) {
             await user.findByIdAndUpdate(req.body.admin, {
                 $set: {
