@@ -7,7 +7,7 @@ var { verifyToken, isAdmin } = require('../helper/helper');
 
 router.get('/getCommunoties', verifyToken, getCommunauties);
 router.get('/', verifyToken, getSearchableCommunauties);
-router.get('/:id', verifyToken, getCommunautieById);
+router.get('/:id', verifyToken, getRequestOfGroup,getCommunautieById);
 router.post('/joinGroup/:groupID', verifyToken, joinGroup);
 router.post('/validateRequest/:groupID', verifyToken, isAdmin, validateRequest);
 router.post('/getRequests/:groupID', verifyToken, getRequestOfGroup);

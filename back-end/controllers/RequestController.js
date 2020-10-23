@@ -32,16 +32,18 @@ exports.validateRequest = async (req, res) => {
 }
 
 
-exports.getRequestOfGroup = async (req, res) => {
+exports.getRequestOfGroup = async (req, res, next) => {
     try {
-        await requestJoinGroup.find({ group: req.params.groupID })
+        await requestJoinGroup.find({ group: mongoose.Types.ObjectId(req.params.id) })
             .populate('group', ['titre'])
             .populate('user', ['nom', 'prenom', 'photo_profil'])
             .exec((err, requests) => {
                 if (err) {
                     res.status(500).json({ success: false, error: err.message });
                 }
-                res.status(200).send({ success: true, requests: requests });
+                res.locals.request = requests;
+                next();
+                // res.status(200).send({ success: true, requests: requests });
             });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });

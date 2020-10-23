@@ -88,7 +88,7 @@ exports.getSearchableCommunauties = async (req, res) => {
         const groupsRequest = await requestJoinGroup.find().select({ group: 1, _id: 0 });
 
         const groupIds = groupsRequest.map(idGroup => mongoose.Types.ObjectId(idGroup.group));
-        
+
         const mygroups = await communaute.find({ members: { $in: req.user._id } })
             .where('visibilite')
             .ne('SECRET')
@@ -144,7 +144,7 @@ exports.getCommunautieById = async (req, res) => {
                 select: ['nom', 'prenom', 'photo_profil', 'fonction', 'email'],
             }])
             .exec();
-        res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: mygroups });
+        res.send({ success: true, msg: "GET COMMUNAUTEIS BY SUCCES", communaute: mygroups, request: res.locals.request });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
