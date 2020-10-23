@@ -85,7 +85,7 @@ exports.getCommunauties = async (req, res) => {
 
 exports.getSearchableCommunauties = async (req, res) => {
     try {
-        const groupsRequest = await requestJoinGroup.find().select({ group: 1, _id: 0 });
+        const groupsRequest = await requestJoinGroup.find({ user: mongoose.Types.ObjectId(req.user._id) }).select({ group: 1, _id: 0 });
 
         const groupIds = groupsRequest.map(idGroup => mongoose.Types.ObjectId(idGroup.group));
 

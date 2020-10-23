@@ -5,7 +5,6 @@ import { currentUser } from '../../_helper/services';
 import '../profile/profile.css'
 import '../home/home/home.css';
 import './groupProfil.css';
-import RightSideBar from '../profile/components/right-sideBar';
 import TopProfiles from '../home/topProfils/TopProfils';
 import ListPost from '../home/Post/ListPost';
 import { Button, message, Upload } from 'antd';
@@ -16,7 +15,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useToasts } from 'react-toast-notifications';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const schemaEvent = Yup.object().shape({
     titre: Yup.string()
@@ -49,6 +48,7 @@ const GroupProfil = (props) => {
     const [msgErrorOption, setMsgErrorOption] = useState("");
     const [group, setGroup] = useState({});
     const [posts, setPost] = useState([]);
+    const [request, setRequest] = useState([]);
 
 
     const param = useParams();
@@ -66,8 +66,9 @@ const GroupProfil = (props) => {
             })
             .then(res => res.json())
             .then((res) => {
+                console.info('res ==>', res);
                 setGroup(res.communaute);
-                console.log('res ==>', res);
+                setRequest(res.request);
             })
             .catch(err => {
                 console.error(err);
@@ -111,7 +112,6 @@ const GroupProfil = (props) => {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.info(response);
                     const newPost = {
                         ...response.post,
                         user: currentUser
@@ -129,7 +129,6 @@ const GroupProfil = (props) => {
 
     const onSubmitAddEvent = async (values, actions) => {
         try {
-            console.log("submit");
             onAddEvent(values);
             actions.setStatus({ success: true })
         } catch (error) {
@@ -150,7 +149,6 @@ const GroupProfil = (props) => {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.log(response);
                     posts.unshift(response.sondage);
                     setPost(posts);
                     if (response.success === true) {
@@ -259,7 +257,6 @@ const GroupProfil = (props) => {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.info(response);
                     if (response.success === true) {
                         message.success(`${response.msg}`);
                         posts.unshift(response.event);
@@ -281,7 +278,6 @@ const GroupProfil = (props) => {
                 }
             }).then(res => res.json())
                 .then((response) => {
-                    console.log(response);
                     const arrayPost = [];
                     response.posts.map((post) => arrayPost.push(post));
                     response.events.map((event) => arrayPost.push(event));
@@ -552,13 +548,40 @@ const GroupProfil = (props) => {
                                                     </div>
 
                                                     {/* Request users */}
-                                                    <div className="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">4...</div>
+                                                    <div className="tab-pane fade my-3" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+                                                        <div className="container">
+                                                            <div className="row">
+                                                                {
+                                                                    request?.map(req =>
+                                                                        <div className="col-lg-6" key={req._id}>
+                                                                            <div className="card bg-light text-white text-center p-2" style={{ maxWidth: "400px" }}>
+                                                                                <div className="row d-flex flex-wrap align-items-center">
+                                                                                    <div className="col-md-4 my-2">
+                                                                                        <img className="img-account-profile rounded-circle mb-2" src={URL + req.user.photo_profil} alt="..." />
+                                                                                    </div>
+                                                                                    <div className="col-md-8">
+                                                                                        <div className="card-body">
+                                                                                            <Link to={'/profile/' + req.user._id}>
+                                                                                                <h5 className="card-title">{req.user.nom + " " + req.user.prenom}</h5>
+                                                                                            </Link>
+                                                                                            <p className="card-text">send request to join the group</p>
+                                                                                            <button type="button" name="" id="" className="btn btn-primary btn-sm btn-block">accept</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
