@@ -57,15 +57,16 @@ app.use((error, req, res, next) => {
 });
 
 
-mongo.connect(process.env.MONGO_LOCAL,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-    }, (err) => {
-        if (err) throw err;
-        console.log("Mongo db connection established");
-    });
+mongo.connect("mongodb://localhost:27017/pfa", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+}, (err) => {
+    if (err) throw err;
+    console.log("Mongo db connection established");
+});
+
+app.listen(9000, () => console.log("serveur run on port 9000"))
 
 module.exports = app;

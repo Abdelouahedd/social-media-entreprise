@@ -236,6 +236,26 @@ const GroupProfil = (props) => {
         coverEvent,
     };
 
+    const acceptRequest = async (requestParam) => {
+        await fetch(`${URL}/communaute/validateRequest/${param.id}`, {
+            method: 'POST',
+            headers: {
+                'authorization': 'Bearer ' + sessionStorage.getItem('jwtToken')
+            }
+        }
+        ).then(res => res.json())
+            .then(response => {
+                console.log('res for accept', response);
+                if (response.success === true) {
+                    message.success(`${response.msg}`);
+                    let requests = request.filter(req => req._id !== requestParam);
+                    setRequest(requests);
+                } else {
+                    message.error(`${response.error}`);
+                }
+            })
+    }
+
     const onAddEvent = useCallback(
         async (values) => {
             if (coverEvent.length === 0) {
@@ -445,9 +465,6 @@ const GroupProfil = (props) => {
                                                                         </div>
                                                                     )
                                                                 }
-
-
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -565,7 +582,7 @@ const GroupProfil = (props) => {
                                                                                                 <h5 className="card-title">{req.user.nom + " " + req.user.prenom}</h5>
                                                                                             </Link>
                                                                                             <p className="card-text">send request to join the group</p>
-                                                                                            <button type="button" name="" id="" className="btn btn-primary btn-sm btn-block">accept</button>
+                                                                                            <button type="button" className="btn btn-primary btn-sm btn-block" onClick={() => acceptRequest(req._id)}>accept</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
